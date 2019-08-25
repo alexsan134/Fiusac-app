@@ -1,0 +1,117 @@
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:11;
+  display:block;
+  background:var(--primary);
+}
+nav .nav-wrapper{
+  position:relative;
+  padding:0 8px;
+  z-index:2;
+  background:transparent;
+}
+nav .nav-wrapper .nbtn{
+  width:40px;
+  height:40px;
+  border-radius:100px;
+  position:relative;
+  top:8px;
+}
+nav .nav-wrapper .sidenav-trigger{
+  margin:0;
+}
+nav .nav-wrapper > a >i{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+nav .brand {
+  position:absolute;
+  left:55px;
+  top:1px;
+  z-index:2;
+  width:60%;
+  font-weight:550;
+  font-size:1.48em;
+  text-transform:capitalize;
+} 
+nav .nav-wrapper .brand-logo span{
+  position:relative;
+  font-size:0.7em;
+  top:-3px;
+  font-weight:500;
+  text-transform:capitalize;
+}
+#search-container{
+  position:absolute;
+  width:100%;
+  left:0;
+  top:0;
+  z-index:2;
+  display:none;
+}
+#search-input{
+  font-size:1.4em;
+  box-sizing:border-box;
+  padding-right:50px;
+  width:100%;
+}
+#backSearch{
+  position:absolute;
+  top:0;
+  left:15px;
+  display:block;
+  width:0px;
+  margin:0;
+  padding:0;
+}
+#searchShadow{
+  position:fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  width:100%;
+  background:rgba(0,0,0,.4);
+  z-index:1;
+  display:none;
+  opacity:0;
+  transition:opacity 0.2s linear;
+}
+#dropdown1{
+  width:150px!important;
+  top:3px!important;
+  border-radius:3px;
+}
+#tuto{
+  z-index:12;
+}
+.closeT{
+  position:fixed;
+  top:0;
+  right:0;
+  font-size:2em;
+  padding:15px;
+  opacity:0;
+  transition:opacity 0.7s ease;
+  z-index:13;
+}
+.autocomplete-content li .highlight{
+  color:var(--primary)!important;
+}
+.section-search input.autocomplete {
+  color:var(--icons);
+}
+.input-field .prefix.active {
+  color:var(--icons)!important;
+}
+.dropdown-content li>a, .dropdown-content li>span {
+  color:var(--secondary-text)!important;
+  text-transform:capitalize;
+}
+.dropdown-content{
+  width:100%!important;
+}

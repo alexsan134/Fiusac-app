@@ -1,0 +1,78 @@
+#homeCont{
+  padding:20px;
+}
+#contHours{
+  width:100%;
+  padding:30px 20px;
+  background:url('./back1.jpg');
+  background-position:center bottom;
+  background-size:cover;
+  border-radius:15px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+  overflow:hidden;
+  position:relative;
+}
+#contHours::before{
+  width:100%;
+  height:100%;
+  position:absolute;
+  left:0;
+  top:0;
+  content:'';
+  background:rgba(0,0,0,.2);
+}
+#contHours h5{
+  font-size:1.2em;
+  text-transform:none;
+  line-height:15px;
+  color:#fff;
+  opacity:0.85;
+  text-shadow:0 0 10px rgba(0,0,0,.3);
+}
+#contHours h4{
+  font-size:2.5em;
+  color:#fff;
+  opacity:0.9;
+  text-shadow:0 0 10px rgba(0,0,0,.3);
+}
+#mainMsj{
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  margin-top:15px;
+}
+#mainMsj > h4{
+  font-size:2em;
+  color:var(--secondary-text);
+}
+#mainMsj > p{
+  margin:0;
+  line-height:17px;
+  color:var(--secondary-text);
+  opacity:0.85;
+}
+#mainMsj > #logoDiv{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  width:100%;
+  position:relative;
+  margin-top:20px;
+}
+#mainMsj > #logoDiv img{
+  width:40%;
+  box-shadow:0 0 20px rgba(0,0,0,.1);
+  border-radius:30px;
+}
+#mainMsj > #logoDiv h4{
+  margin-left:15px;
+  color:var(--secondary-text);
+  text-transform:none;
+}
+#mainMsj > #logoDiv > h4 > p{
+  margin:0;
+  font-size:0.75em;
+  line-height:13px;
+  color:var(--secondary-text);
+  opacity:0.75;
+}

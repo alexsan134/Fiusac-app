@@ -1,0 +1,19 @@
+.action{
+  z-index:9;
+  position:fixed;
+  bottom:0;
+  right:0;
+  margin:15px;
+}
+.btn-floating{
+  background:var(--accent)!important;
+}
+.btn-floatinf i{
+  color:var(--icons);
+}
+ul li .btn-floating{
+  background:var(--icons)!important;
+}
+ul li .btn-floating i{
+  color:var(--accent);
+}
