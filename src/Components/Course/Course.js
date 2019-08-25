@@ -199,7 +199,7 @@ en ${this.props.room} del ${this.props.build}`)
               <h5>{this.props.timeStart} - {this.props.timeEnd}</h5>
             </div>
             <div id='room'>
-              <h4 class='right-align title' ref={this.titleNameS}>Salón: <br class={this.props.room.length > 3 ? 'show' : 'hide'} />{this.props.room}</h4>
+              <h4 class='right-align title' ref={this.titleNameS}>Salón: <br class={this.props.room.length > 3?'show':'hide'}/>{this.props.room}</h4>
               <h5 class='right-align'>Edificio: {this.props.build}</h5>
             </div>
             <div id='footer' ref={this.footer}>

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Sidenav from '../Sidenav/Sidenav';
 import Navbar from '../Navbar/Navbar';
 import Calendar from '../Calendar/Calendar';
+import Login from "../Login/Login";
 import Home from '../Home/Home';
 import Search from '../Search/Search';
 import Tutorial from '../Tutorial/Tutorial';
@@ -22,6 +23,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/horario" component={Calendar} />
               <Route exact path="/tutorial" component={Tutorial} />
+              <Route exact path="/login" component={Login} />
               <Route path="/buscar/:id" render={props => (<Search keyword={props.match.params.id} />)} />
             </Switch>
           </div>

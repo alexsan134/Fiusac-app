@@ -1,0 +1,97 @@
+#logCont{
+    padding:20px;
+    width:100%;
+}
+.firebaseui-idp-button{
+    -webkit-appearance:none;
+    border:none;
+    outline:none;
+    box-shadow:none;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    width:100%;
+    padding:15px 20px;
+    border-radius:15px;
+    color:var(--icons);
+    background:var(--disable);
+    text-align:left;
+}
+.firebaseui-list-item{
+    margin:15px 0;
+}
+.firebaseui-list-item:nth-child(1){
+    margin-top:0;
+}
+.firebaseui-list-item:nth-child(4){
+    margin-bottom:0;
+}
+.firebaseui-idp-text-short{
+    display:none;
+}
+.firebaseui-idp-icon{
+    width:25px;
+    margin-right:10px;
+}
+.firebaseui-idp-google{
+    background:var(--icons);
+    color:var(--secondary-text);
+}
+.firebaseui-idp-facebook{
+    background:#3C5A99;
+}
+.firebaseui-title{
+    font-size:1.4em;
+    color:var(--accent);
+}
+.firebaseui-input, .firebaseui-input-invalid{
+    color:var(--secondary-text);
+}
+.firebaseui-input:focus, .firebaseui-input-invalid:focus {
+    border-bottom: 1px solid var(--primary)!important;
+    box-shadow: 0 1px 0 0 var(--primary)!important;
+}
+
+.firebaseui-id-page-sign-in{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    position: absolute;
+    top:50%;
+    left:20px;
+    width:calc(100% - 40px);
+    transform:translateY(-50%);
+    box-shadow:0 0 15px rgba(0, 0, 0,0.05);
+}
+.firebaseui-id-page-password-sign-up{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    position: absolute;
+    top:50%;
+    left:20px;
+    width:calc(100% - 40px);
+    transform:translateY(-50%);
+    box-shadow:0 0 15px rgba(0, 0, 0,0.05);
+}
+.firebaseui-button{
+    -webkit-appearance:none;
+    border:none;
+    outline:none;
+    padding:15px 20px;
+    background:#fff;
+    color:var(--primary);
+    border-radius:10px;
+}
+.firebaseui-form-actions{
+    float:right;
+}
+.firebaseui-id-submit{
+    background:var(--primary);
+    color:var(--icons);
+}
+.firebaseui-error{
+    color:var(--secondary-text);
+    opacity:.85;
+    line-height:17px;
+}

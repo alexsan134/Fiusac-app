@@ -35,14 +35,17 @@
 }
 .item > p{
   line-height:17px;
-  color:var(--accent);
+  color:var(--secondary-text);
+  opacity:0.85;
   margin:5px 0 20px 0px;
 }
 .bs > .ft{
   margin-bottom:10px;
+  opacity:1;
 }
 .bs > p{
   margin-bottom:5px;
+  opacity:0.8;
 }
 .item > p > h4{
   display:inline-block;
@@ -55,6 +58,7 @@
   line-height:16px;
   margin-bottom:10px;
   color:var(--secondary-text);
+  opacity:.75;
 }
 .item > ul li span{
   color:var(--icons);
