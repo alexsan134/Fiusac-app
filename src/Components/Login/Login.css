@@ -34,7 +34,7 @@
     margin-right:10px;
 }
 .firebaseui-idp-google{
-    background:var(--icons);
+    background:rgba(0, 0, 0,0.05);
     color:var(--secondary-text);
 }
 .firebaseui-idp-facebook{
@@ -43,6 +43,7 @@
 .firebaseui-title{
     font-size:1.4em;
     color:var(--accent);
+    font-weight:550;
 }
 .firebaseui-input, .firebaseui-input-invalid{
     color:var(--secondary-text);
@@ -52,7 +53,7 @@
     box-shadow: 0 1px 0 0 var(--primary)!important;
 }
 
-.firebaseui-id-page-sign-in{
+.firebaseui-container{
     background:#fff;
     padding:20px;
     border-radius:15px;
@@ -63,16 +64,13 @@
     transform:translateY(-50%);
     box-shadow:0 0 15px rgba(0, 0, 0,0.05);
 }
-.firebaseui-id-page-password-sign-up{
-    background:#fff;
-    padding:20px;
-    border-radius:15px;
-    position: absolute;
-    top:50%;
-    left:20px;
-    width:calc(100% - 40px);
-    transform:translateY(-50%);
-    box-shadow:0 0 15px rgba(0, 0, 0,0.05);
+.firebaseui-page-provider-sign-in {
+    position: relative;
+    top:0;
+    transform:none;
+    width:100%;
+    left:0;
+    padding:10px 20px;
 }
 .firebaseui-button{
     -webkit-appearance:none;
@@ -81,7 +79,9 @@
     padding:15px 20px;
     background:#fff;
     color:var(--primary);
+    cursor: pointer;
     border-radius:10px;
+    font-weight:550;
 }
 .firebaseui-form-actions{
     float:right;
@@ -94,4 +94,89 @@
     color:var(--secondary-text);
     opacity:.85;
     line-height:17px;
+}
+
+#logForm{
+    padding:20px;
+    background:#fff;
+    border-radius:15px;
+    position: relative;
+    padding-bottom:70px;
+}
+#logForm > h4{
+    color:var(--secondary-text);
+    margin:0;
+    font-size:1.5em;
+    text-transform:none;
+}
+#logForm > p{
+    margin:0;
+    color:var(--secondary-text);
+    line-height:17px;
+    opacity:0.85;
+    margin:5px 0 25px 0;
+}
+#logForm > .input-field > input{
+    color:var(--secondary-text);
+}
+#logForm > .input-field > input:focus{
+    border-bottom: 1px solid var(--primary)!important;
+    box-shadow: 0 1px 0 0 var(--primary)!important;
+}
+#logForm > .input-field > input:focus + label{
+    color:var(--primary);
+}
+#logForm > .input-field > .material-icons.prefix.active{
+    color:var(--dark)!important;
+}
+#logForm > button{
+    -webkit-appearance: none;
+    border:none;
+    box-shadow:none;
+    outline:none;
+    display:flex;
+    align-items:center;
+    width:100%;
+    justify-content:center;
+    padding:15px;
+    border-radius:0 0 15px 15px;
+    position: absolute;
+    bottom:0;
+    left:0;
+    background:var(--disable);
+    color:var(--icons);
+    font-size:1.2em;
+    font-weight:550;
+}
+#logForm > button > i{
+    margin-right:10px;
+}
+#logSep{
+    position: relative;
+    display:block;
+    margin:10px 0;
+    width:100%;
+    text-align:center;
+    color:var(--secondary-text);
+    opacity:0.85;
+}
+#logSep:before{
+    content:'';
+    width:45%;
+    position: absolute;
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+    height:1px;
+    background:var(--secondary-text);
+}
+#logSep::after{
+    content:'';
+    width:45%;
+    position: absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    height:1px;
+    background:var(--secondary-text);
 }
