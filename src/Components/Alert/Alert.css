@@ -1,0 +1,82 @@
+.unactiveAlert{
+    display:none;
+}
+.activeAlert{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    z-index:1000;
+    background:rgba(0, 0, 0, 0.5);
+}
+
+.alertContainer{
+    opacity:0;
+    transition:all 0.3s ease;
+}
+
+.alertContainer > div{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 6px hsla(0, 0%, 0%, 0.2);
+    width:90%;
+}
+.alertContainer > div > h4{
+    color:#000;
+    text-transform:none;
+    font-size:1.6em;
+    margin:0;
+}
+.alertContainer > div > p{
+    margin:0;
+    line-height:17px;
+    color:#555;
+    margin:5px 0;
+    font-weight:400;
+}
+.alertContainer > div > div{
+    display:flex;
+    width:100%;
+    justify-content:flex-end;
+    align-items:center;
+    margin-top:20px;
+}
+.alertContainer > div > div > button{
+    -webkit-appearance:none;
+    border:none;
+    outline:none;
+    box-shadow:none;
+    margin:0;
+    padding:10px 15px;
+    border-radius:10px;
+    background:#fff;
+    font-weight:550;
+}
+/* Confirmation Box */
+.alertContainer > div > .confirmationType > .cancelAlertBtn{
+    color:#2196F3;
+}
+.alertContainer > div > .confirmationType > .goAlertBtn{
+    background:#2196F3;
+    color:#fff;
+}
+/* Error Box */
+.alertContainer > div > .errorType > .goAlertBtn{
+    background:#F44336;
+    color:#fff;
+}
+
+/* Alert Box */
+.alertContainer > div > .primaryType > .cancelAlertBtn{
+    color:#2196F3;
+}
+.alertContainer > div > .primaryType > .goAlertBtn{
+    background:#2196F3;
+    color:#fff;
+}

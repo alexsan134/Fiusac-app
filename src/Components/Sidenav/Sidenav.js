@@ -1,16 +1,27 @@
 import React, { Component } from "react";
 import { withRouter, Link } from 'react-router-dom';
 import M from "materialize-css/dist/js/materialize.min.js";
+import ShowMsg from '../Alert/Alert';
+import { auth } from "firebase";
 import 'materialize-css/dist/css/materialize.min.css';
 import './Sidenav.css';
 
 class Sidenav extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { user: undefined };
+  }
   componentDidMount() {
+    //Usign Alert
+    const Alert = new ShowMsg();
+    Alert.init();
+
     //Init side nav
     const list = document.querySelector('.sidenav');
     const sBtn = document.querySelectorAll('.mBtn');
     const shareBtn = document.querySelector(".shareBtn");
     const s = M.Sidenav.init(list);
+    const current = this;
 
     //Check route to add active class
     function addActive(rr) {
@@ -26,6 +37,41 @@ class Sidenav extends Component {
         s.close();
       }
     }
+    //Listen for Auth
+    auth().onAuthStateChanged(user => {
+      const userLink = document.querySelector('.userAccount');
+      const loginLink = document.querySelector('.login');
+      const accountSection = document.getElementById('accountSection');
+      if (user === null) {
+        loginLink.classList.remove('hide');
+        accountSection.classList.add('hide');
+        userLink.classList.add('hide');
+      }
+      else {
+        loginLink.classList.add('hide');
+        userLink.classList.remove('active');
+        userLink.classList.remove('hide');
+        accountSection.classList.remove('hide');
+        this.setState({ user: user.displayName });
+      }
+    })
+
+    //Logout Btn
+    const logoutBtn = document.querySelector('.logout');
+    logoutBtn.addEventListener('click', () => {
+      Alert.showMsg({
+        title: "¿Estas seguro?",
+        body: "Deseas cerrar sesión en este dispositivo, siempre puedes conectar cuentas gratis!",
+        type: "confirmation",
+        onConfirm: () => {
+          auth().signOut().then(function () {
+            current.setState({ name: "" });
+          }, function (error) {
+            console.log(error);
+          });
+        }
+      })
+    })
 
     //Listen route changes                                     
     this.props.history.listen(location => addActive(location.pathname.substr(1)));
@@ -97,25 +143,36 @@ class Sidenav extends Component {
         <li>
           <a href="#div" class="subheader disable">Aplicación</a>
         </li>
-        <div id="accountSection">
-          <li class="sBtn config">
-            <a href="#c" class="waves-effect">
-              <i class="material-icons">settings</i>Configuración
-	            </a>
-          </li>
-          <li class="sBtn logout">
-            <a href="#logout" id="logout" class="waves-effect">
-              <i class="material-icons">logout</i>Cerrar sesión
-	            </a>
-          </li>
-        </div>
-        <Link to='/login'>
-          <li class="sBtn mBtn login hide">
+        <Link to='/login' className="login">
+          <li class="sBtn mBtn">
             <a href="#login" id="login" class="waves-effect">
-              <i class="material-icons">person</i>Iniciar sesión
+              <i class="material-icons">person</i> Iniciar sesión
 	          </a>
           </li>
         </Link>
+        <Link to='/'>
+          <li class="sBtn mBtn userAccount">
+            <a href="#login" id="login" class="waves-effect">
+              <i class="material-icons">person</i> {this.state.user}
+            </a>
+          </li>
+        </Link>
+        <div id="accountSection" className="hide">
+          <Link to='/'>
+            <li class="sBtn mBtn config">
+              <a href="#config" class="waves-effect">
+                <i class="material-icons">settings</i> Configuración
+	            </a>
+            </li>
+          </Link>
+          <Link>
+            <li class="sBtn mBtn logout">
+              <a href="#logout" id="logout" class="waves-effect">
+                <i class="material-icons">exit_to_app</i> Cerrar sesión
+	            </a>
+            </li>
+          </Link>
+        </div>
         <li class="sBtn shareBtn" >
           <a href="#share" class="waves-effect">
             <i class="material-icons">share</i>Compartir

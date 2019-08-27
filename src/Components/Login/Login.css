@@ -16,7 +16,7 @@
     padding:15px 20px;
     border-radius:15px;
     color:var(--icons);
-    background:var(--disable);
+    background:#DB4437;
     text-align:left;
 }
 .firebaseui-list-item{
@@ -45,6 +45,11 @@
 .firebaseui-title{
     font-size:1.4em;
     color:var(--accent);
+    font-weight:550;
+}
+.firebaseui-subtitle{
+    line-height:33px;
+    margin-top:20px;
     font-weight:550;
 }
 .firebaseui-input, .firebaseui-input-invalid{
@@ -87,7 +92,7 @@
     width:100%;
     left:0;
     padding:10px 20px;
-    background:#fff;
+    background:var(--icons);
     height:auto;
 }
 .firebaseui-button{
@@ -115,7 +120,26 @@
     opacity:.85;
     line-height:17px;
 }
-
+.firebaseui-form-links{
+    position: relative;
+    top:-15px;
+}
+.firebaseui-text{
+    color:var(--secondary-text);
+    font-weight:400;
+}
+.firebaseui-id-page-password-recovery-email-sent > .firebaseui-card-content{
+    width:100%;
+    background:#fff;
+    padding:20px 20px 40px 20px;
+    margin-top:40px;
+    border-radius:15px;
+    box-shadow:0 4px 6px hsla(0, 0%, 0%, 0.2);
+}
+.firebaseui-id-page-password-recovery-email-sent > .firebaseui-card-actions{
+    margin-top:-60px;
+    margin-right:20px;
+}
 #logForm{
     padding:20px;
     background:#fff;
@@ -137,7 +161,20 @@
     opacity:0.85;
     margin:5px 0 25px 0;
 }
+#logForm > .input-field > .helper-text{
+    opacity:0.5;
+    font-weight:400;
+}
+#logForm > #emm{
+    margin-bottom:20px;
+}
 #logForm > .input-field > input{
+    color:var(--secondary-text);
+}
+#logForm > .input-field > .visible{
+    position: absolute;
+    padding:10px;
+    right:0;
     color:var(--secondary-text);
 }
 #logForm > .input-field > input:focus{
