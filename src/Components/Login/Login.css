@@ -1,6 +1,8 @@
 #logCont{
     padding:20px;
     width:100%;
+    background:url('./back3.jpg');
+    background-size:cover;
 }
 .firebaseui-idp-button{
     -webkit-appearance:none;
@@ -54,15 +56,29 @@
 }
 
 .firebaseui-container{
-    background:#fff;
     padding:20px;
     border-radius:15px;
-    position: absolute;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:url(./back3.jpg);
+    background-size:cover;
+    z-index:2;
+}
+.firebaseui-container > form{
+    display:block;
+    position: relative;
+    padding:20px;
+    background:var(--icons);
+    border-radius:15px;
     top:50%;
-    left:20px;
-    width:calc(100% - 40px);
+    width:100%;
+    left:0;
     transform:translateY(-50%);
-    box-shadow:0 0 15px rgba(0, 0, 0,0.05);
+    padding-bottom:65px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .20);
 }
 .firebaseui-page-provider-sign-in {
     position: relative;
@@ -71,6 +87,8 @@
     width:100%;
     left:0;
     padding:10px 20px;
+    background:#fff;
+    height:auto;
 }
 .firebaseui-button{
     -webkit-appearance:none;
@@ -81,6 +99,8 @@
     color:var(--primary);
     cursor: pointer;
     border-radius:10px;
+}
+.firebaseui-idp-text-long{
     font-weight:550;
 }
 .firebaseui-form-actions{
@@ -101,6 +121,7 @@
     background:#fff;
     border-radius:15px;
     position: relative;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .25);
     padding-bottom:70px;
 }
 #logForm > h4{
@@ -153,11 +174,12 @@
 }
 #logSep{
     position: relative;
+    top:5px;
     display:block;
     margin:10px 0;
     width:100%;
     text-align:center;
-    color:var(--secondary-text);
+    color:var(--icons);
     opacity:0.85;
 }
 #logSep:before{
@@ -168,7 +190,7 @@
     top:50%;
     transform:translateY(-50%);
     height:1px;
-    background:var(--secondary-text);
+    background:var(--icons);
 }
 #logSep::after{
     content:'';
@@ -178,5 +200,45 @@
     top:50%;
     transform:translateY(-50%);
     height:1px;
-    background:var(--secondary-text);
+    background:var(--icons);
+}
+
+#logBanner{
+    overflow: hidden;
+    padding:25px 20px;
+    width:100%;
+    background:url('./back2.jpg');
+    background-size:cover;
+    border-radius:15px;
+    margin-bottom:20px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .35);
+    z-index:1;
+}
+#logBanner::before{
+    content:'';
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    background: rgba(0, 0, 0, .15);
+    z-index:1;
+}
+#logBanner > *{
+    position: relative;
+    z-index:2;
+    text-shadow:0 0 15px rgba(0, 0, 0, .15);
+}
+#logBanner > h4{
+    color:var(--icons);
+    text-transform:none;
+    margin:0;
+}
+#logBanner > p{
+    line-height:16px;
+    margin:0;
+    color:var(--icons);
+    opacity:0.7;
+    margin-top:5px;
 }

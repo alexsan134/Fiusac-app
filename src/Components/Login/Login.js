@@ -5,7 +5,7 @@ import './Login.css';
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1MPonpuvCFF9igWdr1-KTVV43i3I17e8",
-    authDomain: "fiusac.web.com",
+    authDomain: "fiusac.web.app",
     databaseURL: "https://fiusac.firebaseio.com",
     projectId: "fiusac",
     storageBucket: "fiusac.appspot.com",
@@ -20,8 +20,7 @@ const uiConfig = {
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
     ]
 };
 
@@ -34,6 +33,10 @@ class Login extends Component {
     render() {
         return (
             <div id='logCont'>
+                <div id="logBanner">
+                    <h4>Saca el máximo provecho</h4>
+                    <p>Tener una cuenta en la aplicación, tiene muchos beneficios, como notificaciones, grupos privados, y mas.</p>
+                </div>
                 <div id="logForm">
                     <h4>Explora las posibilidades</h4>
                     <p>Ingresa con tu correo y contraseña, si no tienes una cuenta puedes crear una con redes sociales.</p>
@@ -47,7 +50,7 @@ class Login extends Component {
                         <input id="pass" type="password" class="validate" />
                         <label for="pass">Contraseña</label>
                     </div>
-                    <button id="loginBtn"><i className='material-icons'>email</i> Iniciar sesion</button>
+                    <button id="loginBtn"><i className='material-icons'>email</i> Iniciar sesión</button>
                 </div>
                 <span id="logSep">o</span>
                 <div id="loginCont"></div>

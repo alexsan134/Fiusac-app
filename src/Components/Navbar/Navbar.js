@@ -105,7 +105,7 @@ class Navbar extends Component {
     return (
       <div>
         <nav>
-          <a class="brand truncate" href="./"><span>{paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "login" ? "Cuenta" : paths === "signin" ? "Registrarse" : paths}</span></a>
+          <a class="brand truncate" href="./"><span>{paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "login" ? "Iniciar sesión" : paths === "signin" ? "Registrarse" : paths}</span></a>
           <div class="nav-wrapper">
             <a data-target="side1" href="#menu" class="nbtn sidenav-trigger waves-effect">
               <i class="material-icons">menu</i>
