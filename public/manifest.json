@@ -1,6 +1,6 @@
 {
-  "short_name": "FIUSAC App",
-  "name": "FIUSAC App",
+  "short_name": "FIUSAC.app®",
+  "name": "FIUSAC.app®",
   "icons": [
     {
       "src": "./img/icon.png",
@@ -11,5 +11,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#1E88E5",
-  "background_color": "#2196F3"
+  "background_color": "#FFFFFF"
 }

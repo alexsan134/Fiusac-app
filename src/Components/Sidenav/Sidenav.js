@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter, Link } from 'react-router-dom';
 import M from "materialize-css/dist/js/materialize.min.js";
 import ShowMsg from '../Alert/Alert';
-import { auth } from "firebase";
+import { auth } from "firebase/app";
 import 'materialize-css/dist/css/materialize.min.css';
 import './Sidenav.css';
 
@@ -118,7 +118,7 @@ class Sidenav extends Component {
         <li>
           <div class="user-view">
             <span role="button" class="userInfo">
-              <span class="name">FIUSAC App</span>
+              <span class="name">FIUSAC.app®</span>
               <span class="email">Version beta v0.83<br />Dev. Alex Santos</span>
             </span>
           </div>

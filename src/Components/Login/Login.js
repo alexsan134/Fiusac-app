@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase, { auth } from "firebase";
+import firebase, { auth } from "firebase/app";
 import { Redirect } from 'react-router-dom';
 import ShowMsg from '../Alert/Alert';
 import * as firebaseui from 'firebaseui-es';
@@ -7,13 +7,14 @@ import './Login.css';
 
 const firebaseConfig = {
     apiKey: "AIzaSyB1MPonpuvCFF9igWdr1-KTVV43i3I17e8",
-    authDomain: "fiusac.web.app",
+    authDomain: "fiusac.firebaseapp.com",
     databaseURL: "https://fiusac.firebaseio.com",
     projectId: "fiusac",
     storageBucket: "fiusac.appspot.com",
     messagingSenderId: "980983277469",
     appId: "1:980983277469:web:980611419493b3cc"
-};
+  };
+
 firebase.initializeApp(firebaseConfig);
 
 const uiConfig = {
@@ -41,8 +42,6 @@ class Login extends Component {
     }
     componentDidMount() {
         ui.start('#loginCont', uiConfig);
-
-
         const visible = document.querySelector('.visible');
         const pass = document.getElementById('pass');
         let visibleToggle = true;
