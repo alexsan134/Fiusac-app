@@ -1,7 +1,4 @@
-.unactiveAlert{
-    display:none;
-}
-.activeAlert{
+.alertContainer{
     position: fixed;
     top:0;
     left:0;
@@ -9,9 +6,6 @@
     height:100vh;
     z-index:1000;
     background:rgba(0, 0, 0, 0.5);
-}
-
-.alertContainer{
     opacity:0;
     transition:all 0.3s ease;
 }
@@ -26,6 +20,16 @@
     border-radius:10px;
     box-shadow:0 4px 6px hsla(0, 0%, 0%, 0.2);
     width:90%;
+}
+.alertContainer > div > .alertInput{
+    color:#777;
+}
+.alertContainer > div > .alertInput:focus{
+    border-bottom: 1px solid #2196F3!important;
+    box-shadow: 0 1px 0 0 #2196F3!important;
+}
+.alertContainer > div > .alertInput:focus + label{
+    color:var(--primary);
 }
 .alertContainer > div > h4{
     color:#000;

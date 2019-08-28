@@ -133,7 +133,7 @@ class Search extends Component {
               <p>No se encontraron resultados, Intenta buscar algo similar o algo nuevo.</p>
             </div>
           </div>
-          <div class={this.current.length === 0 ? 'hide' : 'rights'}><p>FIUSAC App 2019 ®<br />todos los derechos reservados.</p></div>
+          <div class={this.current.length === 0 ? 'hide' : 'rights'}><p>FIUSACa.app® 2019<br />todos los derechos reservados.</p></div>
         </div>
       </div>
     )

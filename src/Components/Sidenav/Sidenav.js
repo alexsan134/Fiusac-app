@@ -14,7 +14,6 @@ class Sidenav extends Component {
   componentDidMount() {
     //Usign Alert
     const Alert = new ShowMsg();
-    Alert.init();
 
     //Init side nav
     const list = document.querySelector('.sidenav');
@@ -66,8 +65,9 @@ class Sidenav extends Component {
         onConfirm: () => {
           auth().signOut().then(function () {
             current.setState({ name: "" });
+            M.toast({ html: 'Sesión cerrada correctamente' })
           }, function (error) {
-            console.log(error);
+            M.toast({ html: error })
           });
         }
       })

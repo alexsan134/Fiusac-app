@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter, Redirect } from 'react-router-dom';
+import { auth } from "firebase/app";
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './Navbar.css';
 import Tutorial from '../Tutorial/Tutorial';
@@ -12,7 +13,8 @@ class Navbar extends Component {
     //Global Functions
     this.openSearch = this.openSearch.bind(this);
     this.closeTut = this.closeTut.bind(this);
-    this.state = { tut: false, redir: false }
+    this.senEmail = this.senEmail.bind(this);
+    this.state = { tut: false, redir: false, validUser: null, user: null }
 
     //Set autocomplete data
     this.courses = {};
@@ -26,6 +28,20 @@ class Navbar extends Component {
       if (e.horaInicio !== undefined && e.horaInicio.length > 0) this.courses["Empieza a las " + e.horaInicio + " termina a las " + e.horaFinal] = null;
       return 0
     });
+  }
+
+  //Send verify Email
+  senEmail() {
+    if(auth().currentUser !== null){
+      auth().currentUser.sendEmailVerification()
+      .then(() => {
+        M.toast({ html: 'Correo de verificación enviado' })
+      })
+      .catch(err => console.log(err))
+    }
+    this.setState({
+      user:null
+    })
   }
 
   //Close tutorial event
@@ -61,7 +77,7 @@ class Navbar extends Component {
     const searchInput = document.getElementById('search-input');
     const shadow = document.getElementById('searchShadow');
     const opTut = document.getElementById('opTut');
-    const closeT = document.querySelector('.closeT')
+    const closeT = document.querySelector('.closeT');
 
     //Init autocomplete
     M.Dropdown.init(drop);
@@ -78,7 +94,23 @@ class Navbar extends Component {
       }, 200);
     }
 
-    //Events
+    //Check for user
+    auth().onAuthStateChanged(user => {
+      setTimeout(() => {
+        this.setState({
+          user:user?user:null,
+          validUser:user?user.emailVerified:false
+        })
+      }, 10);
+    })
+
+    this.props.history.listen(location => {
+      this.setState({
+        user: auth().currentUser?auth().currentUser:null,
+        validUser: auth().currentUser?auth().currentUser.emailVerified:false
+      })
+    });
+
     searchInput.addEventListener('focusout', () => {
       hideSearch();
     });
@@ -131,6 +163,12 @@ class Navbar extends Component {
         <Floating icon="add" action={this.openSearch} />
         <i class={this.state.tut ? "material-icons closeT" : "hide closeT"} onClick={this.closeTut}>close</i>
         {tutComp}
+        {this.state.user !== null ? this.state.validUser === false ? (
+          <div id="verifyEmail">
+            <span><i className="material-icons">info_outline</i> Si deseas seguir utilizando FIUSAC.app® gratis primero debes verificar tu correo.</span>
+            <button className='waves-effect' onClick={this.senEmail}><i className="material-icons">send</i> Enviar correo de verificacion</button>
+          </div>
+        ) : '' : ''}
         {this.state.redir !== false ? <Redirect to={this.state.redir} /> : ''}
       </div>
     )

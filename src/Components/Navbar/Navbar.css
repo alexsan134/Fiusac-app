@@ -115,3 +115,57 @@ nav .nav-wrapper .brand-logo span{
 .dropdown-content{
   width:100%!important;
 }
+
+#verifyEmail{
+  padding:20px;
+  background:var(--primary);
+  position: relative;
+  border-bottom:3px solid var(--primary);
+}
+#verifyEmail:before{
+  content: '';
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:0;
+  background:rgba(255, 255, 255, .8);
+}
+#verifyEmail > *{
+  position: relative;
+  z-index:2;
+}
+#verifyEmail > span{
+  color:var(--primary);
+  font-weight:550;
+  margin-right:10px;
+  line-height:15px;
+  display:block;
+  width:100%;
+}
+#verifyEmail > span > i{
+  font-size:1.2em;
+  position: relative;
+  top:3px;
+}
+#verifyEmail > button{
+  -webkit-appearance:none;
+  border:none;
+  padding:15px 20px;
+  font-weight:550;
+  color:var(--primary);
+  background:#fff;
+  outline:none;
+  border-radius:10px;
+  margin-top:10px;
+  box-shadow:0 4px 6px hsla(0, 0%, 0%, 0.1);
+}
+#verifyEmail > button > i{
+  font-size:1.2em;
+  position: relative;
+  top:3px;
+  margin:0;
+  line-height:0;
+  margin-right:5px;
+}

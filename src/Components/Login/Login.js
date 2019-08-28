@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import firebase, { auth } from "firebase/app";
+import { auth } from "firebase/app";
+import { firebase } from "../../Functions.js";
 import { Redirect } from 'react-router-dom';
 import ShowMsg from '../Alert/Alert';
 import * as firebaseui from 'firebaseui-es';
+import M from "materialize-css/dist/js/materialize.min.js";
 import './Login.css';
-
-const firebaseConfig = {
-    apiKey: "AIzaSyB1MPonpuvCFF9igWdr1-KTVV43i3I17e8",
-    authDomain: "fiusac.firebaseapp.com",
-    databaseURL: "https://fiusac.firebaseio.com",
-    projectId: "fiusac",
-    storageBucket: "fiusac.appspot.com",
-    messagingSenderId: "980983277469",
-    appId: "1:980983277469:web:980611419493b3cc"
-  };
-
-firebase.initializeApp(firebaseConfig);
 
 const uiConfig = {
     signInSuccessUrl: '/horario',
     signInFlow: 'popup',
+    credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
     signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -44,6 +35,7 @@ class Login extends Component {
         ui.start('#loginCont', uiConfig);
         const visible = document.querySelector('.visible');
         const pass = document.getElementById('pass');
+        const forgotBtn = document.getElementById("forgot");
         let visibleToggle = true;
 
         //Hide and Show pass
@@ -59,9 +51,25 @@ class Login extends Component {
                 visibleToggle = true;
             }
         })
+
+        //Forgot password
+        forgotBtn.addEventListener("click", () =>{
+            Alert.showMsg({
+                title: 'Recupera tu contraseña',
+                body: 'Te enviaremos un mensaje a tu correo con un link para recuperar tu contraseña',
+                type: "input",
+                placeholder: "Correo electrónico",
+                onConfirm: text => {
+                    if(text.length > 5){
+                        auth().sendPasswordResetEmail(text);
+                        M.toast({ html: 'Mensaje enviado correctamente' })
+                    }
+                }
+            })
+        })
+
         //Show Alerts
         const Alert = new ShowMsg();
-        Alert.init();
         
         const loginBtn = document.getElementById('loginBtn');
         loginBtn.addEventListener('click', () =>{
@@ -69,6 +77,7 @@ class Login extends Component {
             auth().signInWithEmailAndPassword(mail.value, pass.value)
             .then(() =>{
                 this.setState({redir:true});
+                M.toast({ html: `Sesión iniciada correctamente` })
             })
             .catch(err => {
                 const errType = err.code==="auth/invalid-email"?"El correo electrónico no es valido, verifica tu entrada o intenta de nuevo":err.code==="auth/wrong-password"?"El correo electrónico o la contraseña son incorrectos, verifica tu entrada.":err.message;
@@ -103,10 +112,11 @@ class Login extends Component {
                         <i className="material-icons visible">visibility_off</i>
                         <label for="pass">Contraseña</label>
                         <span class="helper-text" data-error="invalido" data-success="valido">Caracteres clave</span>
+                        <a href="#forgotPassword" id="forgot">¿Has olvidado tu contraseña?</a>
                     </div>
                     <button id="loginBtn" className="waves-effect"><i className='material-icons'>email</i> Iniciar sesión</button>
                 </div>
-                <span id="logSep">o</span>
+                <span id="logSep">o también</span>
                 <div id="loginCont"></div>
                 {this.state.redir !== false ? <Redirect to='/horario' /> : ''}
             </div>

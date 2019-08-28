@@ -136,7 +136,7 @@ class Calendar extends Component {
             <div id="main">
               <div id="bans">
                 <img src={Logo} alt="Logo FIUSAC" />
-                <h4>Facultad de<br />Ingeniería<br /><span>Semestre II {year}</span></h4>
+                <h4>Facultad de<br />Ingeniería<br /><span>{this.state.normal.getMonth()>5?'Semestre II':'Semestre I'} {year}</span></h4>
               </div>
             </div>
           </div>
@@ -172,7 +172,7 @@ class Calendar extends Component {
                 <p>Puedes agregar mas utilizando el buscador o navegar para ver los cursos entre días.</p>
               </div>
             </div>
-            <div class='rights'><p>FIUSAC App 2019 ®<br />todos los derechos reservados.</p>
+            <div class='rights'><p>FIUSAC.app® 2019<br />todos los derechos reservados.</p>
             </div>
           </section>
           <div id="swipeArea"></div>

@@ -74,16 +74,16 @@
 }
 .firebaseui-container > form{
     display:block;
-    position: relative;
+    position: absolute;
+    height:auto;
     padding:20px;
     background:var(--icons);
     border-radius:15px;
     top:50%;
-    width:100%;
-    left:0;
     transform:translateY(-50%);
-    padding-bottom:65px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .20);
+    width:calc(100% - 40px);
+    left:20px;
+    box-shadow:0 4px 6px hsla(0, 0%, 0%, 0.2);
 }
 .firebaseui-page-provider-sign-in {
     position: relative;
@@ -146,7 +146,7 @@
     border-radius:15px;
     position: relative;
     box-shadow: 0 0 30px rgba(0, 0, 0, .25);
-    padding-bottom:70px;
+    padding-bottom:65px;
 }
 #logForm > h4{
     color:var(--secondary-text);
@@ -176,6 +176,15 @@
     padding:10px;
     right:0;
     color:var(--secondary-text);
+}
+#logForm > .input-field > #forgot{
+    position: relative;
+    top:12px;
+    color:var(--disable);
+    margin:0;
+    text-align:center;
+    width:100%;
+    display:block;
 }
 #logForm > .input-field > input:focus{
     border-bottom: 1px solid var(--primary)!important;
@@ -221,7 +230,7 @@
 }
 #logSep:before{
     content:'';
-    width:45%;
+    width:35%;
     position: absolute;
     left:0;
     top:50%;
@@ -231,7 +240,7 @@
 }
 #logSep::after{
     content:'';
-    width:45%;
+    width:35%;
     position: absolute;
     right:0;
     top:50%;
