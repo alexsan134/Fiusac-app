@@ -8,7 +8,8 @@ import './Search.css';
 
 class Search extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+
     //Global variables
     this.laps = new Date();
     this.current = [];
@@ -19,6 +20,8 @@ class Search extends Component {
     //Page transition
     this.content.current.style.opacity = 0;
     this.content.current.style.left = "-100px";
+
+    //Show TimeLine
     setTimeout(() => {
       this.content.current.style.transition = "all 0.3s ease";
       this.content.current.style.opacity = 1;

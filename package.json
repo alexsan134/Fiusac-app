@@ -6,6 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.21",
     "@fortawesome/free-brands-svg-icons": "^5.10.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "dexie": "^2.0.4",
     "firebase": "^6.4.0",
     "firebaseui-es": "^3.4.3",
     "material-design-icons": "^3.0.1",

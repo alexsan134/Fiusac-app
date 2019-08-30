@@ -6,6 +6,7 @@ import CourseData from './courses.json';
 import Cloud from './cloud.png';
 import Empty from './empty.png';
 import Course from '../Course/Course';
+import { dataHandler } from '../../Functions';
 import './Calendar.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -25,11 +26,13 @@ class Calendar extends Component {
     this.updateCourse = this.updateCourse.bind(this);
     this.allCt = React.createRef();
     this.tuto = React.createRef();
+
+    // Get DataBase
+    this.setCourses();
   }
 
   updateCourse() {
     //Enter style
-    this.setCourses();
     this.allCt.current.style.transition = "none";
     this.allCt.current.style.opacity = 0
 
@@ -39,39 +42,43 @@ class Calendar extends Component {
       this.allCt.current.style.opacity = 1;
     }, 50);
 
-    //Update render
-    this.setState({
-      normal: this.state.normal
-    })
+    //Update Render
+    this.setCourses();
   }
 
   setCourses() {
+    //CoursesList
     this.current = [];
-    const courses = window.localStorage.getItem('courses') === null ? [] : JSON.parse(window.localStorage.getItem('courses'));
-
-    //Map courses to filter by code and section
-    CourseData.map((e, p) => {
-      return courses.map(i => {
-        if (e.codigo === i.codigo.toString() && e.seccion === i.seccion) this.current.push(e);
-        return e
+    dataHandler({}, 2).then(courses => {
+      //Map courses to filter by code and section
+      if(courses){
+      CourseData.map((e, p) => {
+        return courses.map(i => {
+          if (e.codigo === i.codigo.toString() && e.seccion === i.seccion) this.current.push(e);
+          return e
+        })
       })
-    })
 
-    //Sort by time
-    this.current.sort((a, b) => {
-      const as = a.horaInicio.split(':');
-      const bs = b.horaInicio.split(':');
-      return (parseInt(as[0]) + parseInt(as[1] / 100)) - (parseInt(bs[0]) + parseInt(bs[1] / 100))
+      //Sort by time
+      this.current.sort((a, b) => {
+        const as = a.horaInicio.split(':');
+        const bs = b.horaInicio.split(':');
+        return (parseInt(as[0]) + parseInt(as[1] / 100)) - (parseInt(bs[0]) + parseInt(bs[1] / 100))
+      })
+      this.setState({
+        normal: this.state.normal
+      });
+    } else return 0;
     })
   }
   componentDidMount() {
-    //Select Date Text and Courses list to animate
+    // Select Date Text and Courses list to animate
     const mainDate = document.getElementById('mainDate');
     const all = document.getElementById('all');
     const timeLine = document.querySelector('.timeLine');
     const classAct = this;
 
-    //Main animations
+    // Main animations
     animDate(-1);
     function animDate(dir) {
       mainDate.style.transition = "none";
@@ -94,10 +101,9 @@ class Calendar extends Component {
 
     //Add one day to date and anim courses
     function slide(e, dir) {
-      let cp = e.state.normal;
-      cp.setDate(cp.getDate() + dir);
+      e.state.normal.setDate(e.state.normal.getDate() + dir);
       animDate(dir);
-      e.setState({ normal: cp })
+      e.setCourses();
     }
 
     //Swipe Event
@@ -118,7 +124,6 @@ class Calendar extends Component {
 
   render() {
     //Parse dates format
-    this.setCourses();
     const year = this.state.normal.getFullYear();
     const today = this.dd[this.state.normal.getDay()]
     const cMonth = this.months[this.state.normal.getMonth()];
@@ -136,7 +141,7 @@ class Calendar extends Component {
             <div id="main">
               <div id="bans">
                 <img src={Logo} alt="Logo FIUSAC" />
-                <h4>Facultad de<br />Ingeniería<br /><span>{this.state.normal.getMonth()>5?'Semestre II':'Semestre I'} {year}</span></h4>
+                <h4>Facultad de<br />Ingeniería<br /><span>{this.state.normal.getMonth() > 5 ? 'Semestre II' : 'Semestre I'} {year}</span></h4>
               </div>
             </div>
           </div>
@@ -144,7 +149,6 @@ class Calendar extends Component {
           <section id='all'>
             {this.current.map((e, i) => {
               let days = [e.domingo, e.lunes, e.martes, e.miercoles, e.jueves, e.viernes, e.sabado].map(e => { if (e === undefined) return false; else return true });
-
               if (days[this.state.normal.getDay()]) {
                 counter++;
                 return (

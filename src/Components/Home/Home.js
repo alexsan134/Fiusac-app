@@ -27,6 +27,7 @@ class Home extends Component {
 
     //Main text
     const time = day.getHours() <= 12 ? day.getHours() === 12 ? `${day.getHours()}:${pad(day.getMinutes())}pm` : `${day.getHours()}:${pad(day.getMinutes())} a.m` : `${(day.getHours() - 12)}:${pad(day.getMinutes())} p.m`;
+    
     return (
       <div id="homeCont">
         <div id="mainMsj">
@@ -47,4 +48,3 @@ class Home extends Component {
 }
 
 export default Home;
-

@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import Dexie  from 'dexie';
 
 // export default function showNotification(msg) {
 //     navigator.serviceWorker.ready.then(function (registration) {
@@ -25,6 +26,8 @@ import firebase from "firebase/app";
 //     });
 // }
 
+
+//Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyB1MPonpuvCFF9igWdr1-KTVV43i3I17e8",
   authDomain: "fiusac.web.app",
@@ -37,3 +40,16 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 export { firebase };
+
+//Courses DataBase
+const db = new Dexie("coursesDB");
+db.version(1).stores({
+  courses: 'codeid, code, section'
+})
+
+export function dataHandler(data, type = 0) {
+  if(type === 0) return db.courses.put(data);
+  if(type === 1) return db.courses.delete(data.codeid);
+  if(type === 2) return db.courses.toArray();
+  if(type === 3) return db.courses.get(data.codeid,item => item);
+}

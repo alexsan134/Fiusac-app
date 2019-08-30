@@ -9,6 +9,7 @@ class Tutorial extends Component {
     super(props)
     this.items = 0;
   }
+
   componentDidMount() {
     //Select elements
     const tut = document.getElementById('tuto');
@@ -20,6 +21,7 @@ class Tutorial extends Component {
     //Animation
     setTimeout(() => tut.style.opacity = 1, 10);
     dots.childNodes[current].childNodes[0].classList.add('currentDot');
+
     //Init Swipe
     SwipeListener(tut);
 
@@ -38,10 +40,12 @@ class Tutorial extends Component {
     this.setState({ ref: true });
   }
   render() {
+    //Tutorial dots
     const lis = [];
     for (let i = 0; i < this.items + 1; i++) {
       lis.push(<li><i class="material-icons">lens</i></li>);
     }
+
     return (
       <div id="tuto">
         <div class="cont">

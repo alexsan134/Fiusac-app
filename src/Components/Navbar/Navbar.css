@@ -121,6 +121,7 @@ nav .nav-wrapper .brand-logo span{
   background:var(--primary);
   position: relative;
   border-bottom:3px solid var(--primary);
+  z-index:2;
 }
 #verifyEmail:before{
   content: '';

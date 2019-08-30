@@ -10,11 +10,13 @@ import Floating from '../Floating/Floating';
 class Navbar extends Component {
   constructor(props) {
     super(props);
+
     //Global Functions
     this.openSearch = this.openSearch.bind(this);
     this.closeTut = this.closeTut.bind(this);
     this.senEmail = this.senEmail.bind(this);
     this.state = { tut: false, redir: false, validUser: null, user: null }
+    this.currentUser = "";
 
     //Set autocomplete data
     this.courses = {};
@@ -32,15 +34,15 @@ class Navbar extends Component {
 
   //Send verify Email
   senEmail() {
-    if(auth().currentUser !== null){
+    if (auth().currentUser !== null) {
       auth().currentUser.sendEmailVerification()
-      .then(() => {
-        M.toast({ html: 'Correo de verificación enviado' })
-      })
-      .catch(err => console.log(err))
+        .then(() => {
+          M.toast({ html: 'Correo de verificación enviado' })
+        })
+        .catch(err => console.log(err))
     }
     this.setState({
-      user:null
+      user: null
     })
   }
 
@@ -97,38 +99,52 @@ class Navbar extends Component {
     //Check for user
     auth().onAuthStateChanged(user => {
       setTimeout(() => {
+        this.currentUser = user ? user.displayName : "Iniciar sesión";
         this.setState({
-          user:user?user:null,
-          validUser:user?user.emailVerified:false
+          user: user ? user : null,
+          validUser: user ? user.emailVerified : false
         })
       }, 10);
     })
 
+    //Listen for route changes
     this.props.history.listen(location => {
+      const user = auth().currentUser ? auth().currentUser : null;
+      if (user) {
+        const creationTime = new Date(parseInt(user.metadata.a));
+        const today = new Date();
+        const diference = today - creationTime;
+
+        if (diference > 1000 * 3600 * 24) {
+          user.delete()
+            .then(function () {
+              M.toast({ html: 'Usuario borrado, lo sentimos' })
+            })
+            .catch(function (error) {
+              console.log('Error deleting user:', error);
+            });
+        }
+      }
+      this.currentUser = user ? user.displayName : "Iniciar Sesión";
       this.setState({
-        user: auth().currentUser?auth().currentUser:null,
-        validUser: auth().currentUser?auth().currentUser.emailVerified:false
+        user: auth().currentUser ? auth().currentUser : null,
+        validUser: auth().currentUser ? auth().currentUser.emailVerified : false
       })
     });
 
-    searchInput.addEventListener('focusout', () => {
-      hideSearch();
-    });
-    searchInput.addEventListener('change', () => {
-      setTimeout(() => {
-        if (searchInput.value.length > 2) this.setState({ redir: `/buscar/${searchInput.value}` })
-      }, 10);
-    });
-    searchInput.addEventListener('search', () => {
-      hideSearch();
-    });
+    //Search Events
+    searchInput.addEventListener('focusout', () => hideSearch());
+    searchInput.addEventListener('change', () => setTimeout(() => searchInput.value.length > 2 ? this.setState({ redir: `/buscar/${searchInput.value}` }) : false, 10));
+    searchInput.addEventListener('search', () => hideSearch());
+
+    //Open tutorial
     opTut.addEventListener('click', () => {
       this.setState({ tut: true });
       setTimeout(() => closeT.style.opacity = 1, 10);
     })
   }
   render() {
-    //Update state tu show tutorial
+    //Update state to show tutorial
     const { location } = this.props
     const paths = location.pathname.substr(1);
     let tutComp = ' ';
@@ -137,7 +153,7 @@ class Navbar extends Component {
     return (
       <div>
         <nav>
-          <a class="brand truncate" href="./"><span>{paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "login" ? "Iniciar sesión" : paths === "signin" ? "Registrarse" : paths}</span></a>
+          <a class="brand truncate" href="./"><span>{paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths}</span></a>
           <div class="nav-wrapper">
             <a data-target="side1" href="#menu" class="nbtn sidenav-trigger waves-effect">
               <i class="material-icons">menu</i>
@@ -165,8 +181,8 @@ class Navbar extends Component {
         {tutComp}
         {this.state.user !== null ? this.state.validUser === false ? (
           <div id="verifyEmail">
-            <span><i className="material-icons">info_outline</i> Si deseas seguir utilizando FIUSAC.app® gratis primero debes verificar tu correo.</span>
-            <button className='waves-effect' onClick={this.senEmail}><i className="material-icons">send</i> Enviar correo de verificacion</button>
+            <span><i className="material-icons">info_outline</i> Te enviamos un correo de verificacion para que puedas seguir utilizando FIUSAC.app®.</span>
+            <button className='waves-effect' onClick={this.senEmail}><i className="material-icons">send</i> Enviar correo de nuevo</button>
           </div>
         ) : '' : ''}
         {this.state.redir !== false ? <Redirect to={this.state.redir} /> : ''}

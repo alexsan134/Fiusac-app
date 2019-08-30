@@ -11,6 +11,7 @@ class Sidenav extends Component {
     super(props)
     this.state = { user: undefined };
   }
+
   componentDidMount() {
     //Usign Alert
     const Alert = new ShowMsg();
@@ -29,18 +30,24 @@ class Sidenav extends Component {
         //Check route
         const text = sBtn[i].textContent.split(' ')[1].toLowerCase();
         sBtn[i].classList.remove('active');
+        sBtn[3].classList.remove('active');
         if (rr === text) sBtn[i].classList.add('active');
         else if (rr === '') sBtn[0].classList.add('active');
-        else if (rr === 'login') sBtn[2].classList.add('active');
+        else if (rr === 'cuenta') {
+          sBtn[2].classList.add('active');
+          sBtn[3].classList.add('active');
+        }
         //Close sidenav
         s.close();
       }
     }
+
     //Listen for Auth
     auth().onAuthStateChanged(user => {
       const userLink = document.querySelector('.userAccount');
       const loginLink = document.querySelector('.login');
       const accountSection = document.getElementById('accountSection');
+    
       if (user === null) {
         loginLink.classList.remove('hide');
         accountSection.classList.add('hide');
@@ -48,7 +55,6 @@ class Sidenav extends Component {
       }
       else {
         loginLink.classList.add('hide');
-        userLink.classList.remove('active');
         userLink.classList.remove('hide');
         accountSection.classList.remove('hide');
         this.setState({ user: user.displayName });
@@ -73,7 +79,7 @@ class Sidenav extends Component {
       })
     })
 
-    //Listen route changes                                     
+    //Listen for route changes                                     
     this.props.history.listen(location => addActive(location.pathname.substr(1)));
 
     //Share application
@@ -143,14 +149,14 @@ class Sidenav extends Component {
         <li>
           <a href="#div" class="subheader disable">Aplicación</a>
         </li>
-        <Link to='/login' className="login">
+        <Link to='/cuenta' className="login">
           <li class="sBtn mBtn">
             <a href="#login" id="login" class="waves-effect">
               <i class="material-icons">person</i> Iniciar sesión
 	          </a>
           </li>
         </Link>
-        <Link to='/'>
+        <Link to='/cuenta'>
           <li class="sBtn mBtn userAccount">
             <a href="#login" id="login" class="waves-effect">
               <i class="material-icons">person</i> {this.state.user}
