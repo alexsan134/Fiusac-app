@@ -16,7 +16,7 @@
   box-shadow:0 4px 6px hsla(0, 0%, 0%, 0.2);
   overflow:hidden;
   position:relative;
-  margin-bottom:37vh;
+
 }
 #contHours::before{
   width:100%;
@@ -53,29 +53,5 @@
   color:var(--icons);
   opacity:0.85;
 }
-#mainMsj{
-  background:#fff;
-  padding:20px;
-  border-radius:15px;
-  margin-bottom:15px;
-}
-#mainMsj > h4{
-  font-size:2em;
-  color:var(--accent);
-  line-height:25px;
-  margin-bottom:10px;
-}
-#mainMsj > p{
-  margin:0;
-  line-height:17px;
-  color:var(--secondary-text);
-  opacity:0.85;
-}
-#mainMsj > #logoDiv{
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-  width:100%;
-  position:relative;
-  margin-top:20px;
-}
+
+

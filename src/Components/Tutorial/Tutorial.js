@@ -37,7 +37,6 @@ class Tutorial extends Component {
       }
       dots.childNodes[current].childNodes[0].classList.add('currentDot');
     })
-    this.setState({ ref: true });
   }
   render() {
     //Tutorial dots

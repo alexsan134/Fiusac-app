@@ -15,6 +15,7 @@
   font-weight:550;
   width:95%;
   color:var(--primary);
+  padding-right:10px;
 }
 .docExp{
   color:var(--secondary-text);

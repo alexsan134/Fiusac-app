@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { auth } from "firebase/app";
 import Calendar from './calendar.png';
 import './Home.css';
 
@@ -8,13 +7,15 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.state = { day: new Date(), user: '' };
+    this.isSafe = false;
   }
   componentDidMount() {
+    this.isSafe = true;
     this.timer = setInterval(() => this.setState({ day: new Date() }), 1000);
-    auth().onAuthStateChanged(user => user !== null ? this.setState({ user: user.displayName }) : false);
   }
   componentWillUnmount() {
     clearInterval(this.timer);
+    this.isSafe = false;
   }
   render() {
     //Global Variables
@@ -30,10 +31,6 @@ class Home extends Component {
     
     return (
       <div id="homeCont">
-        <div id="mainMsj">
-          <h4>Bienvenido {this.state.user.split(' ')[0]}!</h4>
-          <p>(Esta aplicación es independiente de la facultad de ingenieria). Aquí tienes algunas de las cosas que puedes hacer dentro de la aplicación.</p>
-        </div>
         <Link to="/horario">
           <div id="contHours">
             <span id="info">Ver tus cursos en</span>

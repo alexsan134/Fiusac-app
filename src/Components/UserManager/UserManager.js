@@ -8,18 +8,28 @@ class UserManager extends React.Component {
     constructor(props) {
         super(props);
         this.state = { user: null };
+        this.isSafe = false;
+
+        //Preloader
         this.element = <div id="loadingUser">
             <h4>Espera solo un momento ...</h4>
             <p>Esto dependerá de la velocidad de tu conexión a internet, y solo ocurrirá cuando cierres o inicies sesión.</p>
         </div>
     }
+
     componentDidMount() {
+        //Listen for Auth
+        this.isSafe = true;
         auth().onAuthStateChanged(user => {
             this.element = user === null ? <Login /> : <Profile />;
-            this.setState({ user });
-            console.log("Active");
+            if (this.isSafe) this.setState({ user });
         })
     }
+
+    componentWillUnmount() {
+        this.isSafe = false;
+    }
+    
     render() {
         return (<div>{this.element}</div>)
     }

@@ -91,14 +91,15 @@ class Search extends Component {
 
     return (
       <div id="listOf">
-        <h3 id="srcTitle" class={this.current.length === 0 ? 'hide' : 'ss'}>Resultados de búsqueda<br /><h4>Se a encontrado {this.current.length} {rss} en {laps}s</h4></h3>
+        <h3 id="srcTitle" className={this.current.length === 0 ? 'hide' : 'ss'}>Resultados de búsqueda<br /><span>Se a encontrado {this.current.length} {rss} en {laps}s</span></h3>
         <div id={this.current.length === 1 ? 'allOneSrc' : 'allSrc'} ref={this.content}>
-          <div class={this.current.length <= 1 ? 'hide timeLine' : 'timeLine'}></div>
-          {this.current.map(e => {
+          <div className={this.current.length <= 1 ? 'hide timeLine' : 'timeLine'}></div>
+          {this.current.map((e, i) => {
             let days = [e.domingo, e.lunes, e.martes, e.miercoles, e.jueves, e.viernes, e.sabado].map(e => { if (e === undefined) return false; else return true });
             if (this.current.length === 1) {
               return (
                 <CourseExpanded
+                  key={i}
                   name={e.nombre}
                   timeStart={e.horaInicio}
                   timeEnd={e.horaFinal}
@@ -113,6 +114,7 @@ class Search extends Component {
             } else if (this.current.length > 1) {
               return (
                 <Course
+                  key={i}
                   name={e.nombre}
                   timeStart={e.horaInicio}
                   timeEnd={e.horaFinal}
@@ -129,14 +131,14 @@ class Search extends Component {
             }
             return undefined
           })}
-          <div class={this.current.length === 0 ? 'noRes' : 'hide'}>
+          <div className={this.current.length === 0 ? 'noRes' : 'hide'}>
             <img src={notFound} alt="Not found icon" />
             <div>
               <h5>Upps! no hay resultados</h5>
               <p>No se encontraron resultados, Intenta buscar algo similar o algo nuevo.</p>
             </div>
           </div>
-          <div class={this.current.length === 0 ? 'hide' : 'rights'}><p>FIUSACa.app® 2019<br />todos los derechos reservados.</p></div>
+          <div className={this.current.length === 0 ? 'hide' : 'rights'}><p>FIUSACa.app® 2019<br />todos los derechos reservados.</p></div>
         </div>
       </div>
     )

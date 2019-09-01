@@ -6,6 +6,7 @@ import './Navbar.css';
 import Tutorial from '../Tutorial/Tutorial';
 import CourseData from '../Calendar/courses.json';
 import Floating from '../Floating/Floating';
+import { UserTime } from '../../Functions';
 
 class Navbar extends Component {
   constructor(props) {
@@ -99,7 +100,7 @@ class Navbar extends Component {
     //Check for user
     auth().onAuthStateChanged(user => {
       setTimeout(() => {
-        this.currentUser = user ? user.displayName : "Iniciar sesión";
+        this.currentUser = user ? "" : "Iniciar sesión";
         this.setState({
           user: user ? user : null,
           validUser: user ? user.emailVerified : false
@@ -110,12 +111,8 @@ class Navbar extends Component {
     //Listen for route changes
     this.props.history.listen(location => {
       const user = auth().currentUser ? auth().currentUser : null;
-      if (user) {
-        const creationTime = new Date(parseInt(user.metadata.a));
-        const today = new Date();
-        const diference = today - creationTime;
-
-        if (diference > 1000 * 3600 * 24) {
+      if (user && (user.emailVerified === false)) {
+        if (UserTime(user) === "older") {
           user.delete()
             .then(function () {
               M.toast({ html: 'Usuario borrado, lo sentimos' })
@@ -125,7 +122,7 @@ class Navbar extends Component {
             });
         }
       }
-      this.currentUser = user ? user.displayName : "Iniciar Sesión";
+      this.currentUser = user ? "" : "Iniciar Sesión";
       this.setState({
         user: auth().currentUser ? auth().currentUser : null,
         validUser: auth().currentUser ? auth().currentUser.emailVerified : false
@@ -143,41 +140,43 @@ class Navbar extends Component {
       setTimeout(() => closeT.style.opacity = 1, 10);
     })
   }
+
   render() {
     //Update state to show tutorial
     const { location } = this.props
     const paths = location.pathname.substr(1);
+    const pathsRes = paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths;
     let tutComp = ' ';
     if (this.state.tut) tutComp = (<Tutorial />);
 
     return (
       <div>
-        <nav>
-          <a class="brand truncate" href="./"><span>{paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths}</span></a>
-          <div class="nav-wrapper">
-            <a data-target="side1" href="#menu" class="nbtn sidenav-trigger waves-effect">
-              <i class="material-icons">menu</i>
-            </a>
-            <a class="nbtn right waves-effect dropdown-trigger" href="#menuDot" data-target='dropdown1'>
-              <i class="material-icons">more_vert</i>
-            </a>
-            <a class="nbtn right waves-effect" href="#search" onClick={this.openSearch}>
-              <i class="material-icons">search</i>
-            </a>
-            <div class="input-field" id="search-container">
+        <nav className={pathsRes === "" ? "transBar" : "blue"}>
+          <a className="brand truncate" href="./"><span>{pathsRes}</span></a>
+          <div className="nav-wrapper">
+            <span data-target="side1" className="nbtn sidenav-trigger waves-effect">
+              <i className="material-icons">menu</i>
+            </span>
+            <span className="nbtn right waves-effect dropdown-trigger" data-target='dropdown1'>
+              <i className="material-icons">more_vert</i>
+            </span>
+            <span className="nbtn right waves-effect" onClick={this.openSearch}>
+              <i className="material-icons">search</i>
+            </span>
+            <div className="input-field" id="search-container">
               <input id="search-input" type="search" />
 
-              <i class="material-icons" id="sendSearch">search</i>
-              <i class="material-icons" id="backSearch">arrow_back</i>
+              <i className="material-icons" id="sendSearch">search</i>
+              <i className="material-icons" id="backSearch">arrow_back</i>
             </div>
           </div>
           <div id="searchShadow"></div>
-          <ul id='dropdown1' class='dropdown-content z-depth-3'>
-            <li id="opTut"><a class="black-text waves-effect" href="#info">Información</a></li>
+          <ul id='dropdown1' className='dropdown-content z-depth-3'>
+            <li id="opTut"><span className="black-text waves-effect" href="#info">Información</span></li>
           </ul>
         </nav>
         <Floating icon="add" action={this.openSearch} />
-        <i class={this.state.tut ? "material-icons closeT" : "hide closeT"} onClick={this.closeTut}>close</i>
+        <i className={this.state.tut ? "material-icons closeT" : "hide closeT"} onClick={this.closeTut}>close</i>
         {tutComp}
         {this.state.user !== null ? this.state.validUser === false ? (
           <div id="verifyEmail">

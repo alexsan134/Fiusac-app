@@ -28,7 +28,6 @@ export default class ShowMsg {
 
             //Props
             this.alertProps = "";
-
             counterInstancer++;
         }
     }
@@ -112,6 +111,7 @@ export default class ShowMsg {
             input.placeholder = data.placeholder ? data.placeholder : "";
             input.value = "";
         }
+        
         // Add Text Content
         title.textContent = data.title;
         p.innerHTML = data.body;

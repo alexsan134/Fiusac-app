@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Components/App/App';
 import * as serviceWorker from './serviceWorker';
+import { initDB } from './Functions';
 import M from 'materialize-css/dist/js/materialize.min.js';
+
+initDB();
 
 window.addEventListener('offline', () => M.toast({ html: 'Sin conexión a Internet' }));
 window.addEventListener('online', () => M.toast({ html: 'De nuevo en linea' }));

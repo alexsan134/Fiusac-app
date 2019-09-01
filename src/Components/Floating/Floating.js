@@ -9,10 +9,10 @@ class Floating extends Component {
   }
   render() {
     return (
-      <div class="fixed-action-btn action">
-        <a class={`btn-floating btn-large waves-effect z-depth-3 ${this.props.pulse ? 'pulse' : 'n'}`} href="#add">
-          <i class="large material-icons">{this.props.icon}</i>
-        </a>
+      <div className="fixed-action-btn action">
+        <span className={`btn-floating btn-large waves-effect z-depth-3 ${this.props.pulse ? 'pulse' : 'n'}`}>
+          <i className="large material-icons">{this.props.icon}</i>
+        </span>
       </div>
     )
   }

@@ -7,6 +7,10 @@ nav{
   display:block;
   background:var(--primary);
 }
+.transBar{
+  background:transparent;
+  box-shadow:none;
+}
 nav .nav-wrapper{
   position:relative;
   padding:0 8px;
@@ -23,7 +27,7 @@ nav .nav-wrapper .nbtn{
 nav .nav-wrapper .sidenav-trigger{
   margin:0;
 }
-nav .nav-wrapper > a >i{
+nav .nav-wrapper > span >i{
   position:absolute;
   top:50%;
   left:50%;
@@ -108,7 +112,7 @@ nav .nav-wrapper .brand-logo span{
 .input-field .prefix.active {
   color:var(--icons)!important;
 }
-.dropdown-content li>a, .dropdown-content li>span {
+.dropdown-content li>span, .dropdown-content li>span {
   color:var(--secondary-text)!important;
   text-transform:capitalize;
 }

@@ -23,7 +23,7 @@ class Sidenav extends Component {
     const s = M.Sidenav.init(list);
     const current = this;
 
-    //Check route to add active class
+    //Check route to add active className
     function addActive(rr) {
       const max = sBtn.length;
       for (let i = 0; i < max; i++) {
@@ -47,7 +47,7 @@ class Sidenav extends Component {
       const userLink = document.querySelector('.userAccount');
       const loginLink = document.querySelector('.login');
       const accountSection = document.getElementById('accountSection');
-    
+
       if (user === null) {
         loginLink.classList.remove('hide');
         accountSection.classList.add('hide');
@@ -72,6 +72,7 @@ class Sidenav extends Component {
           auth().signOut().then(function () {
             current.setState({ name: "" });
             M.toast({ html: 'Sesión cerrada correctamente' })
+            s.close();
           }, function (error) {
             M.toast({ html: error })
           });
@@ -120,74 +121,58 @@ class Sidenav extends Component {
 
   render() {
     return (
-      <ul class="sidenav" id="side1">
+      <ul className="sidenav" id="side1">
         <li>
-          <div class="user-view">
-            <span role="button" class="userInfo">
-              <span class="name">FIUSAC.app®</span>
-              <span class="email">Version beta v0.83<br />Dev. Alex Santos</span>
+          <div className="user-view">
+            <span role="button" className="userInfo">
+              <span className="name">FIUSAC.app®</span>
+              <span className="email">Version beta v0.83<br />Dev. Alex Santos</span>
             </span>
           </div>
         </li>
         <Link to="/">
-          <li class="sBtn mBtn">
-            <a href="#toHome" class="waves-effect">
-              <i class="material-icons">home</i> Inicio
-            </a>
+          <li className="sBtn mBtn waves-effect">
+            <i className="material-icons">home</i>
+            <span> Inicio</span>
           </li>
         </Link>
         <Link to="/horario">
-          <li class="sBtn mBtn">
-            <a href="#toSchedule" class="waves-effect">
-              <i class="material-icons">today</i> Horario
-            </a>
+          <li className="sBtn mBtn waves-effect">
+            <i className="material-icons">today</i>
+            <span> Horario</span>
           </li>
         </Link>
         <li>
-          <div class="divider"></div>
+          <div className="divider"></div>
         </li>
         <li>
-          <a href="#div" class="subheader disable">Aplicación</a>
+          <a href="#div" className="subheader disable">Aplicación</a>
         </li>
         <Link to='/cuenta' className="login">
-          <li class="sBtn mBtn">
-            <a href="#login" id="login" class="waves-effect">
-              <i class="material-icons">person</i> Iniciar sesión
-	          </a>
+          <li className="sBtn mBtn waves-effect">
+            <i className="material-icons">person</i>
+            <span id="login">Iniciar sesión</span>
           </li>
         </Link>
         <Link to='/cuenta'>
-          <li class="sBtn mBtn userAccount">
-            <a href="#login" id="login" class="waves-effect">
-              <i class="material-icons">person</i> {this.state.user}
-            </a>
+          <li className="sBtn mBtn userAccount waves-effect">
+            <i className="material-icons">person</i>
+            <span id="login"> {this.state.user}</span>
           </li>
         </Link>
         <div id="accountSection" className="hide">
-          <Link to='/'>
-            <li class="sBtn mBtn config">
-              <a href="#config" class="waves-effect">
-                <i class="material-icons">settings</i> Configuración
-	            </a>
-            </li>
-          </Link>
-          <Link>
-            <li class="sBtn mBtn logout">
-              <a href="#logout" id="logout" class="waves-effect">
-                <i class="material-icons">exit_to_app</i> Cerrar sesión
-	            </a>
-            </li>
-          </Link>
+          <li className="sBtn mBtn logout waves-effect">
+            <i className="material-icons">exit_to_app</i>
+            <span id="logout">Cerrar sesión</span>
+          </li>
         </div>
-        <li class="sBtn shareBtn" >
-          <a href="#share" class="waves-effect">
-            <i class="material-icons">share</i>Compartir
-	        </a>
+        <li className="sBtn shareBtn waves-effect" >
+          <i className="material-icons">share</i>
+          <span>Compartir</span>
         </li>
-        <li class="sBtn download">
-          <a href="#download" class="waves-effect add-button">
-            <i class="material-icons">arrow_downward</i>Descargar app
-	        </a>
+        <li className="sBtn add-button waves-effect">
+          <i className="material-icons">arrow_downward</i>
+          <span>Descargar app</span>
         </li>
       </ul>
     )

@@ -15,6 +15,7 @@ class Calendar extends Component {
     super(props)
     //Get objects from Courses.json
     this.current = [];
+    this.defControl = false;
 
     //Global Variables
     this.months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -50,25 +51,26 @@ class Calendar extends Component {
     //CoursesList
     this.current = [];
     dataHandler({}, 2).then(courses => {
+      this.defControl = true;
       //Map courses to filter by code and section
-      if(courses){
-      CourseData.map((e, p) => {
-        return courses.map(i => {
-          if (e.codigo === i.codigo.toString() && e.seccion === i.seccion) this.current.push(e);
-          return e
+      if (courses) {
+        CourseData.map((e, p) => {
+          return courses.map(i => {
+            if (e.codigo === i.codigo.toString() && e.seccion === i.seccion) this.current.push(e);
+            return e
+          })
         })
-      })
 
-      //Sort by time
-      this.current.sort((a, b) => {
-        const as = a.horaInicio.split(':');
-        const bs = b.horaInicio.split(':');
-        return (parseInt(as[0]) + parseInt(as[1] / 100)) - (parseInt(bs[0]) + parseInt(bs[1] / 100))
-      })
-      this.setState({
-        normal: this.state.normal
-      });
-    } else return 0;
+        //Sort by time
+        this.current.sort((a, b) => {
+          const as = a.horaInicio.split(':');
+          const bs = b.horaInicio.split(':');
+          return (parseInt(as[0]) + parseInt(as[1] / 100)) - (parseInt(bs[0]) + parseInt(bs[1] / 100))
+        })
+        this.setState({
+          normal: this.state.normal
+        });
+      } else return 0;
     })
   }
   componentDidMount() {
@@ -134,10 +136,10 @@ class Calendar extends Component {
     let counter = 0;
 
     return (
-      <div>
-        <div ref={this.allCt} id="ctp" class={def ? 'hide' : 'show'}>
+      <div className={this.defControl ? "show" : "hide"}>
+        <div ref={this.allCt} id="ctp" className={def ? 'hide' : 'show'}>
           <div id="header">
-            <h3 id="mainDate" class={today === 'Miércoles' ? 'rss' : today === 'Domingo' ? 'rsd' : 'exp'}>{today} <br /><span>{cMonth} {tDate}</span></h3>
+            <h3 id="mainDate" className={today === 'Miércoles' ? 'rss' : today === 'Domingo' ? 'rsd' : 'exp'}>{today} <br /><span>{cMonth} {tDate}</span></h3>
             <div id="main">
               <div id="bans">
                 <img src={Logo} alt="Logo FIUSAC" />
@@ -153,6 +155,7 @@ class Calendar extends Component {
                 counter++;
                 return (
                   <Course
+                    key={i}
                     name={e.nombre}
                     timeStart={e.horaInicio}
                     timeEnd={e.horaFinal}
@@ -168,30 +171,30 @@ class Calendar extends Component {
               } else fails++;
               return undefined
             })}
-            <div class={fails === this.current.length ? 'hide timeLine' : 'timeLine'}></div>
-            <div id="emptyCourses" class={fails === this.current.length ? 'show' : 'hide'}>
+            <div className={fails === this.current.length ? 'hide timeLine' : 'timeLine'}></div>
+            <div id="emptyCourses" className={fails === this.current.length ? 'show' : 'hide'}>
               <img src={Empty} alt="Empty Courses" />
               <div>
                 <h4>No tienes ningún curso asignado par hoy.</h4>
                 <p>Puedes agregar mas utilizando el buscador o navegar para ver los cursos entre días.</p>
               </div>
             </div>
-            <div class='rights'><p>FIUSAC.app® 2019<br />todos los derechos reservados.</p>
+            <div className='rights'><p>FIUSAC.app® 2019<br />todos los derechos reservados.</p>
             </div>
           </section>
           <div id="swipeArea"></div>
         </div>
-        <div class={def ? 'show defS' : 'hide'}>
-          <div class="default">
+        <div className={def ? 'show defS' : 'hide'}>
+          <div className="default">
             <h4>No tienes cursos asignados</h4>
-            <p>Puedes agregar los cursos que quieras con solo utilizar el buscador <i class="material-icons">search</i></p>
+            <p>Puedes agregar los cursos que quieras con solo utilizar el buscador <i className="material-icons">search</i></p>
             <div id="banner">
               <img src={Logo} alt='Default banner' />
               <span>Cursos oficiales<br />de la facultad.</span>
             </div>
           </div>
-          <img class="defs" src={Defs} alt="Not found" />
-          <img class="defsCc" src={Cloud} alt="Not found cloud" />
+          <img className="defs" src={Defs} alt="Not found" />
+          <img className="defsCc" src={Cloud} alt="Not found cloud" />
         </div>
       </div>
     );

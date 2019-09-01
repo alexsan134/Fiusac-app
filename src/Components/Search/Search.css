@@ -18,11 +18,13 @@
   font-size:1.4em;
   z-index:2;
 }
-#srcTitle h4{
+#srcTitle span{
   font-size:0.7em;
   color:var(--alter);
   text-transform:none;
   opacity:0.8;
+  margin:0;
+  display:block;
 }
 .noRes{
   padding:0 20px 07px 0;
