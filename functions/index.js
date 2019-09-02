@@ -2,11 +2,17 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 admin.initializeApp({
-    credential: admin.credential.applicationDefault()
+    credential: admin.credential.applicationDefault(),
+    apiKey: "AIzaSyB1MPonpuvCFF9igWdr1-KTVV43i3I17e8",
+    authDomain: "fiusac.firebaseapp.com",
+    databaseURL: "https://fiusac.firebaseio.com",
+    projectId: "fiusac",
+    storageBucket: "fiusac.appspot.com",
+    messagingSenderId: "980983277469",
+    appId: "1:980983277469:web:980611419493b3cc"
 });
 
-const db = admin.firestore();
-const users_coll = db.collection('users');
+const db = admin.database();
 
 exports.setNewUser = functions.auth.user().onCreate((user, context) => {
     console.log(user);
@@ -17,17 +23,11 @@ exports.setNewUser = functions.auth.user().onCreate((user, context) => {
             .catch(err => console.log("Error", err));
     }
     else console.log("The user has already photo");
-    const newDoc = users_coll.doc(user.uid);
-    newDoc.set({
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email
-    });
     return 0;
 })
 
 exports.deleteUser = functions.auth.user().onDelete((user, context) => {
     console.log('Deleting user: ' + user.email);
-    users_coll.doc(user.uid).delete();
+    db.ref("users/"+user.uid).remove();
     return 0;
 })

@@ -49,7 +49,7 @@
   top:50%;
   transform: translateY(-50%);
 }
-#contHours > #info{
+#contHours > #infoSv{
   color:var(--icons);
   opacity:0.85;
 }

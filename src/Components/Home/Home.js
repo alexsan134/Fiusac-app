@@ -33,7 +33,7 @@ class Home extends Component {
       <div id="homeCont">
         <Link to="/horario">
           <div id="contHours">
-            <span id="info">Ver tus cursos en</span>
+            <span id="infoSv">Ver tus cursos en</span>
             <h5>{days[day.getDay()]}, {day.getDate()} de {months[day.getMonth()]}</h5>
             <h4>{time}</h4>
             <img src={Calendar} alt="Calendar icon"/>

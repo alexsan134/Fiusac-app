@@ -47,9 +47,10 @@
   margin-bottom:5px;
   opacity:0.8;
 }
-.item > p > h4{
+.item > p > span{
   display:inline-block;
   text-transform:none;
+  color:var(--accent);
 }
 .item > ul li{
   display:flex;

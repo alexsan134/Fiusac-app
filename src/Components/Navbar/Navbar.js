@@ -6,7 +6,7 @@ import './Navbar.css';
 import Tutorial from '../Tutorial/Tutorial';
 import CourseData from '../Calendar/courses.json';
 import Floating from '../Floating/Floating';
-import { UserTime } from '../../Functions';
+import { UserTime, firedb } from '../../Functions';
 
 class Navbar extends Component {
   constructor(props) {
@@ -100,6 +100,13 @@ class Navbar extends Component {
     //Check for user
     auth().onAuthStateChanged(user => {
       setTimeout(() => {
+        if(user){
+          if(UserTime(user) === "new") setTimeout(() => {
+            firedb.ref("users/"+user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" })            
+            console.log("Update photo for new user");
+          }, 1000 * 60);
+        }
+
         this.currentUser = user ? "" : "Iniciar sesión";
         this.setState({
           user: user ? user : null,
@@ -111,6 +118,13 @@ class Navbar extends Component {
     //Listen for route changes
     this.props.history.listen(location => {
       const user = auth().currentUser ? auth().currentUser : null;
+      if(user){
+        if(UserTime(user) === "new") setTimeout(() => {
+          firedb.ref("users/"+user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" }) 
+          console.log("Update photo for new user");           
+        }, 1000 * 60);
+      }
+
       if (user && (user.emailVerified === false)) {
         if (UserTime(user) === "older") {
           user.delete()
@@ -145,14 +159,20 @@ class Navbar extends Component {
     //Update state to show tutorial
     const { location } = this.props
     const paths = location.pathname.substr(1);
+    let color;
     const pathsRes = paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths;
     let tutComp = ' ';
     if (this.state.tut) tutComp = (<Tutorial />);
+    if(pathsRes === ""){
+      if (this.state.user !== null && this.state.validUser === false) color = "blue";
+      else color = "transBar";
+    }
+
 
     return (
       <div>
-        <nav className={pathsRes === "" ? "transBar" : "blue"}>
-          <a className="brand truncate" href="./"><span>{pathsRes}</span></a>
+        <nav className={color}>
+          <a className="brand truncate" href="./"><span>{pathsRes===""?color==="blue"?"Verificar correo":"":pathsRes}</span></a>
           <div className="nav-wrapper">
             <span data-target="side1" className="nbtn sidenav-trigger waves-effect">
               <i className="material-icons">menu</i>
@@ -172,7 +192,7 @@ class Navbar extends Component {
           </div>
           <div id="searchShadow"></div>
           <ul id='dropdown1' className='dropdown-content z-depth-3'>
-            <li id="opTut"><span className="black-text waves-effect" href="#info">Información</span></li>
+            <li id="opTut"><span className="black-text waves-effect">Información</span></li>
           </ul>
         </nav>
         <Floating icon="add" action={this.openSearch} />

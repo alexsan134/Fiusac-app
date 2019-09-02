@@ -106,7 +106,7 @@ class Sidenav extends Component {
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       deferredPrompt = e;
-      addBtn.style.display = 'block';
+      addBtn.style.display = 'flex';
       addBtn.addEventListener('click', e => {
         addBtn.style.display = 'none';
         deferredPrompt.prompt();
@@ -151,13 +151,13 @@ class Sidenav extends Component {
         <Link to='/cuenta' className="login">
           <li className="sBtn mBtn waves-effect">
             <i className="material-icons">person</i>
-            <span id="login">Iniciar sesión</span>
+            <span>Iniciar sesión</span>
           </li>
         </Link>
         <Link to='/cuenta'>
           <li className="sBtn mBtn userAccount waves-effect">
             <i className="material-icons">person</i>
-            <span id="login"> {this.state.user}</span>
+            <span> {this.state.user}</span>
           </li>
         </Link>
         <div id="accountSection" className="hide">

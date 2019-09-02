@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { auth } from "firebase/app";
-import { firebase, dataHandler, UserTime } from "../../Functions.js";
+import { firedb, dataHandler, UserTime, firebase } from "../../Functions.js";
 import { Redirect } from 'react-router-dom';
 import ShowMsg from '../Alert/Alert';
 import * as firebaseui from 'firebaseui-es';
@@ -22,16 +22,26 @@ async function sendToast(user) {
             const data = {
                 uid: user.uid,
                 name: user.displayName,
+                providerId: user.providerData[0].providerId,
                 email: user.email,
                 photo: user.photoURL,
-                cover: "https://source.unsplash.com/collection/8531073/1200x600"
+                cover: "https://images.unsplash.com/photo-1565895124887-851fcc855bc3?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=700&h=500&fit=crop&ixid=eyJhcHBfaWQiOjF9"
             };
+            firedb.ref("users/" + user.uid).set(data);
             dataHandler(data, 4).then(() => console.log("Save new user"))
-                .catch(err => console.log("User creation error ", err))
+                .catch(err => console.log("User creation error ", err));
         }
-
-        M.toast({ html: `Sesión iniciada correctamente` })
-        return 0;
+        firedb.ref("users/" + user.uid).once('value', data => {
+            if (data.val().courses) {
+                dataHandler(data.val().courses, 5).then(() => {
+                    M.toast({ html: `Sesión iniciada correctamente` })
+                    return 0;
+                })
+            } else {
+                M.toast({ html: `Sesión iniciada correctamente` })
+                return 0;
+            }
+        })
     }
 }
 
@@ -113,8 +123,12 @@ class Login extends Component {
             const mail = document.getElementById('mail');
             auth().signInWithEmailAndPassword(mail.value, pass.value)
                 .then(user => {
-                    M.toast({ html: `Sesión iniciada correctamente` })
-                    crt.setState({ redir: true });
+                    firedb.ref("users/" + user.user.uid).once('value', data => {
+                        if (data.val().courses) dataHandler(data.val().courses, 5).then(() => {
+                            M.toast({ html: `Sesión iniciada correctamente` });
+                            crt.setState({ redir: true });
+                        });
+                    });
                 })
                 .catch(err => {
                     const errType = err.code === "auth/invalid-email" ? "El correo electrónico no es valido, verifica tu entrada o intenta de nuevo" : err.code === "auth/wrong-password" ? "El correo electrónico o la contraseña son incorrectos, verifica tu entrada." : err.message;

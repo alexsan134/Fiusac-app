@@ -33,30 +33,32 @@ class Tutorial extends Component {
       if (current >= this.items) current = this.items;
       cont.style.left = `-${current}00%`;
       for (let i = 0; i < this.items + 1; i++) {
-        dots.childNodes[i].childNodes[0].classList.remove('currentDot');
+        if(dots.childNodes[i]) dots.childNodes[i].childNodes[0].classList.remove('currentDot');
       }
-      dots.childNodes[current].childNodes[0].classList.add('currentDot');
+      if(dots.childNodes[current]) dots.childNodes[current].childNodes[0].classList.add('currentDot');
     })
+
+    this.setState({});
   }
   render() {
     //Tutorial dots
     const lis = [];
     for (let i = 0; i < this.items + 1; i++) {
-      lis.push(<li><i class="material-icons">lens</i></li>);
+      lis.push(<li key={i}><i className="material-icons">lens</i></li>);
     }
 
     return (
       <div id="tuto">
-        <div class="cont">
-          <div class="item">
+        <div className="cont">
+          <div className="item">
             <h5>Cursos</h5>
             <hr></hr>
             <h4>Comportamiento</h4>
             <p>Cada curso cambia su color en su estado actual, los colores se interpretan de la siguiente manera:</p>
             <ul>
-              <li><span class="bls">Inactivo</span> Indica un curso no próximo en el tiempo o ya finalizado.</li>
-              <li><span class="yls">Próximo</span> Indica un curso que esta por empezar en menos de 10 minutos.</li>
-              <li><span class="gls">Activo</span> Indica el curso actual según hora de inició en su intervalo de tiempo.</li>
+              <li><span className="bls">Inactivo</span> Indica un curso no próximo en el tiempo o ya finalizado.</li>
+              <li><span className="yls">Próximo</span> Indica un curso que esta por empezar en menos de 10 minutos.</li>
+              <li><span className="gls">Activo</span> Indica el curso actual según hora de inició en su intervalo de tiempo.</li>
             </ul>
             <hr></hr>
             <h4>Navegación</h4>
@@ -77,17 +79,17 @@ class Tutorial extends Component {
             <img src={gest} alt="Swipe Gesture" id="gest" />
             <div id="block"></div>
           </div>
-          <div class="item bs">
+          <div className="item bs">
             <h5>Buscador</h5>
             <hr></hr>
-            <p class="ft">Puedes buscar por: nombre, sección, docente, código, salón, edificio, hora, lugar, etc.<br /> para acceder a la búsqueda avanzada debes escribir en el siguiente formato:</p>
-            <p><h4>Sección</h4> "numero de sección"</p>
-            <p><h4>Código</h4> "numero de código"</p>
-            <p><h4>Edificio</h4> "nombre del edificio"</p>
-            <p><h4>Salón</h4> "nombre del salón" <h4>del</h4> "nombre del edificio"</p>
-            <p><h4>Empieza a las</h4> "inicio (hh:mm)" <h4>termina a las</h4> "final (hh:mm)"</p>
-            <div class="add">
-              <i class="material-icons">info_outline</i><h4> Información importante</h4><br />
+            <p className="ft">Puedes buscar por: nombre, sección, docente, código, salón, edificio, hora, lugar, etc.<br /> para acceder a la búsqueda avanzada debes escribir en el siguiente formato:</p>
+            <p><span>Sección</span> "numero de sección"</p>
+            <p><span>Código</span> "numero de código"</p>
+            <p><span>Edificio</span> "nombre del edificio"</p>
+            <p><span>Salón</span> "nombre del salón" <span>del</span> "nombre del edificio"</p>
+            <p><span>Empieza a las</span> "inicio (hh:mm)" <span>termina a las</span> "final (hh:mm)"</p>
+            <div className="add">
+              <i className="material-icons">info_outline</i><span> Información importante</span><br />
               <span>La búsqueda avanzada solo funciona si escribes el formato exactamente como se muestra, incluyendo acentos, y no agregues signos de puntuación como "_ - , :" etc. Intenta ser especifico y busca palabras con no menos de 3 letras.</span>
             </div>
           </div>

@@ -1,8 +1,10 @@
 import React from "react";
 import { auth } from 'firebase/app';
-import { dataHandler } from '../../Functions';
+import { dataHandler, firedb } from '../../Functions';
+import ShowMsg from '../Alert/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF, } from '@fortawesome/free-brands-svg-icons';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import './Profile.css';
 
 class Profile extends React.Component {
@@ -13,22 +15,41 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
+        const Alert = new ShowMsg();
 
         //Listen first for Auth
         this.isSafe = true;
         auth().onAuthStateChanged(user => {
             if (user) {
-                const data = {
-                    uid: user.uid,
-                    name: user.displayName,
-                    email: user.email,
-                    providerId: user.providerData[0].providerId,
-                    metadata: user.metadata,
-                    photo: user.photoURL,
-                    cover: "https://source.unsplash.com/Jp1jLjgo3PM/700x500"
-                };
-                dataHandler(data, 4).then(data => this.isSafe ? this.setState({ user: data }) : false)
+                firedb.ref("users/" + user.uid).on('value', data => {
+                    if(data.val()){
+                        dataHandler(data.val(), 4).then(data => this.isSafe ? this.setState({ user: data }) : false)
+                    }
+                });
             }
+        })
+
+        //Save to cloud
+        const saveBtn = document.getElementById("saveToCloud");
+        saveBtn.addEventListener("click", () => {
+            saveBtn.classList.add("disabled");
+            dataHandler({}, 2).then(data => {
+                if (data.length === 0) {
+                    Alert.showMsg({
+                        title: "Sin cursos",
+                        body: "No tienes cursos agregados aun, puedes agregar mas cursos con el buscador.",
+                        type: "error"
+                    });
+                    saveBtn.classList.remove("disabled");
+                }
+                else if (this.state.user) {
+                    firedb.ref("users/" + this.state.user.uid + "/courses").set(data, () => {
+                        M.toast({ html: 'Cursos guardados exitosamente' });
+                        saveBtn.classList.remove("disabled");
+                    });
+                }
+            })
+
         })
     }
 
@@ -42,9 +63,7 @@ class Profile extends React.Component {
         const photo = this.state.user.photo;
         const cover = this.state.user.cover;
         const userName = this.state.user.name;
-        const email = this.state.user.email;;
-        const metadata = this.state.user.metadata;
-        const uid = this.state.user.uid;
+        const email = this.state.user.email;
 
         //Provider Icon
         if (this.state.user.providerId === "password") provider = <i className="material-icons">email</i>
@@ -60,12 +79,14 @@ class Profile extends React.Component {
                     <div id="profileCircle">
                         <img src={photo} alt="" />
                     </div>
-                    <div id="info">
-                        <h1 id="uid" className="truncate">{userName}#<span>{uid}</span></h1>
-                        <span id="email">{provider}&nbsp;<span>{email}</span></span>
+                    <div id="infoProfile">
+                        <span id="uid">{userName}</span><br />
+                        <span id="emailInfo" className="truncate">{provider}&nbsp;<span>{email}</span></span>
                     </div>
                 </div>
-
+                <div id="mainInfo">
+                    <button id="saveToCloud" className="btn blue"><i className="material-icons left">cloud</i>Guardar tus cursos</button>
+                </div>
             </div>
         )
     }

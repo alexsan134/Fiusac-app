@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import "firebase/database";
 import Dexie from 'dexie';
 
 //Firebase Config
@@ -13,15 +14,16 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-export { firebase };
+const firedb = firebase.database();
+export { firebase , firedb};
 
 //Init DataBase
 let db;
 export function initDB() {
-  db = new Dexie("coursesDB");
+  db = new Dexie("localDB");
   db.version(1).stores({
     courses: 'codeid, codigo, seccion',
-    user: 'uid, name, email, photo, cover, provideId, metadata'
+    user: 'uid, name, email, photo, cover, providerId, metadata'
   })
   db.open().then(() => console.log("OpenDB")).catch(err => console.log("Error during open db ", err));
 }
@@ -32,11 +34,15 @@ export function dataHandler(data, type = 0) {
   if (type === 1) return db.courses.delete(data.codeid);
   if (type === 2) return db.courses.toArray();
   if (type === 3) return db.courses.get(data.codeid, item => item);
-  if (type === 4) {
+  if (type === 4 && data) {
     db.user.clear();
     return db.user.put(data).then(res => {
       return db.user.get(res, item => item);
     })
+  }
+  if( type === 5) {
+    db.courses.clear();
+    return db.courses.bulkAdd(data);
   }
 }
 
