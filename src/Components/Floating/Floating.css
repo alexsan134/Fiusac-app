@@ -1,19 +1,12 @@
-.action{
-  z-index:9;
-  position:fixed;
-  bottom:0;
-  right:0;
-  margin:15px;
-}
-.btn-floating{
+.action > span{
   background:var(--accent)!important;
 }
-.btn-floatinf i{
-  color:var(--icons);
+.action{
+  margin-right:-10px;
+  margin-bottom:-10px;
+  z-index:9;
 }
-ul li .btn-floating{
-  background:var(--icons)!important;
-}
-ul li .btn-floating i{
-  color:var(--accent);
+
+.action > span > i{
+  transition:transform 0.5s ease;
 }

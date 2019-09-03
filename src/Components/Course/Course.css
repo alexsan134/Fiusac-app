@@ -129,7 +129,7 @@ h5,h4{
   height:calc(100vh - 56px);
   opacity:1;
   transition:opacity 0.3s ease;
-  z-index:3;
+  z-index:11;
   padding:30px;
 }
 .details > .shadow{

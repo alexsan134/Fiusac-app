@@ -32,14 +32,17 @@ async function sendToast(user) {
                 .catch(err => console.log("User creation error ", err));
         }
         firedb.ref("users/" + user.uid).once('value', data => {
-            if (data.val().courses) {
-                dataHandler(data.val().courses, 5).then(() => {
+            if (data.val()) {
+                if (data.val().courses) {
+                    dataHandler(data.val().courses, 5).then(() => {
+                        M.toast({ html: `Sesión iniciada correctamente` })
+                        return 0;
+                    })
+                } else {
+                    dataHandler({}, 6);
                     M.toast({ html: `Sesión iniciada correctamente` })
                     return 0;
-                })
-            } else {
-                M.toast({ html: `Sesión iniciada correctamente` })
-                return 0;
+                }
             }
         })
     }
@@ -128,6 +131,7 @@ class Login extends Component {
                             M.toast({ html: `Sesión iniciada correctamente` });
                             crt.setState({ redir: true });
                         });
+                        else dataHandler({}, 6);
                     });
                 })
                 .catch(err => {
@@ -171,7 +175,7 @@ class Login extends Component {
                     </div>
                     <button id="loginBtn" className="waves-effect"><i className='material-icons'>email</i> Iniciar sesión</button>
                 </div>
-                <span id="logSep">o también</span>
+                <span id="logSep">registrate</span>
                 <div id="loginCont"></div>
                 {this.state.redir !== false ? <Redirect to='/horario' /> : ''}
             </div>

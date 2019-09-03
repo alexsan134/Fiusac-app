@@ -46,6 +46,12 @@
     margin:5px 0;
     font-weight:400;
 }
+.alertContainer > div > p > span{
+    color:#000;
+    font-weight:550;
+    display:inline-block;
+    -webkit-user-select:initial;
+}
 .alertContainer > div > div{
     display:flex;
     width:100%;

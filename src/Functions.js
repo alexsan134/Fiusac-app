@@ -30,7 +30,10 @@ export function initDB() {
 
 //DataBase requests
 export function dataHandler(data, type = 0) {
-  if (type === 0) return db.courses.put(data);
+  if (type === 0){
+    db.courses.put(data);
+    return db.courses.toArray();
+  }
   if (type === 1) return db.courses.delete(data.codeid);
   if (type === 2) return db.courses.toArray();
   if (type === 3) return db.courses.get(data.codeid, item => item);
@@ -44,6 +47,7 @@ export function dataHandler(data, type = 0) {
     db.courses.clear();
     return db.courses.bulkAdd(data);
   }
+  if(type === 6) db.courses.clear();
 }
 
 //Check user creation time

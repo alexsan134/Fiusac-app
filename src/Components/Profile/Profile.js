@@ -1,10 +1,8 @@
 import React from "react";
 import { auth } from 'firebase/app';
 import { dataHandler, firedb } from '../../Functions';
-import ShowMsg from '../Alert/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF, } from '@fortawesome/free-brands-svg-icons';
-import M from 'materialize-css/dist/js/materialize.min.js';
 import './Profile.css';
 
 class Profile extends React.Component {
@@ -15,8 +13,6 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        const Alert = new ShowMsg();
-
         //Listen first for Auth
         this.isSafe = true;
         auth().onAuthStateChanged(user => {
@@ -27,29 +23,6 @@ class Profile extends React.Component {
                     }
                 });
             }
-        })
-
-        //Save to cloud
-        const saveBtn = document.getElementById("saveToCloud");
-        saveBtn.addEventListener("click", () => {
-            saveBtn.classList.add("disabled");
-            dataHandler({}, 2).then(data => {
-                if (data.length === 0) {
-                    Alert.showMsg({
-                        title: "Sin cursos",
-                        body: "No tienes cursos agregados aun, puedes agregar mas cursos con el buscador.",
-                        type: "error"
-                    });
-                    saveBtn.classList.remove("disabled");
-                }
-                else if (this.state.user) {
-                    firedb.ref("users/" + this.state.user.uid + "/courses").set(data, () => {
-                        M.toast({ html: 'Cursos guardados exitosamente' });
-                        saveBtn.classList.remove("disabled");
-                    });
-                }
-            })
-
         })
     }
 
@@ -80,12 +53,10 @@ class Profile extends React.Component {
                         <img src={photo} alt="" />
                     </div>
                     <div id="infoProfile">
-                        <span id="uid">{userName}</span><br />
+                        <span id="uid">{userName}</span>
                         <span id="emailInfo" className="truncate">{provider}&nbsp;<span>{email}</span></span>
+                        <button id="completeInfo" className="btn-small grey waves-effect">Completar informacion</button>
                     </div>
-                </div>
-                <div id="mainInfo">
-                    <button id="saveToCloud" className="btn blue"><i className="material-icons left">cloud</i>Guardar tus cursos</button>
                 </div>
             </div>
         )

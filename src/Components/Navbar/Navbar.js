@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { withRouter, Redirect } from 'react-router-dom';
+import ShowMsg from '../Alert/Alert';
 import { auth } from "firebase/app";
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './Navbar.css';
 import Tutorial from '../Tutorial/Tutorial';
 import CourseData from '../Calendar/courses.json';
 import Floating from '../Floating/Floating';
-import { UserTime, firedb } from '../../Functions';
+import { UserTime, firedb, dataHandler } from '../../Functions';
+
+const Alert = new ShowMsg();
 
 class Navbar extends Component {
   constructor(props) {
@@ -16,6 +19,8 @@ class Navbar extends Component {
     this.openSearch = this.openSearch.bind(this);
     this.closeTut = this.closeTut.bind(this);
     this.senEmail = this.senEmail.bind(this);
+    this.shareCourses = this.shareCourses.bind(this);
+    this.saveToCloud = this.saveToCloud.bind(this);
     this.state = { tut: false, redir: false, validUser: null, user: null }
     this.currentUser = "";
 
@@ -31,6 +36,88 @@ class Navbar extends Component {
       if (e.horaInicio !== undefined && e.horaInicio.length > 0) this.courses["Empieza a las " + e.horaInicio + " termina a las " + e.horaFinal] = null;
       return 0
     });
+  }
+
+  saveToCloud() {
+    const user = auth().currentUser ? auth().currentUser : null;
+    dataHandler({}, 2).then(data => {
+      if (user) {
+        if (data.length === 0) {
+          Alert.showMsg({
+            title: "Sin cursos",
+            body: "No tienes cursos agregados aun, puedes agregar mas cursos con el buscador.",
+            type: "error"
+          });
+        }
+        else {
+          firedb.ref("users/" + user.uid + "/courses").set(data, () => {
+            M.toast({ html: 'Cursos guardados exitosamente' });
+          });
+        }
+      } else {
+        Alert.showMsg({
+          title: "Inicio de sesion",
+          body: "Para poder acceder a estas opciones primero debes iniciar sesion en la aplicacion.",
+          type: "error"
+        });
+      }
+    })
+  }
+
+  shareCourses() {
+    const user = auth().currentUser ? auth().currentUser : null;
+    if (user) {
+      Alert.showMsg({
+        title: "Compartir cursos",
+        body: `Tu codigo para compartir es <span>${user.uid}</span> para importar cursos de otras personas pega su codigo aqui:`,
+        placeholder: 'Codigo para importar cursos',
+        succesText: "Importar",
+        type: "input",
+        onConfirm: (value) => {
+          firedb.ref("users/" + value).once('value', data => {
+            setTimeout(() => {
+              if (data.val()) {
+                if (data.val().courses)
+                  Alert.showMsg({
+                    title: "Importar cursos",
+                    body: `Importaras todos los cursos de ${data.val().name} <br/> tiene un total de cursos de: ${data.val().courses.length}.`,
+                    type: "confirmation",
+                    onConfirm: () => {
+                      data.val().courses.map((e, i) => {
+                        return dataHandler(e).then(item => {
+                          if(i === data.val().courses.length - 1){
+                            firedb.ref("users/"+user.uid+"/courses").set(item);
+                          }
+                        });
+                      })
+                      M.toast({ html: 'Cursos importados exitosamente' })
+                    }
+                  });
+                else {
+                  Alert.showMsg({
+                    title: "Sin cursos",
+                    body: "Lo sentimos pero no encontramos ningun curso asociado a esta cuenta.",
+                    type: "error"
+                  });
+                }
+              } else {
+                Alert.showMsg({
+                  title: "Codigo incorrecto",
+                  body: "El codigo que introduciste no es correcto o no exite ninguna cuenta con ese codigo.",
+                  type: "error"
+                });
+              }
+            }, 300);
+          })
+        }
+      });
+    } else {
+      Alert.showMsg({
+        title: "Inicio de sesion",
+        body: "Para poder acceder a estas opciones primero debes iniciar sesion en la aplicacion.",
+        type: "error"
+      });
+    }
   }
 
   //Send verify Email
@@ -100,9 +187,9 @@ class Navbar extends Component {
     //Check for user
     auth().onAuthStateChanged(user => {
       setTimeout(() => {
-        if(user){
-          if(UserTime(user) === "new") setTimeout(() => {
-            firedb.ref("users/"+user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" })            
+        if (user) {
+          if (UserTime(user) === "new" && !user.photoURL) setTimeout(() => {
+            firedb.ref("users/" + user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" })
             console.log("Update photo for new user");
           }, 1000 * 60);
         }
@@ -118,10 +205,10 @@ class Navbar extends Component {
     //Listen for route changes
     this.props.history.listen(location => {
       const user = auth().currentUser ? auth().currentUser : null;
-      if(user){
-        if(UserTime(user) === "new") setTimeout(() => {
-          firedb.ref("users/"+user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" }) 
-          console.log("Update photo for new user");           
+      if (user) {
+        if (UserTime(user) === "new") setTimeout(() => {
+          firedb.ref("users/" + user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" })
+          console.log("Update photo for new user");
         }, 1000 * 60);
       }
 
@@ -163,7 +250,7 @@ class Navbar extends Component {
     const pathsRes = paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths;
     let tutComp = ' ';
     if (this.state.tut) tutComp = (<Tutorial />);
-    if(pathsRes === ""){
+    if (pathsRes === "") {
       if (this.state.user !== null && this.state.validUser === false) color = "blue";
       else color = "transBar";
     }
@@ -172,7 +259,7 @@ class Navbar extends Component {
     return (
       <div>
         <nav className={color}>
-          <a className="brand truncate" href="./"><span>{pathsRes===""?color==="blue"?"Verificar correo":"":pathsRes}</span></a>
+          <a className="brand truncate" href="./"><span>{pathsRes === "" ? color === "blue" ? "Verificar correo" : "" : pathsRes}</span></a>
           <div className="nav-wrapper">
             <span data-target="side1" className="nbtn sidenav-trigger waves-effect">
               <i className="material-icons">menu</i>
@@ -195,7 +282,7 @@ class Navbar extends Component {
             <li id="opTut"><span className="black-text waves-effect">Información</span></li>
           </ul>
         </nav>
-        <Floating icon="add" action={this.openSearch} />
+        <Floating icon="add" action={this.openSearch} cloud={this.saveToCloud} share={this.shareCourses} />
         <i className={this.state.tut ? "material-icons closeT" : "hide closeT"} onClick={this.closeTut}>close</i>
         {tutComp}
         {this.state.user !== null ? this.state.validUser === false ? (
