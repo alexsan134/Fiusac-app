@@ -12,4 +12,4 @@ window.addEventListener('offline', () => M.toast({ html: 'Sin conexión a Intern
 window.addEventListener('online', () => M.toast({ html: 'De nuevo en linea' }));
 
 ReactDOM.render(<App />, document.getElementById('root'));
-serviceWorker.register();
+serviceWorker.unregister();

@@ -50,7 +50,7 @@ async function sendToast(user) {
 
 //Auth Config
 const uiConfig = {
-    signInSuccessUrl: '/horario',
+    signInSuccessUrl: '/cuenta',
     signInFlow: 'popup',
     credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
     callbacks: {
@@ -154,7 +154,7 @@ class Login extends Component {
             <div id='logCont'>
                 <div id="logBanner">
                     <h4>Saca el máximo provecho</h4>
-                    <p>Tener una cuenta en la aplicación, tiene muchos beneficios, como notificaciones, grupos privados, y mas.</p>
+                    <p>Tener una cuenta en la aplicación, tiene muchos beneficios, como notificaciones, grupos privados, compartir cursos, y mas.</p>
                 </div>
                 <div id="logForm">
                     <h4>Explora las posibilidades</h4>

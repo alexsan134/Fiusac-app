@@ -1,22 +1,24 @@
-#loadingUser{
-    padding:20px;
-    background:#fff;
-    width:calc(100% - 40px);
+#loadingUser {
+    padding: 20px;
+    background: #fff;
+    width: calc(100% - 40px);
     position: relative;
-    left:20px;
-    top:20px;
-    border-radius:15px;
-    box-shadow:0 4px 6px hsla(0, 0%, 0%, 0.2);
+    left: 20px;
+    top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
 }
-#loadingUser > h4{
-    text-transform:none;
-    color:var(--primary);
+
+#loadingUser>h4 {
+    text-transform: none;
+    color: var(--primary);
 }
-#loadingUser > p{
-    display:block;
-    line-height:15px;
-    margin:0;
-    color:var(--secondary-text);
-    width:100%;
-    margin-top:10px;
+
+#loadingUser>p {
+    display: block;
+    line-height: 15px;
+    margin: 0;
+    color: var(--secondary-text);
+    width: 100%;
+    margin-top: 10px;
 }

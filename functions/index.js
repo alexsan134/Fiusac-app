@@ -1,5 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const fetch = require('node-fetch');
 
 admin.initializeApp({
     credential: admin.credential.applicationDefault(),
@@ -28,6 +29,6 @@ exports.setNewUser = functions.auth.user().onCreate((user, context) => {
 
 exports.deleteUser = functions.auth.user().onDelete((user, context) => {
     console.log('Deleting user: ' + user.email);
-    db.ref("users/"+user.uid).remove();
+    db.ref("users/" + user.uid).remove();
     return 0;
 })

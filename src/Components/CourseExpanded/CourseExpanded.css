@@ -1,61 +1,72 @@
-#detailsContainer{
-  width:100%;
-  height:100%;
-  background:var(--icons);
-  margin:0;
-  border-radius:10px;
-  padding:20px;
-  overflow:scroll;
-  box-shadow:0 0 10px rgba(0,0,0,.5);
+#detailsContainer {
+  width: 100%;
+  height: 100%;
+  background: var(--icons);
+  margin: 0;
+  border-radius: 10px;
+  padding: 20px;
+  overflow: scroll;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+  opacity:0;
+  transition:opacity 0.3s ease;
 }
 
-.titleExp{
-  font-size:1.7em;
-  text-transform:Capitalize;
-  font-weight:550;
-  width:95%;
-  color:var(--primary);
-  padding-right:10px;
+.titleExp {
+  font-size: 1.7em;
+  text-transform: Capitalize;
+  font-weight: 550;
+  width: 95%;
+  color: var(--primary);
+  padding-right: 10px;
 }
-.docExp{
-  color:var(--secondary-text);
-  text-transform:capitalize;
-  font-weight:550;
-  margin-top:5px;
+
+.docExp {
+  color: var(--secondary-text);
+  text-transform: capitalize;
+  font-weight: 550;
+  margin-top: 5px;
 }
-.secExp{
-  color:var(--accent);
-  opacity:0.65;
-  font-weight:550;
+
+.secExp {
+  color: var(--accent);
+  opacity: 0.65;
+  font-weight: 550;
 }
-.placeExp{
-  font-size:1.5em!important;
-  color:var(--accent)!important;
-  margin:20px 0 0 0!important;
-  font-weight:550;
+
+.placeExp {
+  font-size: 1.5em!important;
+  color: var(--accent)!important;
+  margin: 20px 0 0 0!important;
+  font-weight: 550;
 }
-#detailsContainer > p{
-  margin:5px 0 0 0;
-  color:var(--secondary-text);
-  line-height:17px;
-  display:block;
+
+#detailsContainer>p {
+  margin: 5px 0 0 0;
+  color: var(--secondary-text);
+  line-height: 17px;
+  display: block;
 }
-#detailsContainer > p > span{
-  color:var(--secondary-text);
-  font-weight:550;
+
+#detailsContainer>p>span {
+  color: var(--secondary-text);
+  font-weight: 550;
 }
-.gmap{
-  margin-top:20px;
-  width:100%;
+
+.gmap {
+  margin-top: 20px;
+  width: 100%;
 }
-.bHand{
-  margin-top:15px;
-  font-weight:550;
+
+.bHand {
+  margin-top: 15px;
+  font-weight: 550;
 }
-.bHand > i{
-  margin-top:-1px;
-  margin-right:3px;
+
+.bHand>i {
+  margin-top: -1px;
+  margin-right: 3px;
 }
-.addCourse{
-  background:var(--primary)!important;
+
+.addCourse {
+  background: var(--primary)!important;
 }

@@ -18,7 +18,7 @@ class Profile extends React.Component {
         auth().onAuthStateChanged(user => {
             if (user) {
                 firedb.ref("users/" + user.uid).on('value', data => {
-                    if(data.val()){
+                    if (data.val()) {
                         dataHandler(data.val(), 4).then(data => this.isSafe ? this.setState({ user: data }) : false)
                     }
                 });

@@ -6,8 +6,8 @@ import './Floating.css';
 class Floating extends Component {
   componentDidMount() {
     var elems = document.querySelectorAll('.fixed-action-btn');
-    let instance = M.FloatingActionButton.init(elems,{ hoverEnabled: false });
-    
+    let instance = M.FloatingActionButton.init(elems, { hoverEnabled: false });
+
     const searchBtn = document.querySelector('.searchBtnFab');
     searchBtn.addEventListener('click', () => {
       this.props.action();
@@ -26,8 +26,8 @@ class Floating extends Component {
       elems[0].childNodes[0].childNodes[0].style.transform = "rotate(0deg)";
     });
 
-    elems[0].addEventListener("click", e =>{
-      if(!instance[0].isOpen) e.target.style.transform = "rotate(0deg)";
+    elems[0].addEventListener("click", e => {
+      if (!instance[0].isOpen) e.target.style.transform = "rotate(0deg)";
       else e.target.style.transform = "rotate(225deg)";
     })
   }

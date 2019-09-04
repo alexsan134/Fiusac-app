@@ -56,8 +56,8 @@ class Navbar extends Component {
         }
       } else {
         Alert.showMsg({
-          title: "Inicio de sesion",
-          body: "Para poder acceder a estas opciones primero debes iniciar sesion en la aplicacion.",
+          title: "Inicio de sesión",
+          body: "Para poder acceder a estas opciones primero debes iniciar sesión en la aplicación.",
           type: "error"
         });
       }
@@ -69,52 +69,64 @@ class Navbar extends Component {
     if (user) {
       Alert.showMsg({
         title: "Compartir cursos",
-        body: `Tu codigo para compartir es <span>${user.uid}</span> para importar cursos de otras personas pega su codigo aqui:`,
-        placeholder: 'Codigo para importar cursos',
+        body: `Tu código para compartir es <span>${user.uid.substr(0, 6)}</span> , para importar cursos de otras personas pega su código aquí:`,
+        placeholder: 'Código para importar cursos',
         succesText: "Importar",
         type: "input",
         onConfirm: (value) => {
-          firedb.ref("users/" + value).once('value', data => {
+          if (user.uid.substr(0, 6).includes(value)) {
             setTimeout(() => {
-              if (data.val()) {
-                if (data.val().courses)
+              Alert.showMsg({
+                title: "Recurrencia",
+                body: "¿Estas tratando de importar tus propios cursos? Si tienes algun problema solo recarga la aplicación deslizando hacia abajo.",
+                type: "error"
+              });
+            }, 300);
+          }
+          else {
+            firedb.ref("users").orderByKey().startAt(value).limitToFirst(1).once("value", data => {
+              setTimeout(() => {
+                if (data.val()) {
+                  const userKey = Object.keys(data.val());
+                  if (data.val()[userKey[0]].courses)
+                    Alert.showMsg({
+                      title: "Importar cursos",
+                      body: `Importaras todos los cursos de ${data.val()[userKey[0]].name} <br/> tiene un total de cursos de: ${data.val()[userKey[0]].courses.length}.`,
+                      type: "confirmation",
+                      onConfirm: () => {
+                        data.val()[userKey[0]].courses.map((e, i) => {
+                          return dataHandler(e).then(item => {
+                            if (i === data.val()[userKey[0]].courses.length - 1) {
+                              firedb.ref("users/" + user.uid + "/courses").set(item);
+                            }
+                          });
+                        })
+                        M.toast({ html: 'Cursos importados exitosamente' })
+                      }
+                    });
+                  else {
+                    Alert.showMsg({
+                      title: "Sin cursos",
+                      body: `Lo sentimos pero ${data.val()[userKey[0]].name} aun no tiene cursos agregados a su cuenta.`,
+                      type: "error"
+                    });
+                  }
+                } else {
                   Alert.showMsg({
-                    title: "Importar cursos",
-                    body: `Importaras todos los cursos de ${data.val().name} <br/> tiene un total de cursos de: ${data.val().courses.length}.`,
-                    type: "confirmation",
-                    onConfirm: () => {
-                      data.val().courses.map((e, i) => {
-                        return dataHandler(e).then(item => {
-                          if(i === data.val().courses.length - 1){
-                            firedb.ref("users/"+user.uid+"/courses").set(item);
-                          }
-                        });
-                      })
-                      M.toast({ html: 'Cursos importados exitosamente' })
-                    }
-                  });
-                else {
-                  Alert.showMsg({
-                    title: "Sin cursos",
-                    body: "Lo sentimos pero no encontramos ningun curso asociado a esta cuenta.",
+                    title: "Código incorrecto",
+                    body: "El código ingresado no es correcto o no existe ninguna cuenta con ese código.",
                     type: "error"
                   });
                 }
-              } else {
-                Alert.showMsg({
-                  title: "Codigo incorrecto",
-                  body: "El codigo que introduciste no es correcto o no exite ninguna cuenta con ese codigo.",
-                  type: "error"
-                });
-              }
-            }, 300);
-          })
+              }, 300);
+            })
+          }
         }
       });
     } else {
       Alert.showMsg({
-        title: "Inicio de sesion",
-        body: "Para poder acceder a estas opciones primero debes iniciar sesion en la aplicacion.",
+        title: "Inicio de sesión",
+        body: "Para poder acceder a estas opciones primero debes iniciar sesión en la aplicación.",
         type: "error"
       });
     }

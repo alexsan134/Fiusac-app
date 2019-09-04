@@ -111,12 +111,12 @@ export default class ShowMsg {
             input.placeholder = data.placeholder ? data.placeholder : "";
             input.value = "";
         }
-        
+
         // Add Text Content
         title.textContent = data.title;
         p.innerHTML = data.body;
         cancel.textContent = "Cancelar";
-        if(data.succesText) go.textContent = data.succesText;
+        if (data.succesText) go.textContent = data.succesText;
         else go.textContent = "Aceptar";
     }
 }

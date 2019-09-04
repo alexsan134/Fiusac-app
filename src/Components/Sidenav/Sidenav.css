@@ -1,82 +1,96 @@
+.sidenav .user-view {
+  padding-left: 20px;
+}
 
-.sidenav .user-view{
-  padding-left:20px;
-} 
-.sidenav .user-view .userInfo span{
-  color:var(--secondary-text);
-  line-height:14px;
+.sidenav .user-view .userInfo span {
+  color: var(--secondary-text);
+  line-height: 14px;
 }
-.sidenav .user-view .userInfo span:nth-child(1){
-  color:var(--accent);
-  font-weight:550;
-  font-size:1.2em;
-  margin-bottom:10px;
+
+.sidenav .user-view .userInfo span:nth-child(1) {
+  color: var(--accent);
+  font-weight: 550;
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
-.sidenav .sBtn{
-  position:relative;
-  margin:0 10px 0 10px;
-  padding-left:10px;
-  border-radius:5px;
-  overflow:hidden;
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-}
-.sidenav .sBtn:hover{
-  background:transparent;
-} 
-.sidenav li .divider{
-  margin:10px 0;
-} 
-.sidenav li.active span{
-  color:var(--primary);
-}
-.sidenav .sBtn > i{
+
+.sidenav .sBtn {
   position: relative;
-  top:-1px;
-  color:var(--secondary-text);
-}
-.sidenav .sBtn span{
-  padding-left:20px;
-  font-weight:550;
-  color:var(--secondary-text);
-  width:100%;
-} 
-.sidenav li.active i{
-  color:var(--primary);
-} 
-.sidenav > a{
-  margin:0;
-  padding:0;
-}
-.sidenav li.active:before{
-  content:'';
-  position:absolute;
-  height:100%;
-  width:100%;
-  top:0;
-  left:0;
-  background:var(--primary);
-  opacity:0.15;
-} 
-.sidenav *:nth-child(2){
-  margin:0;
-  padding:0;
-}
-.sidenav *:nth-child(3){
-  margin:0;
-  padding:0;
-}
-.sidenav *:nth-child(4){
-  margin:0;
-  padding:0;
-}
-.sidenav *:nth-child(5){
-  margin:0;
-  padding:0;
-}
-.sidenav *:nth-child(7){
-  margin:0;
-  padding:0;
+  margin: 0 10px 0 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
+.sidenav .sBtn:hover {
+  background: transparent;
+}
+
+.sidenav li .divider {
+  margin: 10px 0;
+}
+
+.sidenav li.active span {
+  color: var(--primary);
+}
+
+.sidenav .sBtn>i {
+  position: relative;
+  top: -1px;
+  color: var(--secondary-text);
+}
+
+.sidenav .sBtn span {
+  padding-left: 20px;
+  font-weight: 550;
+  color: var(--secondary-text);
+  width: 100%;
+}
+
+.sidenav li.active i {
+  color: var(--primary);
+}
+
+.sidenav>a {
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav li.active:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: var(--primary);
+  opacity: 0.15;
+}
+
+.sidenav *:nth-child(2) {
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav *:nth-child(3) {
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav *:nth-child(4) {
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav *:nth-child(5) {
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav *:nth-child(7) {
+  margin: 0;
+  padding: 0;
+}

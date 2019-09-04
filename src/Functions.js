@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const firedb = firebase.database();
-export { firebase , firedb};
+export { firebase, firedb };
 
 //Init DataBase
 let db;
@@ -30,7 +30,7 @@ export function initDB() {
 
 //DataBase requests
 export function dataHandler(data, type = 0) {
-  if (type === 0){
+  if (type === 0) {
     db.courses.put(data);
     return db.courses.toArray();
   }
@@ -43,11 +43,11 @@ export function dataHandler(data, type = 0) {
       return db.user.get(res, item => item);
     })
   }
-  if( type === 5) {
+  if (type === 5) {
     db.courses.clear();
     return db.courses.bulkAdd(data);
   }
-  if(type === 6) db.courses.clear();
+  if (type === 6) db.courses.clear();
 }
 
 //Check user creation time

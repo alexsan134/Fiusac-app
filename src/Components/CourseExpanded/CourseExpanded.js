@@ -65,6 +65,16 @@ class CourseExpanded extends Component {
       this.handleCourses(false);
       this.props.updateCourse();
     });
+
+    //Animation
+    this.detailsContainer = document.getElementById("detailsContainer");
+    setTimeout(() => {
+      this.detailsContainer.style.opacity = 1;
+    }, 100);  
+  }
+
+  componentWillUnmount(){
+    this.detailsContainer.style.opacity = 0;
   }
 
   render() {

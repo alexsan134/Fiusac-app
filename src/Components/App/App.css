@@ -1,9 +1,10 @@
-main{
-  display:block;
-  margin-top:56px;
-  box-sizing:border-box;
-  width:100%;
+main {
+  display: block;
+  margin-top: 56px;
+  box-sizing: border-box;
+  width: 100%;
 }
-h6,h5,h4,h3,h2,h1{
-  margin:0;
+
+h6, h5, h4, h3, h2, h1 {
+  margin: 0;
 }

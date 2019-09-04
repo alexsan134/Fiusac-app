@@ -29,7 +29,7 @@ class UserManager extends React.Component {
     componentWillUnmount() {
         this.isSafe = false;
     }
-    
+
     render() {
         return (<div>{this.element}</div>)
     }

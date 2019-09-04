@@ -1,234 +1,279 @@
-#header{
-  background:url('./sidenav.jpg');
-  background-size:cover;
-  width:100%;
-  height:100px;
-  padding:20px 20px 15px 20px;
-  color:var(--icons);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:relative;
-}
-#header > h3{
-  font-size:2.8em;
-  font-weight:550;
-  line-height:20px;
-  text-shadow:0 0 10px rgba(0,0,0,.3);
-  transition:opacity 0.3s ease;
-}
-#header > h3 > span{
-  font-size:0.6em;
-  color:var(--alter);
-}
-#header #main{
-  text-align:right;
-}
-#header #main #bans{
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-}
-#header #main #bans h4 > span{
-  font-size:0.7em;
-  position:relative;
-  color:var(--alter);
-}
-#header #main #bans img{
-  width:48px;
-  margin-right:5px;
-  margin-top:-5px;
-}
-#header #main #bans h4{
-  color:var(--icons);
-  font-size:1.1em;
-  text-shadow:0 0 10px rgba(0,0,0,.3);
-}
-#header #main a{
-  background:var(--icons);
-  border-radius:5px;
-  margin-top:-7px;
-}
-#header #main > span{
-  text-shadow:0 0 10px rgba(0,0,0,.3)
-}
-#header #main a > span,#header #main a i{
-  color:var(--primary);
+#header {
+  background: url('./sidenav.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 100px;
+  padding: 20px 20px 15px 20px;
+  color: var(--icons);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 
-#all{
-  padding:20px;
-  transition:all 0.2s ease;
-  position:relative;
-  left:0;
-}
-#all h3{
-  font-size:2em;
-  margin:0;
-  margin-bottom:20px;
-  color:var(--light);
-  font-weight:550;
-}
-.rights{
-  background:var(--divider);
-  color:var(--alter);
-  padding:10px 15px;
-  border-radius:5px;
-  box-shadow:0 05px 10px rgba(0,0,0,.05);
-  position:relative;
-  z-index:2;
-}
-.rights p{
-  font-weight:550;
-  margin:0;
-  line-height:15px!important;
-}
-.rss{
-  font-size:2.3em!important;
-  line-height:20px!important;
-}
-.rsd{
-  font-size:2.5em!important;
-  line-height:22px!important;
-}
-#swipeArea{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100vh;
-  z-index:-1;
-  opacity:0;
-}
-#emptyCourses{
-  display:flex;
-  justify-content:space-between;;
-  align-items:center;
-  margin-bottom:15px;
-}
-#emptyCourses > img{
-  width:30%;
-  opacity:0.6;
-}
-#emptyCourses > div{
-  margin:0;
-  margin-left:20px;
-  padding:0;
-}
-#emptyCourses > div > p{
-  font-size:1em;
-  line-height:16px;
-  font-weight:550;
-  color:var(--secondary-text);
-  margin:0;
-  opacity:0.8;
-}
-#emptyCourses > div > h4{
-  text-transform:none;
-  color:var(--secondary-text);
-  margin:0;
-}
-#band{
-  position:relative;
-  top:0;
-  width:100%;
-  height:5px;
-  background:var(--icons);
-  box-shadow:0 0 10px rgba(0,0,0,.3);
-}
-#ctp{
-  overflow:hidden;
-}
-.timeLine{
-  position:absolute;
-  top:0;
-  width:2px;
-  left:31px;
-  height:0;
-  background:var(--disable);
-  transition:height 0.3s ease;
-}
-.defS{
-  width:100%;
-  height:100vh;
-  position:absolute;
-  top:0;
-  left:0;
-}
-.default{
-  padding:20px;
-  position:absolute;
-  width:100%;
-  top:50%;
-  z-index:2;
-  transform:translateY(-50%);
-}
-#banner{
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-  width:100%;
-  margin-top:10px;
-}
-#banner span{
-  font-weight:550;
-  line-height:17px;
-  font-size:1.1em;
-  color:var(--secondary-text);
-  opacity:0.7;
-}
-#banner > img{
-  width:62px;
-  margin-right:10px;
-  filter:grayscale(100%);
-}
-.default > h4{
-  text-transform:unset;
-  color:var(--secondary-text);
-  font-weight:550;
-  font-size:2.3em;
-  line-height:25px;
-}
-.default > p{
-  display:block;
-  font-size:1.1em;
-  line-height:3px;
-  color:var(--secondary-text);
-}
-.default > p i{
-  position:relative;
-  top:7px;
-}
-.defs{
-  width:100%;
-  position:absolute;
-  bottom:0;
-  opacity:0.5;
-}
-@keyframes cloud{
- from {right:-100%;opacity:1;width:90%;}
- to {right:100%;opacity:0;width:95%;}
-}
-.defsCc{
-  width:90%;
-  position:absolute;
-  right:-100%;
-  animation:cloud 12s linear infinite;
-}
-@media screen and (max-width:340px){
-.rss{
-  font-size:10vw!important;
-}
-.rsd{
-  font-size:10vw!important;
- }
-}
-@media screen and (max-width:330px){
-#header > h6{
-  font-size:2.45em!important;
-}
-.rss{
-  font-size:8.5vw!important;
-}
+#header>h3 {
+  font-size: 2.8em;
+  font-weight: 550;
+  line-height: 20px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  transition: opacity 0.3s ease;
 }
 
+#header>h3>span {
+  font-size: 0.6em;
+  color: var(--alter);
+}
+
+#header #main {
+  text-align: right;
+}
+
+#header #main #bans {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#header #main #bans h4>span {
+  font-size: 0.7em;
+  position: relative;
+  color: var(--alter);
+}
+
+#header #main #bans img {
+  width: 48px;
+  margin-right: 5px;
+  margin-top: -5px;
+}
+
+#header #main #bans h4 {
+  color: var(--icons);
+  font-size: 1.1em;
+  text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+#header #main a {
+  background: var(--icons);
+  border-radius: 5px;
+  margin-top: -7px;
+}
+
+#header #main>span {
+  text-shadow: 0 0 10px rgba(0, 0, 0, .3)
+}
+
+#header #main a>span, #header #main a i {
+  color: var(--primary);
+}
+
+#all {
+  padding: 20px;
+  transition: all 0.2s ease;
+  position: relative;
+  left: 0;
+}
+
+#all h3 {
+  font-size: 2em;
+  margin: 0;
+  margin-bottom: 20px;
+  color: var(--light);
+  font-weight: 550;
+}
+
+.rights {
+  background: var(--divider);
+  color: var(--alter);
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 05px 10px rgba(0, 0, 0, .05);
+  position: relative;
+  z-index: 2;
+}
+
+.rights p {
+  font-weight: 550;
+  margin: 0;
+  line-height: 15px!important;
+}
+
+.rss {
+  font-size: 2.3em!important;
+  line-height: 20px!important;
+}
+
+.rsd {
+  font-size: 2.5em!important;
+  line-height: 22px!important;
+}
+
+#swipeArea {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0;
+}
+
+#emptyCourses {
+  display: flex;
+  justify-content: space-between;
+  ;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+#emptyCourses>img {
+  width: 30%;
+  opacity: 0.6;
+}
+
+#emptyCourses>div {
+  margin: 0;
+  margin-left: 20px;
+  padding: 0;
+}
+
+#emptyCourses>div>p {
+  font-size: 1em;
+  line-height: 16px;
+  font-weight: 550;
+  color: var(--secondary-text);
+  margin: 0;
+  opacity: 0.8;
+}
+
+#emptyCourses>div>h4 {
+  text-transform: none;
+  color: var(--secondary-text);
+  margin: 0;
+}
+
+#band {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--icons);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+#ctp {
+  overflow: hidden;
+}
+
+.timeLine {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  left: 31px;
+  height: 0;
+  background: var(--disable);
+  transition: height 0.3s ease;
+}
+
+.defS {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.default {
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+#banner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#banner span {
+  font-weight: 550;
+  line-height: 17px;
+  font-size: 1.1em;
+  color: var(--secondary-text);
+  opacity: 0.7;
+}
+
+#banner>img {
+  width: 62px;
+  margin-right: 10px;
+  filter: grayscale(100%);
+}
+
+.default>h4 {
+  text-transform: unset;
+  color: var(--secondary-text);
+  font-weight: 550;
+  font-size: 2.3em;
+  line-height: 25px;
+}
+
+.default>p {
+  display: block;
+  font-size: 1.1em;
+  line-height: 3px;
+  color: var(--secondary-text);
+}
+
+.default>p i {
+  position: relative;
+  top: 7px;
+}
+
+.defs {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  opacity: 0.5;
+}
+
+@keyframes cloud {
+  from {
+    right: -100%;
+    opacity: 1;
+    width: 90%;
+  }
+  to {
+    right: 100%;
+    opacity: 0;
+    width: 95%;
+  }
+}
+
+.defsCc {
+  width: 90%;
+  position: absolute;
+  right: -100%;
+  animation: cloud 12s linear infinite;
+}
+
+@media screen and (max-width:340px) {
+  .rss {
+    font-size: 10vw!important;
+  }
+  .rsd {
+    font-size: 10vw!important;
+  }
+}
+
+@media screen and (max-width:330px) {
+  #header>h6 {
+    font-size: 2.45em!important;
+  }
+  .rss {
+    font-size: 8.5vw!important;
+  }
+}

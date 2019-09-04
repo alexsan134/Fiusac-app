@@ -33,9 +33,9 @@ class Tutorial extends Component {
       if (current >= this.items) current = this.items;
       cont.style.left = `-${current}00%`;
       for (let i = 0; i < this.items + 1; i++) {
-        if(dots.childNodes[i]) dots.childNodes[i].childNodes[0].classList.remove('currentDot');
+        if (dots.childNodes[i]) dots.childNodes[i].childNodes[0].classList.remove('currentDot');
       }
-      if(dots.childNodes[current]) dots.childNodes[current].childNodes[0].classList.add('currentDot');
+      if (dots.childNodes[current]) dots.childNodes[current].childNodes[0].classList.add('currentDot');
     })
 
     this.setState({});
