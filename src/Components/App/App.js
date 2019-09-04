@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Feeds from '../Feeds/Feeds';
 import Sidenav from '../Sidenav/Sidenav';
 import Navbar from '../Navbar/Navbar';
 import Calendar from '../Calendar/Calendar';
@@ -25,6 +26,7 @@ class App extends Component {
               <Route exact path="/horario" component={Calendar} />
               <Route exact path="/tutorial" component={Tutorial} />
               <Route exact path="/cuenta" component={UserManager} />
+              <Route exact path="/noticias" component={Feeds} />
               <Route path="/buscar/:id" render={props => (<Search keyword={props.match.params.id} />)} />
               <Route path="*" component={NotFound} />
             </Switch>

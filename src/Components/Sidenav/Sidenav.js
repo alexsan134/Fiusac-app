@@ -30,12 +30,12 @@ class Sidenav extends Component {
         //Check route
         const text = sBtn[i].textContent.split(' ')[1].toLowerCase();
         sBtn[i].classList.remove('active');
-        sBtn[3].classList.remove('active');
+        sBtn[4].classList.remove('active');
         if (rr === text) sBtn[i].classList.add('active');
         else if (rr === '') sBtn[0].classList.add('active');
         else if (rr === 'cuenta') {
-          sBtn[2].classList.add('active');
           sBtn[3].classList.add('active');
+          sBtn[4].classList.add('active');
         }
         //Close sidenav
         s.close();
@@ -88,12 +88,27 @@ class Sidenav extends Component {
       if (navigator.share) {
         navigator.share({
           title: 'FIUSAC Horario',
-          text: 'Prueba esta aplicación 😀 ',
-          url: window.location
+          text: 'Prueba esta aplicacion ✨👌!',
+          url: window.location.origin
         })
           .then(() => console.log('Successfully share'))
           .catch((error) => console.log('Error sharing', error));
-      } else alert('Tu navegador no es compatible');
+      } else {
+        let inputCp = document.createElement("input");
+        inputCp.value = `Prueba esta aplicacion 📚! ${window.location.origin}`;
+        document.body.appendChild(inputCp);
+        inputCp.select();
+        document.execCommand("copy");
+
+        Alert.showMsg({
+          title: "Gracias por compartir 📚",
+          body: "Puedes ver en tu portapapeles la url de la applicacion para compartirla.",
+          type: "alert"
+        })
+
+        document.body.removeChild(inputCp);
+        inputCp = undefined;
+      }
     })
 
     //Styles active route
@@ -134,6 +149,12 @@ class Sidenav extends Component {
           <li className="sBtn mBtn waves-effect">
             <i className="material-icons">home</i>
             <span> Inicio</span>
+          </li>
+        </Link>
+        <Link to="/noticias">
+          <li className="sBtn mBtn waves-effect">
+            <i className="material-icons">style</i>
+            <span> Noticias</span>
           </li>
         </Link>
         <Link to="/horario">
