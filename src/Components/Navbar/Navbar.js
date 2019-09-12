@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import ShowMsg from '../Alert/Alert';
-import { auth } from "firebase/app";
+import firebase from "firebase/app";
+import "firebase/auth";
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './Navbar.css';
 import Tutorial from '../Tutorial/Tutorial';
@@ -10,6 +11,7 @@ import Floating from '../Floating/Floating';
 import { UserTime, firedb, dataHandler } from '../../Functions';
 
 const Alert = new ShowMsg();
+const auth = firebase.auth;
 
 class Navbar extends Component {
   constructor(props) {
@@ -45,19 +47,21 @@ class Navbar extends Component {
         if (data.length === 0) {
           Alert.showMsg({
             title: "Sin cursos",
-            body: "No tienes cursos agregados aun, puedes agregar mas cursos con el buscador.",
+            body: "No tienes cursos agregados aun, puedes agregar todos los cursos que quieras utilizando el buscador",
             type: "error"
           });
         }
         else {
-          firedb.ref("users/" + user.uid + "/courses").set(data, () => {
-            M.toast({ html: 'Cursos guardados exitosamente' });
-          });
+          dataHandler({}, 7).then(user => {
+            firedb.ref(`users/${user[0].uid}/courses`).set(data, () => {
+              M.toast({ html: 'Cursos guardados correctamente' });
+            });
+          })
         }
       } else {
         Alert.showMsg({
           title: "Inicio de sesión",
-          body: "Para poder acceder a estas opciones primero debes iniciar sesión en la aplicación.",
+          body: "Para poder acceder a esta y a otra opciones primero debes iniciar sesión en la aplicación, es gratis!",
           type: "error"
         });
       }
@@ -69,58 +73,75 @@ class Navbar extends Component {
     if (user) {
       Alert.showMsg({
         title: "Compartir cursos",
-        body: `Tu código para compartir es <span>${user.uid.substr(0, 6)}</span> , para importar cursos de otras personas pega su código aquí:`,
-        placeholder: 'Código para importar cursos',
+        body: 'Para compartir tus cursos solo busca por numero de carnet o por correo, puedes buscar usuarios aquí:',
+        placeholder: 'Carnet o email de amigo',
         succesText: "Importar",
         type: "input",
         onConfirm: (value) => {
-          if (user.uid.substr(0, 6).includes(value)) {
-            setTimeout(() => {
-              Alert.showMsg({
-                title: "Recurrencia",
-                body: "¿Estas tratando de importar tus propios cursos? Si tienes algun problema solo recarga la aplicación deslizando hacia abajo.",
-                type: "error"
-              });
-            }, 300);
-          }
-          else {
-            firedb.ref("users").orderByKey().startAt(value).limitToFirst(1).once("value", data => {
+          dataHandler({}, 7).then(userDats => {
+            if (userDats[0].carnet.trim() === value.trim() || userDats[0].email.trim() === value.trim()) {
               setTimeout(() => {
-                if (data.val()) {
-                  const userKey = Object.keys(data.val());
-                  if (data.val()[userKey[0]].courses)
+                Alert.showMsg({
+                  title: "Recurrencia",
+                  body: "¿Estas tratando de importar tus propios cursos? Si tienes algún problema solo recarga la aplicación deslizando hacia abajo.",
+                  type: "error"
+                });
+              }, 300);
+            }
+            else {
+              let mainRef = "";
+              if(isNaN(parseInt(value))) mainRef = "email";
+              else mainRef = "carnet";
+
+              firedb.ref("users").orderByChild(mainRef).equalTo(value.trim()).limitToFirst(1).once("value", data => {
+                setTimeout(() => {
+                  if (data.val()) {
+                    const userKey = Object.keys(data.val());
+                    if (data.val()[userKey[0]].courses)
+                      Alert.showMsg({
+                        title: "¿Deseas importarlos?",
+                        body: `
+                      <div id="profileContainerShare">
+                        <div id="shareCircle">
+                          <img src='${data.val()[userKey[0]].photo}' alt='Profile'/>
+                        </div>
+                        <div id="contentShare">
+                          <h4>${data.val()[userKey[0]].name}</h4>
+                          <span>${data.val()[userKey[0]].email}</span>
+                          <span>Total de cursos: ${data.val()[userKey[0]].courses.length}</span>
+                        </div>
+                      </div>
+                      `,
+                        type: "confirmation",
+                        onConfirm: () => {
+                          data.val()[userKey[0]].courses.map((e, i) => {
+                            return dataHandler(e).then(item => {
+                              if (i === data.val()[userKey[0]].courses.length - 1) {
+                                firedb.ref("users/" + user.uid + "/courses").set(item);
+                              }
+                            });
+                          })
+                          M.toast({ html: 'Cursos importados exitosamente' })
+                        }
+                      });
+                    else {
+                      Alert.showMsg({
+                        title: "Sin cursos",
+                        body: `Lo sentimos pero ${data.val()[userKey[0]].name} aun no tiene cursos agregados a su cuenta, intenta de nuevo mas tarde.`,
+                        type: "error"
+                      });
+                    }
+                  } else {
                     Alert.showMsg({
-                      title: "Importar cursos",
-                      body: `Importaras todos los cursos de ${data.val()[userKey[0]].name} <br/> tiene un total de cursos de: ${data.val()[userKey[0]].courses.length}.`,
-                      type: "confirmation",
-                      onConfirm: () => {
-                        data.val()[userKey[0]].courses.map((e, i) => {
-                          return dataHandler(e).then(item => {
-                            if (i === data.val()[userKey[0]].courses.length - 1) {
-                              firedb.ref("users/" + user.uid + "/courses").set(item);
-                            }
-                          });
-                        })
-                        M.toast({ html: 'Cursos importados exitosamente' })
-                      }
-                    });
-                  else {
-                    Alert.showMsg({
-                      title: "Sin cursos",
-                      body: `Lo sentimos pero ${data.val()[userKey[0]].name} aun no tiene cursos agregados a su cuenta.`,
+                      title: "Usuario no encontrado",
+                      body: "La búsqueda ingresada no es correcta o no existe ninguna cuenta con ese numero de carnet o email, lo sentimos.",
                       type: "error"
                     });
                   }
-                } else {
-                  Alert.showMsg({
-                    title: "Código incorrecto",
-                    body: "El código ingresado no es correcto o no existe ninguna cuenta con ese código.",
-                    type: "error"
-                  });
-                }
-              }, 300);
-            })
-          }
+                }, 300);
+              })
+            }
+          })
         }
       });
     } else {
@@ -168,7 +189,7 @@ class Navbar extends Component {
     cont.style.opacity = 1;
     inp.style.display = "block";
     setTimeout(() => shadow.style.opacity = 1, 10);
-    setTimeout(() => inp.setAttribute('placeholder', 'Buscar'), 200);
+    setTimeout(() => inp.setAttribute('placeholder', 'Buscar cursos'), 200);
     inp.focus();
   }
 
@@ -180,10 +201,11 @@ class Navbar extends Component {
     const shadow = document.getElementById('searchShadow');
     const opTut = document.getElementById('opTut');
     const closeT = document.querySelector('.closeT');
+    const searchLink = document.getElementById("searchLink");
 
     //Init autocomplete
     M.Dropdown.init(drop);
-    M.Autocomplete.init(searchInput, { data: this.courses });
+    M.Autocomplete.init(searchInput, { data: this.courses, minLength:2 });
 
     //Hide search function
     function hideSearch() {
@@ -199,13 +221,6 @@ class Navbar extends Component {
     //Check for user
     auth().onAuthStateChanged(user => {
       setTimeout(() => {
-        if (user) {
-          if (UserTime(user) === "new" && !user.photoURL) setTimeout(() => {
-            firedb.ref("users/" + user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" })
-            console.log("Update photo for new user");
-          }, 1000 * 60);
-        }
-
         this.currentUser = user ? "" : "Iniciar sesión";
         this.setState({
           user: user ? user : null,
@@ -217,14 +232,8 @@ class Navbar extends Component {
     //Listen for route changes
     this.props.history.listen(location => {
       const user = auth().currentUser ? auth().currentUser : null;
-      if (user) {
-        if (UserTime(user) === "new") setTimeout(() => {
-          firedb.ref("users/" + user.uid).update({ photo: "https://firebasestorage.googleapis.com/v0/b/fiusac.appspot.com/o/default.jpg?alt=media&token=deb24fd8-e895-466a-91ba-513fdfdfef3c" })
-          console.log("Update photo for new user");
-        }, 1000 * 60);
-      }
 
-      if (user && (user.emailVerified === false)) {
+      if (user && (user.providerData[0].providerId !== "facebook.com" && user.emailVerified === false)) {
         if (UserTime(user) === "older") {
           user.delete()
             .then(function () {
@@ -243,9 +252,18 @@ class Navbar extends Component {
     });
 
     //Search Events
+    function searchVs(){
+      setTimeout(() => {
+        if (searchInput.value.length > 2) {
+          this.setState({ redir: `/buscar/${searchInput.value.trim()}` })
+          searchLink.click();
+        }
+      }, 10);
+    }
     searchInput.addEventListener('focusout', () => hideSearch());
-    searchInput.addEventListener('change', () => setTimeout(() => searchInput.value.length > 2 ? this.setState({ redir: `/buscar/${searchInput.value}` }) : false, 10));
-    searchInput.addEventListener('search', () => hideSearch());
+    searchInput.addEventListener('change', () => searchVs());
+    searchInput.addEventListener('search', () => searchVs());
+
 
     //Open tutorial
     opTut.addEventListener('click', () => {
@@ -259,15 +277,15 @@ class Navbar extends Component {
     const { location } = this.props
     const paths = location.pathname.substr(1);
     let color;
-    const pathsRes = paths.includes("buscar") ? paths.substr(7) : paths === "" ? "inicio" : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths;
+    const pathsRes = paths.includes("buscar") ? paths.substr(7) : paths === "" ? " " : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths;
     let tutComp = ' ';
     if (this.state.tut) tutComp = (<Tutorial />);
     if (pathsRes === "") {
-      if (this.state.user !== null && this.state.validUser === false) color = "blue";
+      if (this.state.user !== null && this.state.validUser === false && this.state.user.providerData[0].providerId !== "facebook.com") color = "blue";
       else color = "transBar";
+    }if(pathsRes === " "){
+      color="welcome"
     }
-
-
     return (
       <div>
         <nav className={color}>
@@ -297,13 +315,13 @@ class Navbar extends Component {
         <Floating icon="add" action={this.openSearch} cloud={this.saveToCloud} share={this.shareCourses} />
         <i className={this.state.tut ? "material-icons closeT" : "hide closeT"} onClick={this.closeTut}>close</i>
         {tutComp}
-        {this.state.user !== null ? this.state.validUser === false ? (
-          <div id="verifyEmail">
-            <span><i className="material-icons">info_outline</i> Te enviamos un correo de verificacion para que puedas seguir utilizando FIUSAC.app®.</span>
+        {this.state.user !== null ? this.state.validUser === false ? this.state.user.providerData[0].providerId !== "facebook.com"? (
+          <div id="verifyEmail" className={this.props.location.pathname.substr(1) === ""?"homeAlert":""}>
+            <span><i className="material-icons">info_outline</i> Si deseas seguir utilizando la applicación necesitamos verifcar tu identidad, te enviamos un correo de verificación para que puedas seguir utilizando FIUSAC.app®.</span>
             <button className='waves-effect' onClick={this.senEmail}><i className="material-icons">send</i> Enviar correo de nuevo</button>
           </div>
-        ) : '' : ''}
-        {this.state.redir !== false ? <Redirect to={this.state.redir} /> : ''}
+        ) : '' : '': ''}
+        <Link to={this.state.redir ? this.state.redir : ""} id="searchLink">Goto</Link>
       </div>
     )
   }

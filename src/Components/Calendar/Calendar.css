@@ -1,4 +1,5 @@
 #header {
+  background-color:#2196F3;
   background: url('./sidenav.jpg');
   background-size: cover;
   width: 100%;
@@ -9,8 +10,22 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  z-index:2;
 }
-
+#header::before{
+  content:'';
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 1;
+  background:rgba(0, 0, 0, .3);
+}
+#header >*{
+  position: relative;
+  z-index:2;
+}
 #header>h3 {
   font-size: 2.8em;
   font-weight: 550;
@@ -68,6 +83,7 @@
 
 #all {
   padding: 20px;
+  padding-bottom:50px;
   transition: all 0.2s ease;
   position: relative;
   left: 0;
@@ -79,22 +95,6 @@
   margin-bottom: 20px;
   color: var(--light);
   font-weight: 550;
-}
-
-.rights {
-  background: var(--divider);
-  color: var(--alter);
-  padding: 10px 15px;
-  border-radius: 5px;
-  box-shadow: 0 05px 10px rgba(0, 0, 0, .05);
-  position: relative;
-  z-index: 2;
-}
-
-.rights p {
-  font-weight: 550;
-  margin: 0;
-  line-height: 15px!important;
 }
 
 .rss {
@@ -119,36 +119,51 @@
 
 #emptyCourses {
   display: flex;
-  justify-content: space-between;
-  ;
+  justify-content: space-between;;
   align-items: center;
-  margin-bottom: 15px;
+  width:100%;
+  height:auto;
+
+  position: relative;
 }
 
-#emptyCourses>img {
-  width: 30%;
+#emptyCourses>#emptyImg {
+  width: 45%;
+  margin-left:-50px;
   opacity: 0.6;
 }
 
 #emptyCourses>div {
   margin: 0;
-  margin-left: 20px;
+  margin-left: 30px;
   padding: 0;
 }
-
+#emptyCourses > .dayDef{
+  position:fixed;
+  bottom:48px;
+  left:-50%;
+  opacity:0.7;
+  width:150%;
+  transform:scaleX(-1)
+}
 #emptyCourses>div>p {
+  text-align:justify;
   font-size: 1em;
   line-height: 16px;
   font-weight: 550;
   color: var(--secondary-text);
   margin: 0;
   opacity: 0.8;
+  margin-top:10px;
 }
 
 #emptyCourses>div>h4 {
+  text-align:center;
   text-transform: none;
   color: var(--secondary-text);
   margin: 0;
+  line-height:19px;
+  font-size:1.6em;
 }
 
 #band {
@@ -158,6 +173,7 @@
   height: 5px;
   background: var(--icons);
   box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  z-index:2;
 }
 
 #ctp {
@@ -165,13 +181,14 @@
 }
 
 .timeLine {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 00px;
   width: 2px;
   left: 31px;
   height: 0;
   background: var(--disable);
   transition: height 0.3s ease;
+  z-index:1;
 }
 
 .defS {
@@ -186,7 +203,7 @@
   padding: 20px;
   position: absolute;
   width: 100%;
-  top: 50%;
+  top: 45%;
   z-index: 2;
   transform: translateY(-50%);
 }
@@ -236,7 +253,7 @@
 .defs {
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 48px;
   opacity: 0.5;
 }
 
@@ -258,6 +275,44 @@
   position: absolute;
   right: -100%;
   animation: cloud 12s linear infinite;
+}
+
+.motivation{
+  box-shadow: 0 05px 10px rgba(0, 0, 0, .2);
+  background:url('./card.jpeg');
+  background-size:cover;
+  padding:20px;
+  position: relative;
+  z-index:2;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.motivation::before {
+  content: '';
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, .25);
+  z-index: 1;
+}
+
+.motivation>* {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 20px rgba(0, 0, 0, .15);
+}
+.motivation > h4{
+  color:var(--icons);
+  font-size:1.3em;
+}
+.motivation > p{
+  margin:0;
+  line-height:17px;
+  color:var(--alter);
+  opacity:0.85;
 }
 
 @media screen and (max-width:340px) {

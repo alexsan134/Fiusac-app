@@ -5,6 +5,7 @@ import ShowMsg from '../Alert/Alert';
 import { auth } from "firebase/app";
 import 'materialize-css/dist/css/materialize.min.css';
 import './Sidenav.css';
+import { dataHandler } from "../../Functions";
 
 class Sidenav extends Component {
   constructor(props) {
@@ -47,18 +48,21 @@ class Sidenav extends Component {
       const userLink = document.querySelector('.userAccount');
       const loginLink = document.querySelector('.login');
       const accountSection = document.getElementById('accountSection');
-
-      if (user === null) {
-        loginLink.classList.remove('hide');
-        accountSection.classList.add('hide');
-        userLink.classList.add('hide');
-      }
-      else {
-        loginLink.classList.add('hide');
-        userLink.classList.remove('hide');
-        accountSection.classList.remove('hide');
-        this.setState({ user: user.displayName });
-      }
+      setTimeout(() => {
+        if (user === null) {
+          loginLink.classList.remove('hide');
+          accountSection.classList.add('hide');
+          userLink.classList.add('hide');
+        }
+        else {
+          loginLink.classList.add('hide');
+          userLink.classList.remove('hide');
+          accountSection.classList.remove('hide');
+          dataHandler({}, 7).then(data => {
+            if(data[0]) this.setState({ user: data[0].name });
+          })
+        }
+      }, 10);
     })
 
     //Logout Btn
@@ -70,6 +74,7 @@ class Sidenav extends Component {
         type: "confirmation",
         onConfirm: () => {
           auth().signOut().then(function () {
+            dataHandler({}, 8);
             current.setState({ name: "" });
             M.toast({ html: 'Sesión cerrada correctamente' })
             s.close();

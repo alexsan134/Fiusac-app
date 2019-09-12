@@ -1,3 +1,51 @@
-#feedContainer{
-    padding:20px 10px;
+
+.firstError {
+    padding: 0 10px;
+}
+
+.firstError>h1 {
+    font-size: 1.3em;
+    line-height: 17px;
+}
+
+#feedBanner {
+    padding: 20px;
+    background-color:#4CAF50;
+    background: url("./back1.jpg");
+    background-size: cover;
+    margin-bottom: 20px;
+    position: relative;
+    background-position: center center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 4px solid var(--icons);
+}
+
+#feedBanner::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .25);
+    z-index: 1;
+}
+
+#feedBanner>* {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 20px rgba(0, 0, 0, .5);
+}
+
+#feedBanner>h4 {
+    font-size: 1.6em;
+    color: var(--icons);
+    font-weight: 550;
+}
+
+#feedBanner>p {
+    margin: 0;
+    line-height: 15px;
+    margin-top: 5px;
+    color: var(--alter);
 }

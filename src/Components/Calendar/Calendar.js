@@ -6,7 +6,7 @@ import CourseData from './courses.json';
 import Cloud from './cloud.png';
 import Empty from './empty.png';
 import Course from '../Course/Course';
-import { dataHandler } from '../../Functions';
+import { dataHandler, getRandomPhrase } from '../../Functions';
 import './Calendar.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -67,9 +67,14 @@ class Calendar extends Component {
           const bs = b.horaInicio.split(':');
           return (parseInt(as[0]) + parseInt(as[1] / 100)) - (parseInt(bs[0]) + parseInt(bs[1] / 100))
         })
-        this.setState({
-          normal: this.state.normal
-        });
+        getRandomPhrase().then(data =>{
+          this.setState({
+            normal: this.state.normal,
+            pTitle:data.title,
+            pText:data.text
+          });
+        })
+
       } else return 0;
     })
   }
@@ -93,12 +98,12 @@ class Calendar extends Component {
       setTimeout(() => {
         mainDate.style.transition = "opacity 0.45s ease";
         all.style.transition = "left 0.15s, opacity 0.45s";
-        timeLine.style.transition = "height 0.5s ease";
+        timeLine.style.transition = "height 0.5s ease-out";
         all.style.opacity = 1;
         mainDate.style.opacity = 1;
         all.style.left = 0;
       }, 150);
-      setTimeout(() => timeLine.style.height = 'calc(100% - 40px)', 400);
+      setTimeout(() => timeLine.style.height = `100vh`, 400);
     }
 
     //Add one day to date and anim courses
@@ -132,9 +137,9 @@ class Calendar extends Component {
     const tDate = this.state.normal.getDate();
     const def = this.current.length === 0 ? true : false;
 
-    let fails = 0;
+    this.displayParraf = false;
+    this.fails = 0;
     let counter = 0;
-
     return (
       <div className={this.defControl ? "show" : "hide"}>
         <div ref={this.allCt} id="ctp" className={def ? 'hide' : 'show'}>
@@ -153,6 +158,8 @@ class Calendar extends Component {
               let days = [e.domingo, e.lunes, e.martes, e.miercoles, e.jueves, e.viernes, e.sabado].map(e => { if (e === undefined) return false; else return true });
               if (days[this.state.normal.getDay()]) {
                 counter++;
+                if(counter < 2) this.displayParraf = true;
+                if(counter > 2) this.displayParraf = false;
                 return (
                   <Course
                     key={i}
@@ -168,18 +175,21 @@ class Calendar extends Component {
                     days={days}
                     updateCourse={this.updateCourse}
                   />)
-              } else fails++;
+              } else this.fails++;
               return undefined
             })}
-            <div className={fails === this.current.length ? 'hide timeLine' : 'timeLine'}></div>
-            <div id="emptyCourses" className={fails === this.current.length ? 'show' : 'hide'}>
-              <img src={Empty} alt="Empty Courses" />
-              <div>
-                <h4>No tienes ningún curso asignado par hoy.</h4>
-                <p>Puedes agregar mas utilizando el buscador o navegar para ver los cursos entre días.</p>
-              </div>
+            <div className={this.displayParraf?"motivation":"hide"}>
+              <h4>{this.displayParraf?this.state.pTitle:""}</h4>
+              <p>{this.displayParraf?this.state.pText:""}</p>
             </div>
-            <div className='rights'><p>FIUSAC.app® 2019<br />todos los derechos reservados.</p>
+            <div className={this.fails === this.current.length ? 'timeLine hide' : 'timeLine show'}></div>
+            <div id="emptyCourses" className={this.fails === this.current.length ? 'show' : 'hide'}>
+              <img src={Empty} alt="Empty Courses" id="emptyImg"/>
+              <div>
+                <h4>No tienes asignado ningún curso hoy</h4>
+                <p>Puedes agregar mas cursos si usas el buscador o puedes ver los cursos que hay entre días.</p>
+              </div>
+              <img className="dayDef" src={Defs} alt="Not found" />
             </div>
           </section>
           <div id="swipeArea"></div>

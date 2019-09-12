@@ -70,10 +70,10 @@ class CourseExpanded extends Component {
     this.detailsContainer = document.getElementById("detailsContainer");
     setTimeout(() => {
       this.detailsContainer.style.opacity = 1;
-    }, 100);  
+    }, 100);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.detailsContainer.style.opacity = 0;
   }
 

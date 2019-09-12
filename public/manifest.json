@@ -1,6 +1,7 @@
 {
   "short_name": "FIUSAC.app®",
   "name": "FIUSAC.app®",
+  "version":"0.87",
   "icons": [
     {
       "src": "./img/icon.png",

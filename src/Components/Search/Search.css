@@ -12,15 +12,31 @@
 #srcTitle {
   position: relative;
   text-transform: none;
-  color: var(--alter);
+  color: var(--icons);
   width: 100%;
-  padding: 20px;
-  background: var(--secondary-text);
+  padding: 29px 20px;
+  background: url("../Calendar/sidenav.jpg");
+  background-size: cover;
+  border-bottom: 5px solid var(--icons);
   font-weight: 550;
-  font-size: 1.4em;
+  font-size: 1.6em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
-
+#srcTitle::before{
+  content:'';
+  width:100%;
+  height:100%;
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:-1;
+  background:rgba(0, 0, 0, .3);
+}
+#srcTitle>*{
+  position: relative;
+  z-index:2;
+}
 #srcTitle span {
   font-size: 0.7em;
   color: var(--alter);
@@ -28,6 +44,8 @@
   opacity: 0.8;
   margin: 0;
   display: block;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  line-height: 17px;
 }
 
 .noRes {

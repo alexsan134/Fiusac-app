@@ -1,168 +1,30 @@
 #logCont {
     padding: 20px;
     width: 100%;
-    background: url('./back3.jpg');
-    background-size: cover;
-    padding-top:0;
+    padding-top: 0;
+    padding-bottom:70px;
 }
 
-.firebaseui-idp-button {
-    -webkit-appearance: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    padding: 15px 20px;
-    border-radius: 15px;
-    color: var(--icons);
+#socialLogin{
+    margin-top:20px;
+    width:100%;
+    border-radius:10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    overflow: hidden;
+}
+#socialLogin > button{
+    width:100%;
+    padding:5px;
+    height:auto;
+    font-weight:550;
+}
+#socialLogin > button:nth-child(1){
     background: #DB4437;
-    text-align: left;
+    color:var(--icons);
 }
 
-.firebaseui-list-item {
-    margin: 15px 0;
-}
-
-.firebaseui-list-item:nth-child(1) {
-    margin-top: 0;
-}
-
-.firebaseui-list-item:nth-child(4) {
-    margin-bottom: 0;
-}
-
-.firebaseui-idp-text-short {
-    display: none;
-}
-
-.firebaseui-idp-icon {
-    width: 25px;
-    margin-right: 10px;
-}
-
-.firebaseui-idp-google {
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--secondary-text);
-}
-
-.firebaseui-idp-facebook {
+#socialLogin > button:nth-child(2){
     background: #3C5A99;
-}
-
-.firebaseui-title {
-    font-size: 1.4em;
-    color: var(--accent);
-    font-weight: 550;
-}
-
-.firebaseui-subtitle {
-    line-height: 33px;
-    margin-top: 20px;
-    font-weight: 550;
-}
-
-.firebaseui-input, .firebaseui-input-invalid {
-    color: var(--secondary-text);
-}
-
-.firebaseui-input:focus, .firebaseui-input-invalid:focus {
-    border-bottom: 1px solid var(--primary)!important;
-    box-shadow: 0 1px 0 0 var(--primary)!important;
-}
-
-.firebaseui-container {
-    padding: 20px;
-    border-radius: 15px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: url(./back3.jpg);
-    background-size: cover;
-    z-index: 2;
-}
-
-.firebaseui-container>form {
-    display: block;
-    position: absolute;
-    height: auto;
-    padding: 20px;
-    background: var(--icons);
-    border-radius: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: calc(100% - 40px);
-    left: 20px;
-    box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
-}
-
-.firebaseui-page-provider-sign-in {
-    position: relative;
-    top: 0;
-    transform: none;
-    width: 100%;
-    left: 0;
-    padding: 10px 20px;
-    background: var(--icons);
-    height: auto;
-}
-
-.firebaseui-button {
-    -webkit-appearance: none;
-    border: none;
-    outline: none;
-    padding: 15px 20px;
-    background: #fff;
-    color: var(--primary);
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.firebaseui-idp-text-long {
-    font-weight: 550;
-}
-
-.firebaseui-form-actions {
-    float: right;
-}
-
-.firebaseui-id-submit {
-    background: var(--primary);
-    color: var(--icons);
-}
-
-.firebaseui-error {
-    color: var(--secondary-text);
-    opacity: .85;
-    line-height: 17px;
-}
-
-.firebaseui-form-links {
-    position: relative;
-    top: -15px;
-}
-
-.firebaseui-text {
-    color: var(--secondary-text);
-    font-weight: 400;
-}
-
-.firebaseui-id-page-password-recovery-email-sent>.firebaseui-card-content {
-    width: 100%;
-    background: #fff;
-    padding: 20px 20px 40px 20px;
-    margin-top: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
-}
-
-.firebaseui-id-page-password-recovery-email-sent>.firebaseui-card-actions {
-    margin-top: -60px;
-    margin-right: 20px;
 }
 
 #logForm {
@@ -170,14 +32,14 @@
     background: #fff;
     border-radius: 15px;
     position: relative;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .25);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     padding-bottom: 65px;
 }
 
 #logForm>h4 {
     color: var(--secondary-text);
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.4em;
     text-transform: none;
 }
 
@@ -186,30 +48,58 @@
     color: var(--secondary-text);
     line-height: 17px;
     opacity: 0.85;
-    margin: 5px 0 25px 0;
+    margin: 5px 0 10px 0;
 }
 
-#logForm>.input-field>.helper-text {
+#logForm>div>.input-field>.helper-text {
     opacity: 0.5;
     font-weight: 400;
 }
 
-#logForm>#emm {
+#logForm>div>#emm {
     margin-bottom: 20px;
 }
 
-#logForm>.input-field>input {
+#logForm>div>.input-field>input {
     color: var(--secondary-text);
 }
 
-#logForm>.input-field>.visible {
+#logForm>div>.input-field>.visible {
     position: absolute;
     padding: 10px;
     right: 0;
     color: var(--secondary-text);
 }
 
-#logForm>.input-field>#forgot {
+#logForm>div .alreadyAccount {
+    position: relative;
+    color: var(--disable);
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    display: block;
+    color: var(--secondary-text);
+    font-weight: 550;
+    opacity: 0.7;
+}
+
+#logForm>div .alreadyAccount>button {
+    -webkit-appearance: none;
+    border: none;
+    background: none;
+    color: var(--disable);
+    font-weight: 550;
+}
+
+#logForm>div .alr3{
+    text-align:center;
+}
+#logForm>div .alr3 > button{
+    display: block;
+    margin:0 auto;
+}
+
+#logForm>div>.input-field>#forgotPassword{
     position: relative;
     top: 12px;
     color: var(--disable);
@@ -217,22 +107,60 @@
     text-align: center;
     width: 100%;
     display: block;
+    color: var(--secondary-text);
+    font-weight: 550;
+    opacity: 0.7;
 }
 
-#logForm>.input-field>input:focus {
-    border-bottom: 1px solid var(--primary)!important;
-    box-shadow: 0 1px 0 0 var(--primary)!important;
+
+#logForm>div>.input-field>#forgotPassword>button {
+    -webkit-appearance: none;
+    border: none;
+    background: none;
+    color: var(--disable);
+    font-weight: 550;
+    display: block;
+    margin:0 auto;
 }
 
-#logForm>.input-field>input:focus+label {
+
+div>.input-field>.material-icons.prefix {
+    color: var(--secondary-text);
+}
+
+#logForm>div>.input-field>.prefix.active {
+    color: var(--secondary-text)!important;
+}
+
+.character-counter {
+    color: var(--secondary-text);
+}
+
+#logForm>div>.input-field>input:focus {
+    border-bottom: 1px solid var(--primary);
+    box-shadow: 0 1px 0 0 var(--primary);
+}
+
+#logForm>div>.input-field>input:focus+label {
     color: var(--primary);
 }
 
-#logForm>.input-field>.material-icons.prefix{
-    color:var(--secondary-text);
+#logForm>div>.input-field>input.valid {
+    border-bottom: 1px solid lightgreen;
+    box-shadow: 0 1px 0 0 lightgreen;
 }
-#logForm>.input-field>.material-icons.prefix.active {
-    color: var(--dark)!important;
+
+#logForm>div>.input-field>input.valid+label {
+    color: lightgreen;
+}
+
+#logForm>div>.input-field>input.invalid {
+    border-bottom: 1px solid var(--error);
+    box-shadow: 0 1px 0 0 var(--error);
+}
+
+#logForm>div>.input-field>input.invalid+label {
+    color: var(--error);
 }
 
 #logForm>button {
@@ -261,46 +189,49 @@
 
 #logSep {
     position: relative;
+    top:5px;
     display: block;
     margin: 10px 0;
     width: 100%;
     text-align: center;
-    color: var(--icons);
+    color: var(--divider);
     opacity: 0.85;
 }
 
 #logSep:before {
     content: '';
-    width: 35%;
+    width: 31%;
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
     height: 1px;
-    background: var(--icons);
+    background: var(--divider);
 }
 
 #logSep::after {
     content: '';
-    width: 35%;
+    width: 31%;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
     height: 1px;
-    background: var(--icons);
+    background: var(--divider);
 }
 
 #logBanner {
     overflow: hidden;
-    padding: 25px 20px;
+    padding: 20px 20px;
     width: calc(100% + 40px);
+    background-color:#F44336;
     background: url('./back2.jpg');
     background-size: cover;
     margin-bottom: 20px;
     position: relative;
-    box-shadow: 0 0 15px rgba(0, 0, 0, .35);
-    left:-20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 5px solid var(--icons);
+    left: -20px;
     z-index: 1;
 }
 
@@ -311,20 +242,21 @@
     top: 0;
     left: 0;
     height: 100%;
-    background: rgba(0, 0, 0, .15);
+    background: rgba(0, 0, 0, .25);
     z-index: 1;
 }
 
 #logBanner>* {
     position: relative;
     z-index: 2;
-    text-shadow: 0 0 15px rgba(0, 0, 0, .15);
+    text-shadow: 0 0 20px rgba(0, 0, 0, .15);
 }
 
 #logBanner>h4 {
     color: var(--icons);
     text-transform: none;
     margin: 0;
+    font-size: 1.6em;
 }
 
 #logBanner>p {
@@ -333,4 +265,16 @@
     color: var(--icons);
     opacity: 0.7;
     margin-top: 5px;
+}
+
+#loginGroup {
+    height: 245px;
+    transition: height 0.7s ease, opacity 0.5s ease;
+    overflow: hidden;
+}
+
+#siginGroup {
+    height: 0;
+    transition: height 0.7s ease, opacity 0.5s ease;
+    overflow: hidden;
 }

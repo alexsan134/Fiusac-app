@@ -4,10 +4,28 @@
 
 .action {
   margin-right: -10px;
-  margin-bottom: -10px;
+  margin-bottom: -0px;
   z-index: 9;
 }
 
 .action>span>i {
   transition: transform 0.5s ease;
+}
+.rights {
+  background: var(--divider);
+  color: var(--alter);
+  padding: 10px 15px;
+  border-radius: 5px 5px 0 0 ;
+  box-shadow: 0 0px 20px rgba(0, 0, 0, .2);
+  position: fixed;
+  bottom:0;
+  left:0;
+  z-index:8;
+  width:100%;
+}
+
+.rights p {
+  font-weight: 550;
+  margin: 0;
+  line-height: 15px!important;
 }

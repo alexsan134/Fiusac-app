@@ -8,14 +8,31 @@ class Feed extends React.Component {
     constructor(props) {
         super(props);
         this.shareBtn = React.createRef();
+        this.preview = React.createRef();
+        this.cardImage = React.createRef();
     }
 
     componentDidMount() {
+        const cardImage = this.cardImage.current;
+        const shadow = this.preview.current;
+        cardImage.addEventListener("click", () => {
+            shadow.style.display = "block";
+            setTimeout(() => {
+                shadow.style.opacity = 1;
+            }, 10);
+        })
+        shadow.addEventListener("click", () => {
+            shadow.style.opacity = 0;
+            setTimeout(() => {
+                shadow.style.display = "none";
+            }, 300)
+        })
+        //Share feed
         this.shareBtn.current.addEventListener('click', () => {
             if (navigator.share) {
                 navigator.share({
                     title: "Noticia del portal",
-                    text: this.props.this.props.title.toLowerCase(),
+                    text: this.props.title.toLowerCase(),
                     url: `https://portal.ingenieria.usac.edu.gt/index.php/${this.props.href}`
                 })
                     .then(() => console.log('Successfully share'))
@@ -40,13 +57,13 @@ class Feed extends React.Component {
     }
 
     render() {
-        console.log(this.props.link);
+        const fullImage = this.props.preSrc.substr(this.props.preSrc.indexOf("-") + 1);
         return (
             <div className="row">
                 <div className="col s12 m7">
-                    <div className="card z-depth-1">
-                        <div className="card-image">
-                            <img src={`https://portal.ingenieria.usac.edu.gt/cache/mod_bt_contentslider/${this.props.preSrc}`} className="materialboxed" alt={this.props.title} />
+                    <div className="card">
+                        <div className="card-image" ref={this.cardImage}>
+                            <img src={`https://portal.ingenieria.usac.edu.gt/cache/mod_bt_contentslider/${this.props.preSrc}`} alt={this.props.title} />
                         </div>
                         <div className="card-content">
                             <span className="btn-floating waves-effect waves-dark white" ref={this.shareBtn}>
@@ -55,7 +72,7 @@ class Feed extends React.Component {
                             <span className="card-title">{this.props.title.toLowerCase()}</span>
                             <p className="card-text">
                                 {this.props.text.toLowerCase()}<br className={this.props.link ? 'show' : 'hide'} /><br className={this.props.link ? 'show' : 'hide'} />
-                                <a className={this.props.link ? 'show' : 'hide'} href={this.props.link}>{this.props.link}</a>
+                                <a className={this.props.link ? 'show' : 'hide'} href={this.props.link ? this.props.link : "#none"}>{this.props.link}</a>
                             </p>
                         </div>
                         <div className="card-action">
@@ -68,6 +85,26 @@ class Feed extends React.Component {
                         </div >
                     </div >
                 </div >
+                <div id="imageShadow" ref={this.preview}>
+                    <div id="preloader">
+                        <div className="preloader-wrapper small active">
+                            <div className="spinner-layer">
+                                <div className="circle-clipper left">
+                                    <div className="circle"></div>
+                                </div><div className="gap-patch">
+                                    <div className="circle"></div>
+                                </div><div className="circle-clipper right">
+                                    <div className="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <span id="loadText">Cargando imagen ...</span>
+                </div>
+                <div id="imageContainer">
+                    <img src={`https://portal.ingenieria.usac.edu.gt/images/${fullImage}`} alt={this.props.title} />
+                </div>
+                <i className="material-icons">close</i>
+            </div>
             </div >
         )
     }

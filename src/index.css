@@ -38,6 +38,16 @@ body {
   color: #fff;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+::-moz-scrollbar {
+  display: none;
+}
+::scrollbar {
+  display: none;
+}
+
 @media screen and (min-width:620px) {
   body {
     display: none;

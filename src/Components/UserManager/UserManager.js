@@ -11,7 +11,7 @@ class UserManager extends React.Component {
         this.isSafe = false;
 
         //Preloader
-        this.element = <div id="loadingUser">
+        this.element = <div className="loadingUser">
             <h4>Espera solo un momento ...</h4>
             <p>Esto dependerá de la velocidad de tu conexión a internet, y solo ocurrirá cuando cierres o inicies sesión.</p>
         </div>

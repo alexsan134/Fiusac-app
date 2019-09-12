@@ -1,4 +1,4 @@
-#loadingUser {
+.loadingUser {
     padding: 20px;
     background: #fff;
     width: calc(100% - 40px);
@@ -9,12 +9,12 @@
     box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
 }
 
-#loadingUser>h4 {
+.loadingUser>h4 {
     text-transform: none;
     color: var(--primary);
 }
 
-#loadingUser>p {
+.loadingUser>p {
     display: block;
     line-height: 15px;
     margin: 0;

@@ -1,17 +1,19 @@
-
-#homeCont>div {
-  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
+#homeCont {
+  margin-top: -80px;
 }
 
 #contHours {
-  width: 100%;
-  padding: 30px 20px;
-  background: url('./back1.jpg');
-  background-position: center bottom;
+  padding: 20px;
+  background-color:#2196F3;
+  background: url('../Calendar/sidenav.jpg');
+  background-position: center top;
   background-size: cover;
-  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
   overflow: hidden;
   position: relative;
+  border-radius: 15px;
+  width: calc(100% - 40px);
+  margin: 10px auto;
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.6);
 }
 
 #contHours::before {
@@ -21,35 +23,162 @@
   left: 0;
   top: 0;
   content: '';
-  background: rgba(0, 0, 0, .2);
+  background: rgba(0, 0, 0, .4);
 }
-
+#contHours > *{
+  position: relative;
+  z-index:2;
+}
 #contHours h5 {
-  font-size: 1.2em;
+  font-size: 1.1em;
   text-transform: none;
   line-height: 15px;
-  color: #fff;
-  opacity: 0.85;
+  color: var(--icons);
   text-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  font-weight:400;
+}
+
+#contHours>span {
+  font-size: 1.6em;
+  font-weight: 550;
+  margin: 0;
 }
 
 #contHours h4 {
   font-size: 2.5em;
-  color: #fff;
-  opacity: 0.9;
+  color: var(--icons);
+  opacity:1;
   text-shadow: 0 0 10px rgba(0, 0, 0, .3);
   text-transform: none;
 }
 
 #contHours>img {
   position: absolute;
-  width: 30%;
-  right: 10px;
+  width: 70px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
 }
 
 #contHours>#infoSv {
   color: var(--icons);
-  opacity: 0.85;
+}
+
+#feedsBanner {
+  padding:20px;
+  background-color:#4CAF50;
+  background: url('../Feeds/back1.jpg');
+  background-position: center top;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  width: calc(100% - 40px);
+  margin: 10px auto;
+  margin-bottom:50px;
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.6);
+}
+
+#feedsBanner::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  background: rgba(0, 0, 0, .4);
+}
+
+#feedsBanner>* {
+  position: relative;
+  z-index: 2;
+}
+
+#feedsBanner>div>h4 {
+  color: var(--icons);
+  font-size: 1.6em;
+}
+
+#feedsBanner>div>p {
+  color: var(--alter);
+  opacity: 0.75;
+  line-height: 15px;
+  margin: 0;
+  margin-top: 5px;
+  width: 90%;
+}
+
+#feedsBanner>img {
+  width: 70px;
+}
+
+#welcome {
+  position: relative;
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  border-radius: 15px;
+  padding: 20px;
+  background-color:#F44336;
+  background: url("../Login/back2.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-size: cover;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.6);
+}
+
+#welcome::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  background: rgba(0, 0, 0, .4);
+}
+
+#welcome>* {
+  position: relative;
+  z-index: 2;
+}
+
+#welcome>img {
+  width: 70px;
+}
+
+#welcome>div>h4 {
+  font-size: 1.6em;
+  color: var(--icons);
+}
+
+#welcome>div>p {
+  line-height: 15px;
+  color: var(--alter);
+  margin: 0;
+  margin-top: 5px;
+  opacity: 0.75;
+  width: 90%;
+}
+
+#welBegin {
+  background: var(--primary);
+  margin: 0;
+  position: relative;
+  top: 0;
+  color: var(--alter);
+  line-height: 15px;
+  padding: 0px 20px 90px;
+}
+#welBegin > p{
+  margin:0;
+}
+#welBegin> h1{
+  font-size:2em;
+  font-weight:550;
 }

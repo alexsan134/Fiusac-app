@@ -1,6 +1,6 @@
 import React from "react";
 import { auth } from 'firebase/app';
-import { dataHandler, firedb } from '../../Functions';
+import { dataHandler } from '../../Functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF, } from '@fortawesome/free-brands-svg-icons';
 import './Profile.css';
@@ -17,11 +17,9 @@ class Profile extends React.Component {
         this.isSafe = true;
         auth().onAuthStateChanged(user => {
             if (user) {
-                firedb.ref("users/" + user.uid).on('value', data => {
-                    if (data.val()) {
-                        dataHandler(data.val(), 4).then(data => this.isSafe ? this.setState({ user: data }) : false)
-                    }
-                });
+                dataHandler({}, 7).then(user => {
+                    if (this.isSafe && user) this.setState({ user: user[0] });
+                })
             }
         })
     }
@@ -33,15 +31,15 @@ class Profile extends React.Component {
     render() {
         //Global Constants
         let provider;
-        const photo = this.state.user.photo;
-        const cover = this.state.user.cover;
-        const userName = this.state.user.name;
-        const email = this.state.user.email;
+        const photo = this.state.user?this.state.user.photo:"";
+        const cover = this.state.user?this.state.user.cover:"";
+        const userName = this.state.user?this.state.user.name:"";
+        const email = this.state.user?this.state.user.email:"";
 
         //Provider Icon
-        if (this.state.user.providerId === "password") provider = <i className="material-icons">email</i>
-        if (this.state.user.providerId === "facebook.com") provider = <FontAwesomeIcon icon={faFacebookF} />
-        if (this.state.user.providerId === "google.com") provider = <FontAwesomeIcon icon={faGoogle} />
+        if (this.state.user && this.state.user.providerId === "password") provider = <i className="material-icons">email</i>
+        if (this.state.user && this.state.user.providerId === "facebook.com") provider = <FontAwesomeIcon icon={faFacebookF} />
+        if (this.state.user && this.state.user.providerId === "google.com") provider = <FontAwesomeIcon icon={faGoogle} />
 
         return (
             <div>
@@ -55,7 +53,7 @@ class Profile extends React.Component {
                     <div id="infoProfile">
                         <span id="uid">{userName}</span>
                         <span id="emailInfo" className="truncate">{provider}&nbsp;<span>{email}</span></span>
-                        <button id="completeInfo" className="btn-small grey waves-effect">Completar informacion</button>
+                        <button id="completeInfo" className="btn-small grey">Usuario activo</button>
                     </div>
                 </div>
             </div>

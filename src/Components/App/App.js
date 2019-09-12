@@ -28,7 +28,7 @@ class App extends Component {
               <Route exact path="/cuenta" component={UserManager} />
               <Route exact path="/noticias" component={Feeds} />
               <Route path="/buscar/:id" render={props => (<Search keyword={props.match.params.id} />)} />
-              <Route path="*" component={NotFound} />
+              <Route path="*" render={props => (<NotFound body={"Esta pagina no existe"} />)} />
             </Switch>
           </div>
         </BrowserRouter>

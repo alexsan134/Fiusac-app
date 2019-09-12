@@ -7,7 +7,9 @@ nav {
   display: block;
   background: var(--primary);
 }
-
+.welcome{
+  box-shadow:none;
+}
 .transBar {
   background: transparent;
   box-shadow: none;
@@ -106,7 +108,9 @@ nav .nav-wrapper .brand-logo span {
 #tuto {
   z-index: 12;
 }
-
+#searchLink{
+  display:none;
+}
 .closeT {
   position: fixed;
   top: 0;
@@ -177,7 +181,9 @@ nav .nav-wrapper .brand-logo span {
   position: relative;
   top: 3px;
 }
-
+.homeAlert{
+  border-bottom-width:20px!important;
+}
 #verifyEmail>button {
   -webkit-appearance: none;
   border: none;
@@ -188,6 +194,7 @@ nav .nav-wrapper .brand-logo span {
   outline: none;
   border-radius: 10px;
   margin-top: 10px;
+  margin-bottom:5px;
   box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
 }
 

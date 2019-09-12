@@ -80,6 +80,8 @@ class Search extends Component {
         this.content.current.style.left = 0;
         setTimeout(() => timeLine.style.height = 'calc(100% - 40px)', 400);
       }, 200);
+    }else{
+      this.setCurrent();
     }
   }
 
@@ -91,7 +93,7 @@ class Search extends Component {
 
     return (
       <div id="listOf">
-        <h3 id="srcTitle" className={this.current.length === 0 ? 'hide' : 'ss'}>Resultados de búsqueda<br /><span>Se a encontrado {this.current.length} {rss} en {laps}s</span></h3>
+        <h3 id="srcTitle" className={this.current.length === 0 ? 'hide' : 'ss'}>Resultados para cursos<br /><span>Se a encontrado {this.current.length} {rss} en {laps}s</span></h3>
         <div id={this.current.length === 1 ? 'allOneSrc' : 'allSrc'} ref={this.content}>
           <div className={this.current.length <= 1 ? 'hide timeLine' : 'timeLine'}></div>
           {this.current.map((e, i) => {
@@ -138,7 +140,6 @@ class Search extends Component {
               <p>No se encontraron resultados, Intenta buscar algo similar o algo nuevo.</p>
             </div>
           </div>
-          <div className={this.current.length === 0 ? 'hide' : 'rights'}><p>FIUSACa.app® 2019<br />todos los derechos reservados.</p></div>
         </div>
       </div>
     )
