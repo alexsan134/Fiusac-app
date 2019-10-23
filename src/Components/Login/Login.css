@@ -181,6 +181,7 @@ div>.input-field>.material-icons.prefix {
     color: var(--icons);
     font-size: 1.2em;
     font-weight: 550;
+    text-transform:uppercase;
 }
 
 #logForm>button>i {
@@ -277,4 +278,7 @@ div>.input-field>.material-icons.prefix {
     height: 0;
     transition: height 0.7s ease, opacity 0.5s ease;
     overflow: hidden;
+}
+#loginBtn, #validAccount, #forgotBtn{
+    text-transform:unset;
 }

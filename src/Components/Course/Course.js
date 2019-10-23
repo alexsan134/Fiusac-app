@@ -103,14 +103,17 @@ en ${this.props.room} del ${this.props.build}`)
 
       //Close Details
       function closeThat() {
+        const detal = document.querySelector(".details");
+        detal.style.opacity = 0;
         selected.details = "";
-        selected.setState({});
+        setTimeout(() => {
+          selected.setState({});  
+        }, 300);
       }
 
       //Main Component
       this.details = <div className="details">
         <div className="shadow" onClick={closeThat}></div>
-        <i className='material-icons closeDetails' onClick={closeThat}>close</i>
         <CourseExpanded
           name={this.props.name}
           timeStart={this.props.timeStart}
@@ -121,7 +124,9 @@ en ${this.props.room} del ${this.props.build}`)
           code={this.props.code}
           prof={this.props.prof}
           days={this.props.days}
-          updateCourse={() => { closeThat(); this.props.updateCourse(); }}
+          updateCourse={() => {
+            closeThat(); this.props.updateCourse();
+          }}
         />
       </div>
       this.setState({});

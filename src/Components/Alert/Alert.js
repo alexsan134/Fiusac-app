@@ -115,8 +115,8 @@ export default class ShowMsg {
         // Add Text Content
         title.textContent = data.title;
         p.innerHTML = data.body;
-        cancel.textContent = "Cancelar";
+        cancel.textContent = "CANCELAR";
         if (data.succesText) go.textContent = data.succesText;
-        else go.textContent = "Aceptar";
+        else go.textContent = "ACEPTAR";
     }
 }

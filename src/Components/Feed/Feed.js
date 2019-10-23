@@ -103,7 +103,6 @@ class Feed extends React.Component {
                 <div id="imageContainer">
                     <img src={`https://portal.ingenieria.usac.edu.gt/images/${fullImage}`} alt={this.props.title} />
                 </div>
-                <i className="material-icons">close</i>
             </div>
             </div >
         )

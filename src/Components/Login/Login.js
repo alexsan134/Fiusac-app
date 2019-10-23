@@ -321,7 +321,7 @@ class Login extends Component {
                             <i className="material-icons visible visible2">visibility_off</i>
                             <span className="helper-text" data-error="Contraseña debil" data-success="Contraseña aceptada">Caracteres clave</span>
                         </div>
-                        <span className="alreadyAccount alr3">¿Ya tienes una cuenta? <button id="validAccount">Iniciar sesion</button></span>
+                        <span className="alreadyAccount alr3">¿Ya tienes una cuenta? <button id="validAccount">Iniciar sesión</button></span>
                     </div>
 
                     <div id="loginGroup">
@@ -341,7 +341,7 @@ class Login extends Component {
                             <span id="forgotPassword">¿Olvidaste tu contraseña? <button id="forgotBtn">Recuperar contraseña</button></span>
                         </div>
                     </div>
-                    <button id="loginBtn" className="waves-effect"><i className='material-icons'>assignment_ind</i> Iniciar sesion</button>
+                    <button id="loginBtn" className="waves-effect"><i className='material-icons'>assignment_ind</i> Iniciar sesión</button>
                 </div>
                 <span id="logSep">tambien puedes</span>
                 <div id="socialLogin">

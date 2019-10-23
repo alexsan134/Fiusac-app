@@ -48,6 +48,10 @@ body {
   display: none;
 }
 
+button{
+  text-transform:uppercase;
+}
+
 @media screen and (min-width:620px) {
   body {
     display: none;

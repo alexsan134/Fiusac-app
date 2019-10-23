@@ -66,6 +66,7 @@ class Search extends Component {
   }
 
   componentDidUpdate(prev, st) {
+    window.scrollTo(0, 0);
     //Update results and page transition
     if (prev.keyword !== this.props.keyword) {
       this.setCurrent()
@@ -90,7 +91,6 @@ class Search extends Component {
     this.setCurrent();
     const laps = this.laps.getMilliseconds() / 1000;
     const rss = this.current.length === 1 ? 'resultado' : 'resultados';
-
     return (
       <div id="listOf">
         <h3 id="srcTitle" className={this.current.length === 0 ? 'hide' : 'ss'}>Resultados para cursos<br /><span>Se a encontrado {this.current.length} {rss} en {laps}s</span></h3>

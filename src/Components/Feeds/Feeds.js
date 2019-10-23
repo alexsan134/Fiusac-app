@@ -24,7 +24,7 @@ class Feeds extends React.Component {
                         <h4>Mantente conectado</h4>
                         <p>Ve las noticias mas recientes de la facultad y el portal de ingeniería con notificaciones gratuitas.</p>
                     </div>
-                    {data.feedList.map((e, i) => (
+                    {data.feedList.reverse().map((e, i) => (
                         <Feed
                             key={i}
                             title={e.title}

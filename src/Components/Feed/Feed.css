@@ -10,6 +10,7 @@
 .card-image {
     height: 160px;
     z-index: 1;
+    overflow: hidden;
     position: relative;
 }
 
@@ -100,7 +101,7 @@
     left:0;
     width:100%;
     height:100vh;
-    z-index:10;
+    z-index:11;
     background:rgba(0, 0, 0, 0.8);
     display:none;
     opacity:0;
@@ -108,7 +109,7 @@
 }
 #imageShadow>#imageContainer{
     position: absolute;
-    top:calc(50% + 36px);
+    top:50%;
     left:50%;
     transform:translate(-50%, -50%);
     box-shadow:0 0 20px rgba(0, 0, 0, 0.1);
@@ -127,13 +128,6 @@
     -ms-user-select: initial;
     -khtml-user-select: initial;
     -webkit-user-select: initial;
-}
-#imageShadow>i{
-    position: absolute;
-    top:56px;
-    color:var(--icons);
-    right:0;
-    padding:20px;
 }
 .spinner-layer{
     border-color:var(--icons)!important;

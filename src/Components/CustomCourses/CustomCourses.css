@@ -1,0 +1,97 @@
+#mainCustomForm{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    height:100%;
+    overflow: scroll;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+
+}
+#mainCustomForm > span{
+    font-size:1.4em;
+    color:var(--accent);
+    font-weight:550;
+}
+#mainCustomForm > p{
+    margin:0;
+    color:var(--secondary-text);
+    line-height:15px;
+    margin-bottom:25px;
+}
+.codesSet > .col.s6 {
+   margin-left:0;
+   margin-right:0;
+   padding:0;
+   width:48%;
+}
+
+.codesSet > .col.s6:nth-child(1){
+    margin-right:4%;
+}
+
+#mainCustomForm > .input-field  input:focus, #mainCustomForm > .row> .input-field > input:focus{
+    border-color:var(--primary);
+    box-shadow: 0 1px 0 var(--primary);
+}
+
+#mainCustomForm > .input-field  input:focus + label, #mainCustomForm > .row> .input-field  input:focus + label{
+    color:var(--primary);
+}
+#mainCustomForm > .input-field input, #mainCustomForm > .row> .input-field > input{
+    color:var(--secondary-text);
+}
+#mainCustomForm > #customActions > .btn-flat{
+    font-weight:550;
+}
+#mainCustomForm > #customActions > .customCancel{
+    color:var(--primary);
+}
+
+.timepicker-digital-display{
+    background:var(--primary);
+}
+.timepicker-canvas-bg{
+    fill:var(--primary);
+}
+.timepicker-svg>g>line{
+    stroke:var(--primary);
+}
+.timepicker-close{
+    color:var(--primary);
+}
+.timepicker-close:nth-child(2){
+    background:var(--primary);
+    color:var(--icons);
+}
+.timepicker-footer > .confirmation-btns{
+    margin:15px 0 10px 0;
+    display:flex;
+    padding:0;
+    justify-content: flex-end;
+}
+
+.timepicker-modal{
+    overflow: hidden;
+    width:calc(90% - 5px);
+    border-radius:15px;
+}
+.timepicker-tick{
+    color:var(--secondary-text);
+    font-weight:550;
+}
+
+.timepicker-canvas-bearing{
+    fill: var(--primary);
+}
+
+.timepicker-span-hours, .timepicker-span-minutes, .am-btn, .pm-btn, .timepicker-close{
+    font-weight:550;
+}
+
+#customDays{
+    margin-top:-10px;
+}
+#customDays [type="checkbox"]:checked + span::after{
+    border-color:var(--primary)!important;
+    background:var(--primary)!important;
+}

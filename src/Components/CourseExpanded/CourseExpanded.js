@@ -78,6 +78,7 @@ class CourseExpanded extends Component {
   }
 
   render() {
+    console.log("this render expanded");
     //Global day names
     const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
     return (

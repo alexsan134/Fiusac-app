@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter, Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import ShowMsg from '../Alert/Alert';
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -8,6 +8,7 @@ import './Navbar.css';
 import Tutorial from '../Tutorial/Tutorial';
 import CourseData from '../Calendar/courses.json';
 import Floating from '../Floating/Floating';
+import CustomCourses from '../CustomCourses/CustomCourses'
 import { UserTime, firedb, dataHandler } from '../../Functions';
 
 const Alert = new ShowMsg();
@@ -23,7 +24,9 @@ class Navbar extends Component {
     this.senEmail = this.senEmail.bind(this);
     this.shareCourses = this.shareCourses.bind(this);
     this.saveToCloud = this.saveToCloud.bind(this);
-    this.state = { tut: false, redir: false, validUser: null, user: null }
+    this.openCustom = this.openCustom.bind(this);
+    this.saveCustom = this.saveCustom.bind(this);
+    this.state = { tut: false, redir: false, validUser: null, user: null}
     this.currentUser = "";
 
     //Set autocomplete data
@@ -67,7 +70,21 @@ class Navbar extends Component {
       }
     })
   }
-
+  openCustom(){
+   const customShadow = document.getElementById("customShadow");
+   customShadow.style.display = "block";
+   setTimeout(() => {
+      customShadow.style.opacity = "1";
+   }, 10);
+  }
+  saveCustom(mode){
+    const customShadow = document.getElementById("customShadow");
+    customShadow.style.opacity = "0";
+    setTimeout(() => {
+      customShadow.style.display = "none";
+    }, 300);
+    console.log(mode);
+  }
   shareCourses() {
     const user = auth().currentUser ? auth().currentUser : null;
     if (user) {
@@ -75,7 +92,7 @@ class Navbar extends Component {
         title: "Compartir cursos",
         body: 'Para compartir tus cursos solo busca por numero de carnet o por correo, puedes buscar usuarios aquí:',
         placeholder: 'Carnet o email de amigo',
-        succesText: "Importar",
+        succesText: "IMPORTAR",
         type: "input",
         onConfirm: (value) => {
           dataHandler({}, 7).then(userDats => {
@@ -252,17 +269,17 @@ class Navbar extends Component {
     });
 
     //Search Events
-    function searchVs(){
+    function searchVs(es){
       setTimeout(() => {
         if (searchInput.value.length > 2) {
-          this.setState({ redir: `/buscar/${searchInput.value.trim()}` })
+          es.setState({ redir: `/buscar/${searchInput.value.trim()}` })
           searchLink.click();
         }
       }, 10);
     }
     searchInput.addEventListener('focusout', () => hideSearch());
-    searchInput.addEventListener('change', () => searchVs());
-    searchInput.addEventListener('search', () => searchVs());
+    searchInput.addEventListener('change', () => searchVs(this));
+    searchInput.addEventListener('search', () => searchVs(this));
 
 
     //Open tutorial
@@ -322,6 +339,9 @@ class Navbar extends Component {
           </div>
         ) : '' : '': ''}
         <Link to={this.state.redir ? this.state.redir : ""} id="searchLink">Goto</Link>
+        <div id="customShadow">
+          <CustomCourses action={this.saveCustom}/>
+        </div>
       </div>
     )
   }

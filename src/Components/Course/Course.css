@@ -141,19 +141,6 @@ h5, h4 {
   position: relative;
 }
 
-.closeDetails {
-  position: fixed;
-  top: 56px;
-  right: 0;
-  margin: 20px;
-  padding: 7px;
-  border-radius: 100%;
-  z-index: 4;
-  color: var(--icons);
-  background: var(--accent);
-  font-size: 1.3em!important;
-}
-
 .details {
   position: fixed;
   top: 56px;
