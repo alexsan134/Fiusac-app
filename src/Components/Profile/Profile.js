@@ -1,6 +1,6 @@
 import React from "react";
 import { auth } from 'firebase/app';
-import { dataHandler } from '../../Functions';
+import { dataHandler, changeTheme} from '../../Functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF, } from '@fortawesome/free-brands-svg-icons';
 import './Profile.css';
@@ -13,6 +13,7 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
+	changeTheme("#B71C1C");
         //Listen first for Auth
         this.isSafe = true;
         auth().onAuthStateChanged(user => {

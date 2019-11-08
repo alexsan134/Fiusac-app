@@ -6,7 +6,7 @@ import CourseData from './courses.json';
 import Cloud from './cloud.png';
 import Empty from './empty.png';
 import Course from '../Course/Course';
-import { dataHandler, getRandomPhrase } from '../../Functions';
+import { dataHandler, getRandomPhrase , changeTheme} from '../../Functions';
 import './Calendar.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -35,7 +35,8 @@ class Calendar extends Component {
   updateCourse() {
     //Enter style
     this.allCt.current.style.transition = "none";
-    this.allCt.current.style.opacity = 0
+    this.allCt.current.style.opacity = 0;
+    
 
     //Leave style
     setTimeout(() => {
@@ -79,6 +80,7 @@ class Calendar extends Component {
     })
   }
   componentDidMount() {
+    changeTheme("#5C6BC0");
     // Select Date Text and Courses list to animate
     const mainDate = document.getElementById('mainDate');
     const all = document.getElementById('all');
@@ -152,7 +154,6 @@ class Calendar extends Component {
               </div>
             </div>
           </div>
-          <div id="band"></div>
           <section id='all'>
             {this.current.map((e, i) => {
               let days = [e.domingo, e.lunes, e.martes, e.miercoles, e.jueves, e.viernes, e.sabado].map(e => { if (e === undefined) return false; else return true });
@@ -182,7 +183,6 @@ class Calendar extends Component {
               <h4>{this.displayParraf?this.state.pTitle:""}</h4>
               <p>{this.displayParraf?this.state.pText:""}</p>
             </div>
-            <div className={this.fails === this.current.length ? 'timeLine hide' : 'timeLine show'}></div>
             <div id="emptyCourses" className={this.fails === this.current.length ? 'show' : 'hide'}>
               <img src={Empty} alt="Empty Courses" id="emptyImg"/>
               <div>
@@ -193,6 +193,7 @@ class Calendar extends Component {
             </div>
           </section>
           <div id="swipeArea"></div>
+	  <div id="timelineCont">                            <div className={this.fails === this.current.length ? 'timeLine hide' : 'timeLine show'}></div>                                           </div>
         </div>
         <div className={def ? 'show defS' : 'hide'}>
           <div className="default">

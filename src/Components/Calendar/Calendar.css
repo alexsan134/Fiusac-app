@@ -4,7 +4,7 @@
   background-size: cover;
   width: 100%;
   height: 100px;
-  padding: 20px 20px 15px 20px;
+  padding: 85px 20px 100px 20px;
   color: var(--icons);
   display: flex;
   justify-content: space-between;
@@ -21,6 +21,7 @@
   left:0;
   z-index: 1;
   background:rgba(0, 0, 0, .3);
+  box-shadow:0 0 40px rgba(0,0,0,.7) inset;
 }
 #header >*{
   position: relative;
@@ -82,11 +83,13 @@
 }
 
 #all {
+  margin-top:-72px;
   padding: 20px;
   padding-bottom:50px;
   transition: all 0.2s ease;
   position: relative;
   left: 0;
+  z-index:2;
 }
 
 #all h3 {
@@ -119,24 +122,28 @@
 
 #emptyCourses {
   display: flex;
-  justify-content: space-between;;
-  align-items: center;
+  justify-content:flex-end;
   width:100%;
   height:auto;
-
   position: relative;
 }
 
 #emptyCourses>#emptyImg {
-  width: 45%;
-  margin-left:-50px;
-  opacity: 0.6;
+  width:50%;
+  left:-80px;
+  position:absolute;
 }
 
 #emptyCourses>div {
   margin: 0;
+  background:#fff;
+  padding:20px;
+  width:70%;
+  max-width:235px;
   margin-left: 30px;
-  padding: 0;
+  margin-bottom:50px;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
 }
 #emptyCourses > .dayDef{
   position:fixed;
@@ -147,7 +154,7 @@
   transform:scaleX(-1)
 }
 #emptyCourses>div>p {
-  text-align:justify;
+  text-align:right;
   font-size: 1em;
   line-height: 16px;
   font-weight: 550;
@@ -158,7 +165,7 @@
 }
 
 #emptyCourses>div>h4 {
-  text-align:center;
+  text-align:right;
   text-transform: none;
   color: var(--secondary-text);
   margin: 0;
@@ -166,23 +173,22 @@
   font-size:1.6em;
 }
 
-#band {
-  position: relative;
-  top: 0;
-  width: 100%;
-  height: 5px;
-  background: var(--icons);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
-  z-index:2;
-}
-
 #ctp {
-  overflow: hidden;
+  overflow:hidden;
+  margin-top:-56px;
 }
-
+#timelineCont{
+ position:fixed;
+  top:0px;
+  left:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:-2;
+}
 .timeLine {
-  position: fixed;
-  top: 00px;
+  position:absolute;
+  top:00px;
   width: 2px;
   left: 31px;
   height: 0;
@@ -203,7 +209,7 @@
   padding: 20px;
   position: absolute;
   width: 100%;
-  top: 45%;
+  top:50%;
   z-index: 2;
   transform: translateY(-50%);
 }

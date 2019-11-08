@@ -3,14 +3,48 @@ import './CustomCourses.css';
 import M from 'materialize-css/dist/js/materialize.min'
 
 class CustomCourses extends React.Component {
+    constructor(props){
+        super(props);
+	this.customData = {};
+    }
     componentDidMount() {
         const cancel = document.querySelector(".customCancel");
         const confirm = document.querySelector(".customSave");
+	const allDaysCheck = document.getElementById("allDaysCheck");
+	const customDays = document.getElementById("customDays");
 
         cancel.addEventListener("click", () => this.props.action(false));
-        confirm.addEventListener("click", () => this.props.action(true));
+        confirm.addEventListener("click", () => this.props.action(this.customData));
 
-        //Dropdowsn
+	//DaysCheckbox
+	const days = [
+		["lunes", "martes"],
+		["miercoles", "jueves"],
+		["viernes", "sabado"],
+		["domingo", ""]
+	     ]
+	let m = customDays.childNodes.length;                 
+	for(let i = 0;i < m;i++){                                 
+	    for(let j= 0;j < 2;j++){                                  
+	        if(i*j !== (m-1)){
+		    customDays.childNodes[i].childNodes[j].childNodes[0].addEventListener('click', () =>{
+		         allDaysCheck.childNodes[0].childNodes[0].checked = false;
+			 this.customData[days[i][j]] = customDays.childNodes[i].childNodes[j].childNodes[0].checked;
+		    })
+	        }
+            }                                                 
+	}
+
+	allDaysCheck.addEventListener("click", () =>{
+	    for(let i = 0;i < m;i++){
+		for(let j= 0;j < 2;j++){
+		    if(i*j !== (m-1)) customDays.childNodes[i].childNodes[j].childNodes[0].childNodes[0].checked = true;
+		}
+	    }
+	    allDaysCheck.childNodes[0].childNodes[0].checked = true;
+	})
+
+        //Dropdowns
         var ds = document.querySelectorAll('select');
         M.FormSelect.init(ds);
 
@@ -128,7 +162,7 @@ class CustomCourses extends React.Component {
                                 <span>Domingo</span>
                             </label>
                         </div>
-                        <div className="input-field col s6">
+                        <div className="input-field col s6" id="allDaysCheck">
                             <label>
                                 <input type="checkbox" className="filled-in" />
                                 <span>Todos</span>
@@ -169,7 +203,7 @@ class CustomCourses extends React.Component {
 
                 <div id="customActions" className="right">
                     <button className="waves-effect btn-flat customCancel">cancelar</button>
-                    <button className="waves-effect btn-flat blue white-text customSave">guardar</button>
+                    <button className="waves-effect btn-flat  white-text customSave">guardar</button>
                 </div>
             </div >
         )

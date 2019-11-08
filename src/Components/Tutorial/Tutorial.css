@@ -166,7 +166,7 @@
 .add {
   width: 100%;
   display: block;
-  background: var(--light);
+  background: var(--primary);
   border-radius: 5px;
   line-height: 15px;
   color: var(--primary);
@@ -202,7 +202,7 @@
 
 .add>i {
   display: inline-block;
-  color: var(--dark);
+  color: var(--primary);
   position: relative;
   top: 6px;
   margin-right: 5px;

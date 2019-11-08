@@ -28,8 +28,8 @@
 }
 
 .alertContainer>div>.alertInput:focus {
-    border-bottom: 1px solid #2196F3!important;
-    box-shadow: 0 1px 0 0 #2196F3!important;
+    border-bottom: 1px solid var(--primary)!important;
+    box-shadow: 0 1px 0 0 var(--primary)!important;
 }
 
 .alertContainer>div>.alertInput:focus+label {
@@ -81,11 +81,11 @@
 /* Confirmation Box */
 
 .alertContainer>div>.confirmationType>.cancelAlertBtn {
-    color:#2196F3;
+    color:var(--primary);
 }
 
 .alertContainer>div>.confirmationType>.goAlertBtn {
-    background: #2196F3;
+    background:var(--primary);
     color: #fff;
 }
 
@@ -99,11 +99,11 @@
 /* Alert Box */
 
 .alertContainer>div>.primaryType>.cancelAlertBtn {
-    color: #2196F3;
+    color:var(--primary);
 }
 
 .alertContainer>div>.primaryType>.goAlertBtn {
-    background: #2196F3;
+    background:var(--primary);
     color: #fff;
 }
 

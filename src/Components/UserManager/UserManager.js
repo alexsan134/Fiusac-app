@@ -2,6 +2,7 @@ import React from "react";
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import { auth } from "firebase/app";
+import { changeTheme } from "../../Functions.js";
 import './UserManager.css';
 
 class UserManager extends React.Component {
@@ -18,6 +19,7 @@ class UserManager extends React.Component {
     }
 
     componentDidMount() {
+	changeTheme("#B71C1C");
         //Listen for Auth
         this.isSafe = true;
         auth().onAuthStateChanged(user => {

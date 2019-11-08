@@ -1,7 +1,7 @@
 .card {
     border-radius: 10px!important;
     overflow: hidden;
-    box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2)!important;
+    box-shadow: 0 0px 10px rgba(0,0,0,.3)!important;
     margin: 0 10px!important;
 }
 #feedList{
@@ -43,7 +43,7 @@
 }
 
 .card-content>.btn-floating>i {
-    color: var(--dark);
+    color: var(--primary);
 }
 
 .card-title {
@@ -69,6 +69,7 @@
 
 .card-text>a:link {
     opacity: 1;
+    color:var(--primary);
 }
 
 .card-text>a:visited {
@@ -85,13 +86,14 @@
 .card-action>a {
     margin: 0!important;
     padding: 20px;
-    color: var(--dark)!important;
+    color: var(--primary)!important;
     text-align: center;
 }
 
 .card-action>a>i {
     line-height: 0;
     position: relative;
+    color:var(--primary);
     top: 7px;
 }
 

@@ -29,3 +29,6 @@
   margin: 0;
   line-height: 15px!important;
 }
+.action ul li span{
+  background:var(--primary);
+}

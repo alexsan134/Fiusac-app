@@ -46,7 +46,9 @@
 #mainCustomForm > #customActions > .customCancel{
     color:var(--primary);
 }
-
+#mainCustomForm > #customActions > .customSave{
+    background:var(--primary)!important;                        
+}
 .timepicker-digital-display{
     background:var(--primary);
 }

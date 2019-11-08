@@ -62,6 +62,13 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function changeTheme(c){
+   document.body.style.cssText = `--primary:${c}`;
+
+  let metaThemeColor = document.querySelector("meta[name=theme-color]");
+      let style = getComputedStyle(document.body);                    let primary = style.getPropertyValue('--primary');                                                                              metaThemeColor.setAttribute("content",primary );
+}
+
 export async function getRandomPhrase(){
   return await phrases.all.toArray()
   .then(data => data[0].list[getRandomInt(0,data[0].list.length-1)]);

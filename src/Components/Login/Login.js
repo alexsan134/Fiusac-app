@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { auth } from "firebase/app";
-import { firedb, dataHandler, UserTime } from "../../Functions.js";
+import { firedb, dataHandler, UserTime, changeTheme} from "../../Functions.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Redirect } from 'react-router-dom';
@@ -78,6 +78,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
+	changeTheme("#B71C1C");
         this.isSafe = true;
         //providers
         auth().languageCode = "es";
@@ -343,7 +344,6 @@ class Login extends Component {
                     </div>
                     <button id="loginBtn" className="waves-effect"><i className='material-icons'>assignment_ind</i> Iniciar sesión</button>
                 </div>
-                <span id="logSep">tambien puedes</span>
                 <div id="socialLogin">
                     <button id="googleLog" className="btn waves-effect"><FontAwesomeIcon icon={faGoogle} />&nbsp;&nbsp;Iniciar sesion con Google</button>
                     <button id="facebookLog" className="btn waves-effect"><FontAwesomeIcon icon={faFacebookF} />&nbsp;&nbsp;Iniciar sesion con Facebook</button>

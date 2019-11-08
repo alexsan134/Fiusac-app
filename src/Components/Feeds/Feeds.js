@@ -2,7 +2,7 @@ import Feed from '../Feed/Feed';
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import './Feeds.css';
-import { getFeeds } from '../../Functions';
+import { getFeeds , changeTheme } from '../../Functions';
 import NotFound from '../404/404';
 
 class Feeds extends React.Component {
@@ -17,6 +17,7 @@ class Feeds extends React.Component {
         </div>
     }
     componentDidMount() {
+	changeTheme("#2E7D32");
         getFeeds(data => {
             this.element = data ?
                 <div id="feedList">
@@ -24,6 +25,7 @@ class Feeds extends React.Component {
                         <h4>Mantente conectado</h4>
                         <p>Ve las noticias mas recientes de la facultad y el portal de ingeniería con notificaciones gratuitas.</p>
                     </div>
+		    <div id="feedList">
                     {data.feedList.reverse().map((e, i) => (
                         <Feed
                             key={i}
@@ -35,6 +37,7 @@ class Feeds extends React.Component {
                             link={e.link}
                         />
                     ))}
+		  </div>
                 </div> :
                 <NotFound body="Lo sentimos necesitas una conexión a internet para descargar las noticias del portal" />
             this.setState({});

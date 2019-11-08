@@ -39,9 +39,9 @@ class Floating extends Component {
             <i className="large material-icons">add</i>
           </span>
           <ul>
-            <li className="saveCloudFab"><span className="btn-floating blue darken-2"><i className="material-icons">save</i></span></li>
-            <li className="shareBtnFab"><span className="btn-floating blue darken-2"><i className="material-icons">share</i></span></li>
-            <li className="searchBtnFab"><span className="btn-floating blue darken-2"><i className="material-icons">today</i></span></li>
+            <li className="saveCloudFab"><span className="btn-floating"><i className="material-icons">save</i></span></li>
+            <li className="shareBtnFab"><span className="btn-floating"><i className="material-icons">share</i></span></li>
+            <li className="searchBtnFab"><span className="btn-floating"><i className="material-icons">today</i></span></li>
           </ul>
         </div>
         <div className='rights'><p>FIUSAC.app® 2019<br />todos los derechos reservados.</p></div>

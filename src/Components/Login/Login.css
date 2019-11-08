@@ -3,12 +3,12 @@
     width: 100%;
     padding-top: 0;
     padding-bottom:70px;
+    margin-top:-56px;
 }
 
 #socialLogin{
-    margin-top:20px;
     width:100%;
-    border-radius:10px;
+    border-radius:0 0 10px 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, .2);
     overflow: hidden;
 }
@@ -28,12 +28,14 @@
 }
 
 #logForm {
-    padding: 20px;
-    background: #fff;
-    border-radius: 15px;
+    background:var(--icons);
+    margin-top:-100px;
+    padding:25px;
+    border-radius: 15px 15px 0 0;
     position: relative;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .3);
     padding-bottom: 65px;
+    z-index:2;
 }
 
 #logForm>h4 {
@@ -81,6 +83,7 @@
     color: var(--secondary-text);
     font-weight: 550;
     opacity: 0.7;
+    margin-bottom:20px;
 }
 
 #logForm>div .alreadyAccount>button {
@@ -173,19 +176,19 @@ div>.input-field>.material-icons.prefix {
     width: 100%;
     justify-content: center;
     padding: 15px;
-    border-radius: 0 0 15px 15px;
     position: absolute;
     bottom: 0;
     left: 0;
     background: var(--disable);
     color: var(--icons);
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 550;
     text-transform:uppercase;
 }
 
 #logForm>button>i {
     margin-right: 10px;
+    font-size:1.3em;
 }
 
 #logSep {
@@ -223,7 +226,7 @@ div>.input-field>.material-icons.prefix {
 
 #logBanner {
     overflow: hidden;
-    padding: 20px 20px;
+    padding: 55px 20px 100px 20px;
     width: calc(100% + 40px);
     background-color:#F44336;
     background: url('./back2.jpg');
@@ -231,7 +234,6 @@ div>.input-field>.material-icons.prefix {
     margin-bottom: 20px;
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-bottom: 5px solid var(--icons);
     left: -20px;
     z-index: 1;
 }
@@ -243,7 +245,8 @@ div>.input-field>.material-icons.prefix {
     top: 0;
     left: 0;
     height: 100%;
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 0, 0, .35);
+    box-shadow:0 0 40px rgba(0,0,0,.7) inset;
     z-index: 1;
 }
 
@@ -257,7 +260,7 @@ div>.input-field>.material-icons.prefix {
     color: var(--icons);
     text-transform: none;
     margin: 0;
-    font-size: 1.6em;
+    font-size: 1.8em;
 }
 
 #logBanner>p {
@@ -279,6 +282,6 @@ div>.input-field>.material-icons.prefix {
     transition: height 0.7s ease, opacity 0.5s ease;
     overflow: hidden;
 }
-#loginBtn, #validAccount, #forgotBtn{
+#loginBtn, #validAccount, #forgotBtn, #createAccount{
     text-transform:unset;
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Calendar from './fiusaccalendar.png';
 import './Home.css';
 import FiusacLogo from './fiusacrss.png';
+import { changeTheme } from '../../Functions.js';
 import AccountLogo from './fiusacuser.png';
 
 class Home extends Component {
@@ -13,6 +14,7 @@ class Home extends Component {
     this.isSafe = false;
   }
   componentDidMount() {
+    changeTheme("#2196F3");
     this.isSafe = true;
     this.timer = setInterval(() => this.setState({ day: new Date() }), 1000);
     auth().onAuthStateChanged(user => {

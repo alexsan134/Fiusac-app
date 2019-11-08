@@ -83,7 +83,6 @@ class Navbar extends Component {
     setTimeout(() => {
       customShadow.style.display = "none";
     }, 300);
-    console.log(mode);
   }
   shareCourses() {
     const user = auth().currentUser ? auth().currentUser : null;
@@ -238,7 +237,6 @@ class Navbar extends Component {
     //Check for user
     auth().onAuthStateChanged(user => {
       setTimeout(() => {
-        this.currentUser = user ? "" : "Iniciar sesión";
         this.setState({
           user: user ? user : null,
           validUser: user ? user.emailVerified : false
@@ -248,6 +246,7 @@ class Navbar extends Component {
 
     //Listen for route changes
     this.props.history.listen(location => {
+
       const user = auth().currentUser ? auth().currentUser : null;
 
       if (user && (user.providerData[0].providerId !== "facebook.com" && user.emailVerified === false)) {
@@ -261,7 +260,6 @@ class Navbar extends Component {
             });
         }
       }
-      this.currentUser = user ? "" : "Iniciar Sesión";
       this.setState({
         user: auth().currentUser ? auth().currentUser : null,
         validUser: auth().currentUser ? auth().currentUser.emailVerified : false
@@ -274,6 +272,7 @@ class Navbar extends Component {
         if (searchInput.value.length > 2) {
           es.setState({ redir: `/buscar/${searchInput.value.trim()}` })
           searchLink.click();
+	  hideSearch();
         }
       }, 10);
     }
@@ -294,7 +293,7 @@ class Navbar extends Component {
     const { location } = this.props
     const paths = location.pathname.substr(1);
     let color;
-    const pathsRes = paths.includes("buscar") ? paths.substr(7) : paths === "" ? " " : paths === "cuenta" ? this.currentUser : paths === "signin" ? "Registrarse" : paths;
+    const pathsRes = paths.includes("buscar") ? paths.substr(7) : paths === "" ? " " : paths === "cuenta" ? "" : paths === "signin" ? "Registrarse" : "";
     let tutComp = ' ';
     if (this.state.tut) tutComp = (<Tutorial />);
     if (pathsRes === "") {
@@ -329,7 +328,7 @@ class Navbar extends Component {
             <li id="opTut"><span className="black-text waves-effect">Información</span></li>
           </ul>
         </nav>
-        <Floating icon="add" action={this.openSearch} cloud={this.saveToCloud} share={this.shareCourses} />
+        <Floating icon="add" action={this.openCustom} cloud={this.saveToCloud} share={this.shareCourses} />
         <i className={this.state.tut ? "material-icons closeT" : "hide closeT"} onClick={this.closeTut}>close</i>
         {tutComp}
         {this.state.user !== null ? this.state.validUser === false ? this.state.user.providerData[0].providerId !== "facebook.com"? (
